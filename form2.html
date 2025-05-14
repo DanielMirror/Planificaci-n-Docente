@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wizard Planificación Docente</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #0D3757;
+      --secondary-color: #2196F3;
+      --accent-color: #4cc9f0;
+      --light-color: #f8f9fa;
+      --success-color: #4CAF50;
+    }
+    
+    body {
+      background-color: #F5F5F5;
+      font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    
+    .wizard-container {
+      width: 95%;
+      margin: 2rem auto;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      background: white;
+    }
+    
+    .wizard-header {
+      background-color: white;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(to top, white 30%, rgba(151, 151, 151, 0.603))
+    }
+    
+    .wizard-title {
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+    
+    .wizard-progress {
+      height: 8px;
+      background-color: rgba(255, 255, 255, 0.3);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    
+    .wizard-progress-bar {
+      height: 100%;
+      width: 20%;
+      background-color: var(--accent-color);
+      border-radius: 0 4px 4px 0;
+      transition: width 0.5s ease;
+    }
+    
+    .wizard-body {
+      padding: 2rem;
+      background-color: white;
+    }
+    
+    .wizard-card {
+      padding: 1rem;
+      border-radius: 12px;
+      background-color: white;
+    }
+    
+    .step-title {
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      font-weight: 500;
+      font-size: 18px;
+      color: black;
+      text-transform: uppercase;
+    }
+    
+    .step-title::before {
+      content: '';
+      position: absolute;
+      height: 2px;
+      width: 60px;
+      background-color: var(--primary-color);
+      bottom: -2px;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .form-label i {
+      margin-right: 8px;
+      color: var(--primary-color);
+    }
+    
+    .form-control {
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+    }
+    
+    .input-group-text {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+    }
+    
+    .form-select {
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      padding: 0.75rem 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+    }
+    
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 5px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      min-height: 58px;
+      background-color: white;
+    }
+    
+    .tag {
+      display: flex;
+      align-items: center;
+      margin: 5px;
+      padding: 5px 10px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 30px;
+      font-size: 0.9rem;
+    }
+    
+    .tag-close {
+      margin-left: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    
+    .tag-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 10px 5px;
+      font-size: 1rem;
+    }
+    
+    .dropzone {
+      border: 2px dashed var(--primary-color);
+      border-radius: 8px;
+      padding: 2rem 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      background-color: rgba(67, 97, 238, 0.05);
+      cursor: pointer;
+    }
+    
+    .dropzone:hover {
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+    
+    .dropzone i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    
+    .wizard-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.5rem 2rem;
+      background: linear-gradient(to bottom, white 30%, rgba(151, 151, 151, 0.603))
+    }
+    
+    .btn-wizard {
+      padding: 0.75rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-next {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-next:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      color: white;
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+
+    .btn-prev {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-prev:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      color: white;
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+    }
+    
+    .completion-icon {
+      color: var(--success-color);
+      font-size: 1.2rem;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .field-complete .completion-icon {
+      opacity: 1;
+    }
+    
+    .form-tip {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-top: 0.5rem;
+    }
+    
+    .animation-pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    
+    /* Estilos para los componentes de selección múltiple */
+    .multi-select-container {
+      position: relative;
+    }
+    
+    .multi-select-selected {
+      padding: 0.75rem 1rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .multi-select-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 2px solid var(--primary-color);
+      border-radius: 8px;
+      margin-top: 5px;
+      z-index: 10;
+      max-height: 200px;
+      overflow-y: auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    
+    .multi-select-item {
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .multi-select-item:hover {
+      background-color: rgba(67, 97, 238, 0.1);
+    }
+    
+    .multi-select-item.selected {
+      background-color: rgba(67, 97, 238, 0.2);
+      font-weight: 600;
+    }
+    
+    /* Animaciones para los elementos */
+    .animated-element {
+      animation: fadeInUp 0.5s ease;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+.list-group-item {
+  cursor: move;
+  background: white;
+  margin-bottom: 5px;
+  border: 1px solid rgba(0,0,0,.125);
+  padding: 10px 15px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.list-group-item .fa-grip-vertical {
+  color: #999;
+  margin-right: 10px;
+  cursor: grab;
+}
+
+.list-group-item.ui-sortable-helper {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border: 1px solid var(--primary-color);
+}
+
+.ui-sortable-placeholder {
+  visibility: visible !important;
+  background: rgba(67, 97, 238, 0.1);
+  border: 2px dashed var(--primary-color);
+}
+
+.nivel-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #ddd;
+}
+
+.nivel-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
+  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+}
+
+.nivel-card.selected {
+  background-color: rgba(67, 97, 238, 0.1);
+  border-color: var(--primary-color);
+}
+
+.nivel-card i {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.method-card {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.method-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+}
+
+.method-card.selected {
+  background-color: rgba(67, 97, 238, 0.1);
+  border-color: var(--primary-color);
+}
+
+.method-card i {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
+
+.activity-option {
+  transition: all 0.3s ease;
+}
+
+.activity-option.selected {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.activity-section h6 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--accent-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+  .resource-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .resource-card.selected {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+  
+  .resource-options {
+    overflow: hidden;
+  }
+  
+  .custom-resource-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px;
+    margin-bottom: 5px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+  
+  .custom-resource-item:hover {
+    background-color: #e9ecef;
+  }
+  
+  .custom-resource-item > div {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .custom-resource-item i.fa-cube,
+  .custom-resource-item i.fa-globe {
+    margin-right: 8px;
+    color: #6c757d;
+  }
+  
+  .custom-resource-item span {
+    margin-right: 8px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .custom-resource-item .resource-link {
+    color: #0d6efd;
+    margin-left: 5px;
+  }
+  
+  .custom-resource-item .delete-resource {
+    cursor: pointer;
+    color: #dc3545;
+    transition: transform 0.2s ease;
+  }
+  
+  .custom-resource-item .delete-resource:hover {
+    transform: scale(1.2);
+  }
+
+.activity-item {
+  margin-bottom: 8px;
+  border: 1px solid rgba(0,0,0,.125);
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+}
+
+.activity-inputs {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.activities-list {
+  margin-top: 10px;
+}
+
+.btn-close {
+  font-size: 0.8rem;
+}
+
+/* Añade estos estilos al bloque <style> existente */
+/* Estilización del scrollbar */
+.secciones-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.secciones-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.secciones-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+  opacity: 0.7;
+}
+
+.secciones-container::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
+
+/* Actualizar el contenedor de secciones */
+.secciones-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 45px;
+  overflow-y: auto;
+  padding: 4px 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) #f1f1f1;
+}
+
+/* Mejorar el wrapper */
+.secciones-wrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 8px;
+  border: 1px solid #dee2e6;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.secciones-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 50px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.seccion-check {
+  flex: 0 0 auto;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 6px 12px;
+  margin: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  max-width: 31%;
+}
+
+
+
+.seccion-check:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(67, 97, 238, 0.1);
+}
+
+.seccion-check input {
+  margin-right: 6px;
+}
+
+.seccion-check label {
+  margin: 0;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.seccion-check.selected {
+  background-color: rgba(67, 97, 238, 0.1);
+  border-color: var(--primary-color);
+}
+
+/* Estilos para el paso 6 de evaluación  */
+    .evaluation-card {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      height: 100%;
+      border: 2px solid #ddd;
+    }
+    .evaluation-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+    }
+    .evaluation-card.selected {
+      background-color: rgba(67, 97, 238, 0.1);
+      border-color: var(--primary-color);
+    }
+    .evaluation-card i {
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+    .criteria-list {
+      text-align: left;
+      border-top: 1px solid #dee2e6;
+      padding-top: 1rem;
+    }
+    .instrument-card {
+      height: 100%;
+      transition: all 0.3s ease;
+      border: 2px solid #ddd;
+    }
+    .instrument-card:hover {
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
+    }
+    .instrument-card h6 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    .instrument-option {
+      transition: all 0.2s ease;
+      padding: 0.5rem;
+      border-radius: 4px;
+    }
+    .instrument-option:hover {
+      background-color: rgba(67, 97, 238, 0.05);
+    }
+    .add-criteria-section, .add-instrument-section {
+      margin-top: 1rem;
+      padding-top: 0.5rem;
+      border-top: 1px dashed #dee2e6;
+    }
+    .custom-criteria-item, .custom-instrument-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .delete-item {
+      cursor: pointer;
+      color: #dc3545;
+      margin-left: 10px;
+      opacity: 0.7;
+      transition: all 0.2s ease;
+    }
+    .delete-item:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
+/* Añade estos estilos al final del archivo CSS */
+.fa-arrow-up, .fa-arrow-down {
+  transition: transform 0.3s ease;
+}
+
+.btn-prev:hover .fa-arrow-up {
+  transform: translateY(-4px);
+}
+
+.btn-next:hover .fa-arrow-down {
+  transform: translateY(4px);
+}
+
+.arrow-nav {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgb(145, 145, 145);
+}
+
+.arrow-up, .arrow-down {
+  color: rgb(104, 104, 104);
+}
+
+.arrow-nav:hover {
+  color: var(--primary-color);
+}
+
+.arrow-nav.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #ccc;
+}
+
+.arrow-nav.disabled:hover {
+  transform: none;
+}
+
+  </style>
+</head>
+<body>
+  <div class="wizard-container animate__animated animate__fadeIn">
+    <!--  -->
+    <div class="wizard-header d-flex justify-content-center">
+      <i class="fas fa-arrow-up arrow-nav arrow-up mb-5" id="btn-prev"></i>
+    </div>
+    <!--  -->
+    <div class="wizard-body">
+        <!--  -->
+      <div class="wizard-card wizard-step active animated-element" id="step1">
+        <h4 class="step-title">
+          <i class="fas fa-clipboard-list me-2"></i>
+          Paso 1: Contexto de la Planificación
+        </h4>
+        
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group field-complete">
+              <label class="form-label">
+                <i class="fas fa-book"></i>
+                Asignatura
+              </label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+                <select class="form-select" id="asignatura" name="asignatura" required>
+                  <option value="" selected disabled>Seleccione una asignatura</option>
+                  <option value="matematicas">Matemáticas</option>
+                  <option value="lenguaje">Lenguaje y Literatura</option>
+                  <option value="ciencias">Ciencias Naturales</option>
+                  <option value="sociales">Ciencias Sociales</option>
+                  <option value="arte">Arte y Música</option>
+                  <option value="educacionFisica">Educación Física</option>
+                  <option value="tecnologia">Tecnología</option>
+                  <option value="ingles">Inglés</option>
+                  <option value="otra">Otra asignatura...</option>
+                </select>
+                <i class="fas fa-check-circle completion-icon"></i>
+              </div>
+              <div id="asignaturaOtra" class="mt-2 d-none">
+                <input type="text" class="form-control" placeholder="Especifique la asignatura">
+              </div>
+            </div>
+
+<div class="form-group">
+  <label class="form-label">
+    <i class="fas fa-layer-group"></i>
+    Grado o Nivel
+  </label>
+  <div class="row grado-selector">
+    <div class="col-4">
+      <div class="card nivel-card" data-value="preescolar">
+        <div class="card-body text-center">
+          <i class="fas fa-child mb-2"></i>
+          <p class="mb-0">Preescolar</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card nivel-card" data-value="primaria">
+        <div class="card-body text-center">
+          <i class="fas fa-school mb-2"></i>
+          <p class="mb-0">Primaria</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card nivel-card" data-value="secundaria">
+        <div class="card-body text-center">
+          <i class="fas fa-user-graduate mb-2"></i>
+          <p class="mb-0">Secundaria</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <input type="hidden" name="grado" id="gradoInput" required>
+  <div id="nivelDetalle" class="mt-3 d-none">
+    <select class="form-select" id="gradoDetalle">
+    </select>
+  </div>
+</div>
+          </div>
+          
+          <div class="col-md-6">
+
+            
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fas fa-calendar-alt"></i>
+                Fechas (inicio - fin)
+              </label>
+              <input type="text" class="form-control" id="fechas" name="fechas" placeholder="Seleccione el rango de fechas">
+              <i class="fas fa-check-circle completion-icon"></i>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">
+                <i class="fas fa-clock"></i>
+                Sesiones
+              </label>
+              <div class="row">
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="number" class="form-control" id="cantidadSesiones" min="1" max="20" placeholder="Cantidad" aria-label="Cantidad de sesiones">
+                    <span class="input-group-text">sesiones</span>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="input-group">
+                    <input type="number" class="form-control" id="duracionSesiones" min="15" step="5" placeholder="Duración" aria-label="Duración de cada sesión">
+                    <span class="input-group-text">minutos</span>
+                  </div>
+                </div>
+              </div>
+              <input type="hidden" name="sesiones" id="sesionesInput">
+            </div>
+                <div class="form-group">
+                <div id="seccionesTecnicos" class="d-none">
+                    <label class="form-label mb-2">
+                    <i class="fas fa-users"></i>
+                    Secciones / Técnicos
+                    </label>
+                    <div class="secciones-wrapper">
+                    <div class="secciones-container">
+                        <!-- Se llenará dinámicamente -->
+                    </div>
+                    </div>
+                </div>
+                </div>
+          </div>
+        </div>
+
+        
+        
+        <div class="form-group mt-3">
+          <label class="form-label">
+            <i class="fas fa-tags"></i>
+            Palabras clave (opcional)
+          </label>
+          <div class="tag-container" id="tagContainer">
+            <input type="text" class="tag-input" id="tagInput" placeholder="Escriba palabras clave y presione Enter">
+          </div>
+          <div class="form-tip">Añada etiquetas para clasificar y encontrar fácilmente su planificación.</div>
+        </div>
+      </div>
+
+    <div class="wizard-card wizard-step d-none animated-element" id="step2">
+        <h4 class="step-title">
+        <i class="fas fa-bullseye me-2"></i>
+        Paso 2: Propósito de la Enseñanza
+        </h4>
+        
+        <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+            <label class="form-label">
+                <i class="fas fa-star"></i>
+                Aprendizaje esperado
+            </label>
+            <textarea class="form-control" name="aprendizaje" id="aprendizaje" rows="4" 
+                placeholder="Describa los objetivos de aprendizaje esperados..."></textarea>
+            <i class="fas fa-check-circle completion-icon"></i>
+            <div class="form-tip">Detalle los conocimientos y habilidades que los estudiantes desarrollarán.</div>
+            </div>
+
+            <div class="form-group">
+            <label class="form-label">
+                <i class="fas fa-book-open"></i>
+                Relación con el currículo
+            </label>
+            <div class="tag-container" id="curriculoTags">
+                <input type="text" class="tag-input" id="curriculoInput" 
+                placeholder="Agregue elementos del currículo relacionados...">
+            </div>
+            <div class="form-tip">Vincule su planificación con elementos específicos del currículo.</div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="wizard-card wizard-step d-none animated-element" id="step3">
+    <h4 class="step-title">
+        <i class="fas fa-list-ol me-2"></i>
+        Paso 3: Contenidos y Secuencia
+    </h4>
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="form-group">
+            <label class="form-label">
+            <i class="fas fa-books"></i>
+            Temas principales
+            </label>
+            <div class="multi-select-container">
+            <div class="multi-select-selected" id="temasSelected">
+                Seleccione los temas principales
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="multi-select-dropdown" id="temasDropdown">
+                <div class="multi-select-item" data-value="tema1">Conceptos básicos</div>
+                <div class="multi-select-item" data-value="tema2">Definiciones fundamentales</div>
+                <div class="multi-select-item" data-value="tema3">Ejercicios prácticos</div>
+                <div class="multi-select-item" data-value="tema4">Aplicaciones reales</div>
+                <div class="multi-select-item" data-value="tema5">Evaluación y retroalimentación</div>
+            </div>
+            <input type="hidden" id="temasSeleccionados" name="temas">
+            </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label class="form-label">
+            <i class="fas fa-sort-numeric-down"></i>
+            Organización de contenidos
+            </label>
+            <div class="sortable-container" id="contenidosOrden">
+            <div class="alert alert-info">
+                Arrastre los elementos para ordenar la secuencia de enseñanza
+            </div>
+            <div class="list-group" id="sortableList">
+                <!-- Se llenará dinámicamente con los temas seleccionados -->
+            </div>
+            </div>
+        </div>
+
+        <div class="form-group mt-4">
+            <label class="form-label">
+            <i class="fas fa-clock"></i>
+            Distribución temporal sugerida
+            </label>
+            <div class="row">
+            <div class="col-md-6">
+                <select class="form-select" id="distribucionTiempo">
+                <option value="equilibrada">Equilibrada (tiempo igual para cada tema)</option>
+                <option value="personalizada">Personalizada (ajustar por tema)</option>
+                <option value="flexible">Flexible (según necesidades)</option>
+                </select>
+            </div>
+            <div class="col-md-6 d-none" id="tiempoPersonalizado">
+                <!-- Se mostrará al seleccionar distribución personalizada -->
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+        <div class="wizard-card wizard-step d-none animated-element" id="step4">
+    <h4 class="step-title">
+        <i class="fas fa-chalkboard-teacher me-2"></i>
+        Paso 4: Métodos y Actividades
+    </h4>
+    
+    <div class="row">
+        <div class="col-md-12">
+        <div class="form-group">
+            <label class="form-label">
+            <i class="fas fa-tools"></i>
+            Métodos de enseñanza
+            </label>
+            <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="card method-card" data-value="expositivo">
+                <div class="card-body text-center">
+                    <i class="fa fa-desktop mb-2"></i>
+                    <h6>Método Expositivo</h6>
+                    <small>Presentación clara y estructurada</small>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card method-card" data-value="colaborativo">
+                <div class="card-body text-center">
+                    <i class="fas fa-users mb-2"></i>
+                    <h6>Aprendizaje Colaborativo</h6>
+                    <small>Trabajo en grupos y discusión</small>
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-3">
+                <div class="card method-card" data-value="practico">
+                <div class="card-body text-center">
+                    <i class="fas fa-hands mb-2"></i>
+                    <h6>Método Práctico</h6>
+                    <small>Ejercicios y aplicación directa</small>
+                </div>
+                </div>
+            </div>
+            </div>
+            <input type="hidden" id="metodosSeleccionados" name="metodos">
+        </div>
+
+<div class="form-group mt-4">
+    <label class="form-label">
+        <i class="fas fa-list-check"></i>
+        Secuencia de actividades
+    </label>
+    <div class="activity-builder">
+        <div class="activity-section mb-4">
+            <h6><i class="fas fa-play-circle me-2"></i>Inicio</h6>
+            <div class="activity-inputs">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="fas fa-plus-circle"></i></span>
+                    <input type="text" class="form-control activity-input" placeholder="Agregar actividad de inicio..." data-section="inicio">
+                    <button class="btn btn-outline-primary add-activity" type="button"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="activities-list" id="inicio-activities">
+                    <!-- Aquí se agregarán dinámicamente las actividades -->
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-section mb-4">
+            <h6><i class="fas fa-cogs me-2"></i>Desarrollo</h6>
+            <div class="activity-inputs">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="fas fa-plus-circle"></i></span>
+                    <input type="text" class="form-control activity-input" placeholder="Agregar actividad de desarrollo..." data-section="desarrollo">
+                    <button class="btn btn-outline-primary add-activity" type="button"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="activities-list" id="desarrollo-activities">
+                    <!-- Aquí se agregarán dinámicamente las actividades -->
+                </div>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <h6><i class="fas fa-flag-checkered me-2"></i>Cierre</h6>
+            <div class="activity-inputs">
+                <div class="input-group mb-2">
+                    <span class="input-group-text"><i class="fas fa-plus-circle"></i></span>
+                    <input type="text" class="form-control activity-input" placeholder="Agregar actividad de cierre..." data-section="cierre">
+                    <button class="btn btn-outline-primary add-activity" type="button"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="activities-list" id="cierre-activities">
+                    <!-- Aquí se agregarán dinámicamente las actividades -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Campo oculto para almacenar todas las actividades -->
+        <input type="hidden" id="actividadesSeleccionadas" name="actividades">
+    </div>
+</div>
+
+
+        </div>
+    </div>
+    </div>
+
+    
+<!-- Código para el Paso 5: Recursos Didácticos mejorado -->
+<div class="wizard-card wizard-step d-none animated-element" id="step5">
+  <h4 class="step-title">
+    <i class="fas fa-toolbox me-2"></i>
+    Paso 5: Recursos Didácticos
+  </h4>
+  
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="form-group">
+        <label class="form-label">
+          <i class="fas fa-tools"></i>
+          Materiales y Recursos
+        </label>
+        
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-5">
+            <div class="card resource-card" data-value="material">
+              <div class="card-body text-center">
+                <i class="fas fa-pencil-ruler mb-3 resource-icon"></i>
+                <h6>Material Físico</h6>
+                <div class="resource-options mt-3 d-none">
+                  <div class="form-check">
+                    <input class="form-check-input stop-propagation" type="checkbox" value="libros">
+                    <label class="form-check-label">Libros de texto</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input stop-propagation" type="checkbox" value="fichas">
+                    <label class="form-check-label">Fichas de trabajo</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input stop-propagation" type="checkbox" value="materiales">
+                    <label class="form-check-label">Materiales manipulativos</label>
+                  </div>
+                  
+                  <!-- Sección para añadir nuevos materiales físicos -->
+                  <div class="add-resource-section mt-3">
+                    <div class="input-group mb-2">
+                      <input type="text" class="form-control form-control-sm new-resource-input stop-propagation" 
+                             placeholder="Nuevo material físico..." data-resource-type="material">
+                      <button class="btn btn-outline-secondary btn-sm add-resource-btn stop-propagation" type="button">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                    <div class="custom-resources-list" id="material-custom-resources">
+                      <!-- Aquí se mostrarán los recursos personalizados añadidos -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-5">
+            <div class="card resource-card" data-value="digital">
+              <div class="card-body text-center">
+                <i class="fas fa-laptop mb-3 resource-icon"></i>
+                <h6>Recursos Digitales</h6>
+                <div class="resource-options mt-3 d-none">
+                  <div class="form-check">
+                    <input class="form-check-input stop-propagation" type="checkbox" value="videos">
+                    <label class="form-check-label">Videos educativos</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input stop-propagation" type="checkbox" value="apps">
+                    <label class="form-check-label">Apps interactivas</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input stop-propagation" type="checkbox" value="presentaciones">
+                    <label class="form-check-label">Presentaciones</label>
+                  </div>
+                  
+                  <!-- Sección para añadir nuevos recursos digitales con links -->
+                  <div class="add-resource-section mt-3">
+                    <div class="input-group mb-2">
+                      <input type="text" class="form-control form-control-sm new-resource-input stop-propagation" 
+                             placeholder="Nombre del recurso..." data-resource-type="digital">
+                      <button class="btn btn-outline-secondary btn-sm add-resource-btn stop-propagation" type="button">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                    <div class="input-group mb-2">
+                      <input type="url" class="form-control form-control-sm stop-propagation" id="digital-resource-link" 
+                             placeholder="URL del recurso (opcional)">
+                      <button class="btn btn-outline-secondary btn-sm stop-propagation" id="attach-link-btn" type="button" disabled>
+                        <i class="fas fa-link"></i>
+                      </button>
+                    </div>
+                    <div class="custom-resources-list" id="digital-custom-resources">
+                      <!-- Aquí se mostrarán los recursos digitales personalizados añadidos -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <input type="hidden" id="recursosSeleccionados" name="recursos">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Paso 6 y Final -->
+<div class="wizard-card wizard-step d-none animated-element" id="step6">
+  <h4 class="step-title">
+    <i class="fas fa-chart-bar me-2"></i>
+    Paso 6: Evaluación del Aprendizaje
+  </h4>
+
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Sección de Criterios de Evaluación -->
+      <div class="form-group mb-4">
+        <label class="form-label">
+          <i class="fas fa-tasks"></i>
+          Criterios de Evaluación
+        </label>
+        <div class="criteria-builder">
+          <div class="row g-3">
+            <!-- Dimensiones de evaluación predefinidas -->
+            <div class="col-md-4">
+              <div class="card evaluation-card" data-dimension="conocimientos">
+                <div class="card-body text-center">
+                  <i class="fas fa-brain mb-2"></i>
+                  <h6>Conocimientos</h6>
+                  <small>Comprensión y dominio del tema</small>
+                  <div class="criteria-list mt-3 d-none">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="comprension">
+                      <label class="form-check-label">Comprensión conceptual</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="aplicacion">
+                      <label class="form-check-label">Aplicación práctica</label>
+                    </div>
+                    <div class="add-criteria-section">
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control new-criteria stop-propagation" placeholder="Agregar criterio...">
+                        <button class="btn btn-outline-primary add-criteria-btn stop-propagation" type="button">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card evaluation-card" data-dimension="habilidades">
+                <div class="card-body text-center">
+                  <i class="fas fa-cogs mb-2"></i>
+                  <h6>Habilidades</h6>
+                  <small>Destrezas y competencias</small>
+                  <div class="criteria-list mt-3 d-none">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="resolucion">
+                      <label class="form-check-label">Resolución de problemas</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="comunicacion">
+                      <label class="form-check-label">Comunicación efectiva</label>
+                    </div>
+                    <div class="add-criteria-section">
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control new-criteria stop-propagation" placeholder="Agregar criterio...">
+                        <button class="btn btn-outline-primary add-criteria-btn stop-propagation" type="button">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="card evaluation-card" data-dimension="actitudes">
+                <div class="card-body text-center">
+                  <i class="fas fa-heart mb-2"></i>
+                  <h6>Actitudes</h6>
+                  <small>Comportamiento y valores</small>
+                  <div class="criteria-list mt-3 d-none">
+                    <div class="form-check mb-2">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="participacion">
+                      <label class="form-check-label">Participación activa</label>
+                    </div>
+                    <div class="form-check mb-2">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="colaboracion">
+                      <label class="form-check-label">Trabajo colaborativo</label>
+                    </div>
+                    <div class="add-criteria-section">
+                      <div class="input-group input-group-sm">
+                        <input type="text" class="form-control new-criteria stop-propagation" placeholder="Agregar criterio...">
+                        <button class="btn btn-outline-primary add-criteria-btn stop-propagation" type="button">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Instrumentos de Evaluación -->
+      <div class="form-group">
+        <label class="form-label">
+          <i class="fas fa-clipboard-check"></i>
+          Instrumentos de Evaluación
+        </label>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="card instrument-card" data-type="formativo">
+              <div class="card-body">
+                <h6><i class="fas fa-sync-alt me-2"></i>Evaluación Formativa</h6>
+                <div class="instruments-list">
+                  <div class="instrument-option mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="observacion">
+                      <label class="form-check-label">Registro de observación</label>
+                    </div>
+                  </div>
+                  <div class="instrument-option mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="rubricas">
+                      <label class="form-check-label">Rúbricas de desempeño</label>
+                    </div>
+                  </div>
+                  <div class="instrument-option mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="portfolio">
+                      <label class="form-check-label">Portafolio de evidencias</label>
+                    </div>
+                  </div>
+                  <!-- Sección para añadir instrumentos formativos personalizados -->
+                  <div class="add-instrument-section mt-3">
+                    <div class="input-group input-group-sm mb-2">
+                      <input type="text" class="form-control new-instrument stop-propagation" data-type="formativo" placeholder="Agregar instrumento...">
+                      <button class="btn btn-outline-primary add-instrument-btn stop-propagation" type="button">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card instrument-card" data-type="sumativo">
+              <div class="card-body">
+                <h6><i class="fas fa-check-double me-2"></i>Evaluación Sumativa</h6>
+                <div class="instruments-list">
+                  <div class="instrument-option mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="examenes">
+                      <label class="form-check-label">Exámenes escritos</label>
+                    </div>
+                  </div>
+                  <div class="instrument-option mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="proyectos">
+                      <label class="form-check-label">Proyectos finales</label>
+                    </div>
+                  </div>
+                  <div class="instrument-option mb-2">
+                    <div class="form-check">
+                      <input class="form-check-input stop-propagation" type="checkbox" value="presentaciones">
+                      <label class="form-check-label">Presentaciones orales</label>
+                    </div>
+                  </div>
+                  <!-- Sección para añadir instrumentos sumativos personalizados -->
+                  <div class="add-instrument-section mt-3">
+                    <div class="input-group input-group-sm mb-2">
+                      <input type="text" class="form-control new-instrument stop-propagation" data-type="sumativo" placeholder="Agregar instrumento...">
+                      <button class="btn btn-outline-primary add-instrument-btn stop-propagation" type="button">
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Campo oculto para almacenar los datos de evaluación -->
+      <input type="hidden" id="evaluacionSeleccionada" name="evaluacion">
+    </div>
+  </div>
+</div>
+
+<!-- Cierre de Wizard Body Abajo-->
+
+    </div>
+      <div class="wizard-footer d-flex justify-content-center">
+        <i class="fas fa-arrow-down arrow-nav arrow-down mt-5" id="btn-next"></i>
+      </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/es.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+  
+  <script>
+    $(document).ready(function() {
+      // Inicializar datepicker para fechas
+      flatpickr("#fechas", {
+        mode: "range",
+        dateFormat: "d/m/Y",
+        locale: "es",
+        minDate: "today",
+        altInput: true,
+        altFormat: "j \\de F \\de Y",
+        conjunction: " al ",
+        onChange: function(selectedDates, dateStr) {
+          if (selectedDates.length === 2) {
+            $("#fechas").parent().addClass("field-complete");
+          } else {
+            $("#fechas").parent().removeClass("field-complete");
+          }
+        }
+      });
+      
+      // Gestionar la selección de asignatura
+      $("#asignatura").change(function() {
+        if ($(this).val() === "otra") {
+          $("#asignaturaOtra").removeClass("d-none");
+        } else {
+          $("#asignaturaOtra").addClass("d-none");
+        }
+        
+        $(this).parent().parent().addClass("field-complete");
+      });
+      
+      // Gestionar el campo nombre docente
+      $("#docente").on("input", function() {
+        if ($(this).val().trim() !== "") {
+          $(this).parent().addClass("field-complete");
+        } else {
+          $(this).parent().removeClass("field-complete");
+        }
+      });
+      
+      // Gestionar las sesiones
+      $("#cantidadSesiones, #duracionSesiones").on("input", function() {
+        const cantidad = $("#cantidadSesiones").val();
+        const duracion = $("#duracionSesiones").val();
+        
+        if (cantidad && duracion) {
+          $("#sesionesInput").val(`${cantidad} sesiones de ${duracion} minutos`);
+          $(this).parents(".form-group").addClass("field-complete");
+        }
+      });
+      
+      // Gestionar las etiquetas
+      $("#tagInput").keydown(function(e) {
+        if (e.keyCode === 13 && $(this).val().trim() !== "") {
+          e.preventDefault();
+          const tagText = $(this).val().trim();
+          
+          const tag = $(`
+            <div class="tag">
+              ${tagText}
+              <span class="tag-close">&times;</span>
+            </div>
+          `);
+          
+          $(this).before(tag);
+          $(this).val("");
+          
+          // Actualizar el campo oculto con todas las etiquetas
+          updateTags();
+        }
+      });
+      
+      // Eliminar etiqueta al hacer clic en la x
+      $(document).on("click", ".tag-close", function() {
+        $(this).parent().remove();
+        updateTags();
+      });
+      
+      function updateTags() {
+        const tags = [];
+        $(".tag").each(function() {
+          tags.push($(this).text().trim().replace("×", ""));
+        });
+      }
+      
+// Gestionar selección de nivel
+// Definir opciones por nivel
+const nivelesDetalle = {
+  preescolar: {
+    grados: ["Preescolar 1", "Preescolar 2", "Preescolar 3"],
+    secciones: ["A", "B", "C"]
+  },
+  primaria: {
+    grados: ["1º Primaria", "2º Primaria", "3º Primaria", "4º Primaria", "5º Primaria", "6º Primaria"],
+    secciones: ["A", "B", "C", "D"]
+  },
+  secundaria: {
+    grados: ["1º Secundaria", "2º Secundaria", "3º Secundaria"],
+    tecnicos: ["Informática", "Contabilidad", "Electricidad", "Electrónica", "Mecánica"]
+  }
+};
+
+$(".nivel-card").click(function() {
+  // Remover selección previa
+  $(".nivel-card").removeClass("selected");
+  
+  // Seleccionar nueva tarjeta
+  $(this).addClass("selected");
+  
+  // Obtener y establecer el valor
+  const nivel = $(this).data("value");
+  $("#gradoInput").val(nivel);
+  
+  // Mostrar contenedores
+  $("#nivelDetalle").removeClass("d-none");
+  $("#seccionesTecnicos").removeClass("d-none");
+  
+  // Cargar grados
+  const opciones = nivelesDetalle[nivel].grados.map(opcion => 
+    `<option value="${opcion}">${opcion}</option>`
+  ).join('');
+  
+  $("#gradoDetalle").html(opciones);
+  
+  // Cargar secciones o técnicos
+  const container = $(".secciones-container");
+  container.empty();
+  
+  const items = nivel === 'secundaria' ? 
+    nivelesDetalle[nivel].tecnicos : 
+    nivelesDetalle[nivel].secciones;
+  
+items.forEach(item => {
+  container.append(`
+    <div class="seccion-check">
+      <label class="form-check-label" for="${item}">${item}</label>
+    </div>
+  `);
+});
+
+// Permitir seleccionar/deseleccionar secciones/técnicos
+$(".seccion-check").click(function () {
+  $(this).toggleClass("selected");
+});
+
+});
+
+// Actualizar valor cuando se seleccionan secciones/técnicos
+$(document).on('change', '.secciones-container input', function() {
+  const seleccionados = [];
+  $('.secciones-container input:checked').each(function() {
+    seleccionados.push($(this).val());
+  });
+  // Puedes guardar los seleccionados en un campo oculto si lo necesitas
+  console.log("Secciones/Técnicos seleccionados:", seleccionados);
+});
+
+
+
+// filepath: c:\Users\pc personal\Desktop\Pasantia\Dashboards\form2.html
+function actualizarTemasSeleccionados() {
+  const temasSeleccionados = [];
+  $(".multi-select-item.selected").each(function() {
+    temasSeleccionados.push({
+      valor: $(this).data("value"),
+      texto: $(this).text()
+    });
+  });
+  
+  $("#temasSeleccionados").val(JSON.stringify(temasSeleccionados));
+  
+  // Actualizar lista ordenable
+  $("#sortableList").empty();
+  temasSeleccionados.forEach(tema => {
+    $("#sortableList").append(`
+      <div class="list-group-item" data-value="${tema.valor}">
+        <i class="fas fa-grip-vertical me-2"></i>
+        ${tema.texto}
+      </div>
+    `);
+  });
+
+  // Inicializar sortable
+  $("#sortableList").sortable({
+    handle: '.fa-grip-vertical',
+    update: function(event, ui) {
+      // Actualizar el orden cuando se mueven los elementos
+      const nuevoOrden = [];
+      $(this).find('.list-group-item').each(function() {
+        nuevoOrden.push($(this).data('value'));
+      });
+      // Aquí puedes guardar el nuevo orden si lo necesitas
+      console.log('Nuevo orden:', nuevoOrden);
+    }
+  });
+}
+      // Gestionar distribución temporal
+      $("#distribucionTiempo").change(function() {
+        if ($(this).val() === "personalizada") {
+          $("#tiempoPersonalizado").removeClass("d-none");
+          const temasSeleccionados = JSON.parse($("#temasSeleccionados").val() || "[]");
+          mostrarAjusteTiempo(temasSeleccionados);
+        } else {
+          $("#tiempoPersonalizado").addClass("d-none");
+        }
+      });
+
+      function mostrarAjusteTiempo(temas) {
+        $("#tiempoPersonalizado").html(
+          temas.map(tema => `
+            <div class="input-group mb-2">
+              <span class="input-group-text">${tema.texto}</span>
+              <input type="number" class="form-control" min="1" value="1" data-tema="${tema.valor}">
+              <span class="input-group-text">sesión(es)</span>
+            </div>
+          `).join("")
+        );
+      }
+
+// Gestionar selección múltiple de temas del paso 3
+$("#temasSelected").click(function() {
+  $("#temasDropdown").slideToggle();
+});
+
+$(".multi-select-item").click(function() {
+  $(this).toggleClass("selected");
+  
+  // Actualizar el texto del selector
+  const temasSeleccionados = $(".multi-select-item.selected").map(function() {
+    return $(this).text();
+  }).get();
+  
+  if (temasSeleccionados.length > 0) {
+    $("#temasSelected").html(
+      temasSeleccionados.join(", ") + 
+      '<i class="fas fa-chevron-down"></i>'
+    );
+  } else {
+    $("#temasSelected").html(
+      'Seleccione los temas principales' +
+      '<i class="fas fa-chevron-down"></i>'
+    );
+  }
+  
+  actualizarTemasSeleccionados();
+});
+
+//Paso 4 logica
+// Gestionar selección de métodos de enseñanza
+$(".method-card").click(function (e) {
+  //Ignorar el click si proviene del textarea
+  if ($(e.target).is("textarea")) return;
+
+  const $card = $(this);
+  const valor = $card.data("value");
+  const titulo = $card.find("h6").text();
+
+  $card.toggleClass("selected");
+
+  // Agregar o remover textarea de detalles
+  if ($card.hasClass("selected")) {
+    if ($card.find(".method-textarea").length === 0) {
+      $card.find(".card-body").append(`
+        <div class="method-details mt-2">
+          <textarea class="form-control method-textarea" placeholder="Agregue detalles sobre este método..."></textarea>
+        </div>
+      `);
+    }
+  } else {
+    $card.find(".method-details").remove();
+  }
+
+  // Actualizar el campo oculto con los métodos seleccionados
+  const metodosSeleccionados = $(".method-card.selected").map(function () {
+    return {
+      valor: $(this).data("value"),
+      texto: $(this).find("h6").text(),
+      detalles: $(this).find(".method-textarea").val() || ""
+    };
+  }).get();
+
+  $("#metodosSeleccionados").val(JSON.stringify(metodosSeleccionados));
+
+  if (metodosSeleccionados.length > 0) {
+    $card.closest(".form-group").addClass("field-complete");
+  } else {
+    $card.closest(".form-group").removeClass("field-complete");
+  }
+});
+
+
+
+// Función para actualizar el campo oculto con todas las actividades
+function actualizarActividades() {
+  const actividades = {
+    inicio: [],
+    desarrollo: [],
+    cierre: []
+  };
+  
+  // Recopilar actividades de inicio
+  $("#inicio-activities .activity-item").each(function() {
+    actividades.inicio.push($(this).text().replace("×", "").trim());
+  });
+  
+  // Recopilar actividades de desarrollo
+  $("#desarrollo-activities .activity-item").each(function() {
+    actividades.desarrollo.push($(this).text().replace("×", "").trim());
+  });
+  
+  // Recopilar actividades de cierre
+  $("#cierre-activities .activity-item").each(function() {
+    actividades.cierre.push($(this).text().replace("×", "").trim());
+  });
+  
+  // Actualizar el campo oculto
+  $("#actividadesSeleccionadas").val(JSON.stringify(actividades));
+}
+
+// Añadir actividad al hacer clic en el botón o presionar Enter
+$(".add-activity").click(function() {
+  const input = $(this).closest(".input-group").find(".activity-input");
+  addActivity(input);
+});
+
+$(".activity-input").keypress(function(e) {
+  if (e.which === 13) { // Enter key
+    e.preventDefault();
+    addActivity($(this));
+  }
+});
+
+function addActivity(input) {
+  const activityText = input.val().trim();
+  const section = input.data("section");
+  
+  if (activityText) {
+    // Crear elemento de actividad
+    const activityItem = $(`
+      <div class="activity-item alert alert-light d-flex justify-content-between align-items-center">
+        ${activityText}
+        <button type="button" class="btn-close delete-activity" aria-label="Close"></button>
+      </div>
+    `);
+    
+    // Añadir al contenedor correspondiente
+    $(`#${section}-activities`).append(activityItem);
+    
+    // Limpiar el campo de entrada
+    input.val("");
+    
+    // Actualizar el campo oculto
+    actualizarActividades();
+  }
+}
+
+// Eliminar actividad
+$(document).on("click", ".delete-activity", function() {
+  $(this).closest(".activity-item").remove();
+  actualizarActividades();
+});
+
+// Cerrar el dropdown cuando se hace clic fuera
+$(document).click(function(e) {
+  if (!$(e.target).closest('.multi-select-container').length) {
+    $("#temasDropdown").slideUp();
+  }
+});
+
+
+// Gestionar selección de actividades
+$(".activity-option").click(function() {
+  $(this).toggleClass("selected");
+});
+
+// Paso 5
+// JavaScript para manejar los recursos didácticos
+
+// Selección de tarjetas de recursos
+$(".resource-card").click(function(e) {
+  // Evitar que se propague el evento si el clic fue en elementos específicos
+  if ($(e.target).hasClass('stop-propagation') || $(e.target).closest('.stop-propagation').length) {
+    return;
+  }
+
+  $(this).toggleClass("selected");
+  
+  // Mostrar/ocultar opciones al seleccionar/deseleccionar tarjetas
+  if ($(this).hasClass("selected")) {
+    $(this).find(".resource-options").removeClass("d-none").hide().slideDown(300);
+  } else {
+    $(this).find(".resource-options").slideUp(300, function() {
+      $(this).addClass("d-none");
+    });
+  }
+  
+  actualizarRecursosSeleccionados();
+});
+
+// Detener la propagación en elementos específicos
+$(document).on('click', '.stop-propagation', function(e) {
+  e.stopPropagation();
+});
+
+// Actualizar el campo oculto con los recursos seleccionados
+function actualizarRecursosSeleccionados() {
+  const recursos = {
+    material: {
+      predefinidos: [],
+      personalizados: []
+    },
+    digital: {
+      predefinidos: [],
+      personalizados: []
+    }
+  };
+  
+  // Recoger recursos físicos predefinidos seleccionados
+  if ($(".resource-card[data-value='material']").hasClass("selected")) {
+    $(".resource-card[data-value='material'] .form-check-input:checked").each(function() {
+      recursos.material.predefinidos.push($(this).val());
+    });
+  }
+  
+  // Recoger recursos digitales predefinidos seleccionados
+  if ($(".resource-card[data-value='digital']").hasClass("selected")) {
+    $(".resource-card[data-value='digital'] .form-check-input:checked").each(function() {
+      recursos.digital.predefinidos.push($(this).val());
+    });
+  }
+  
+  // Recoger recursos personalizados
+  $("#material-custom-resources .custom-resource-item").each(function() {
+    recursos.material.personalizados.push({
+      nombre: $(this).data("resource-name")
+    });
+  });
+  
+  $("#digital-custom-resources .custom-resource-item").each(function() {
+    recursos.digital.personalizados.push({
+      nombre: $(this).data("resource-name"),
+      link: $(this).data("resource-link") || ""
+    });
+  });
+  
+  // Actualizar el campo oculto
+  $("#recursosSeleccionados").val(JSON.stringify(recursos));
+}
+
+// Variables para manejar la adición de recursos digitales
+let currentDigitalResource = "";
+let currentDigitalLink = "";
+
+// Activar/desactivar botón de enlace
+$("#digital-resource-link").on("input", function() {
+  const link = $(this).val().trim();
+  $("#attach-link-btn").prop("disabled", !link);
+  currentDigitalLink = link;
+});
+
+// Añadir nuevos recursos
+$(".add-resource-btn").click(function(e) {
+  e.stopPropagation(); // Detener la propagación para evitar que se deseleccione la tarjeta
+  
+  const inputElement = $(this).closest(".input-group").find(".new-resource-input");
+  const resourceType = inputElement.data("resource-type");
+  const resourceName = inputElement.val().trim();
+  
+  if (resourceName) {
+    if (resourceType === "material") {
+      // Añadir recurso físico
+      agregarRecursoPersonalizado(resourceName, resourceType);
+      inputElement.val("");
+    } else if (resourceType === "digital") {
+      // Guardar nombre del recurso digital para posible adjunto de link
+      currentDigitalResource = resourceName;
+      inputElement.val("");
+      
+      // Si hay un link ya ingresado, adjuntarlo automáticamente
+      if ($("#digital-resource-link").val().trim()) {
+        $("#attach-link-btn").click();
+      } else {
+        // Si no hay link, añadir solo el nombre
+        agregarRecursoPersonalizado(resourceName, resourceType);
+        $("#digital-resource-link").focus();
+      }
+    }
+  }
+});
+
+// Adjuntar link a un recurso digital
+$("#attach-link-btn").click(function(e) {
+  e.stopPropagation(); // Detener la propagación
+  
+  const resourceName = currentDigitalResource;
+  const resourceLink = $("#digital-resource-link").val().trim();
+  
+  if (resourceName && resourceLink) {
+    agregarRecursoPersonalizado(resourceName, "digital", resourceLink);
+    
+    // Limpiar campos
+    $("#digital-resource-link").val("");
+    $("#attach-link-btn").prop("disabled", true);
+    currentDigitalResource = "";
+    currentDigitalLink = "";
+  }
+});
+
+// También permitir añadir presionando Enter
+$(".new-resource-input").keypress(function(e) {
+  if (e.which === 13) { // Enter key
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).closest(".input-group").find(".add-resource-btn").click();
+  }
+});
+
+$("#digital-resource-link").keypress(function(e) {
+  if (e.which === 13) { // Enter key
+    e.preventDefault();
+    e.stopPropagation();
+    if (!$("#attach-link-btn").prop("disabled")) {
+      $("#attach-link-btn").click();
+    }
+  }
+});
+
+// Función para agregar un recurso personalizado
+function agregarRecursoPersonalizado(nombre, tipo, link = "") {
+  const contenedor = tipo === "material" ? "#material-custom-resources" : "#digital-custom-resources";
+  const conEnlace = link ? "with-link" : "";
+  
+  let enlaceHTML = "";
+  if (link) {
+    enlaceHTML = `<a href="${link}" class="resource-link stop-propagation" target="_blank" title="${link}">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>`;
+  }
+  
+  const recursoHTML = `
+    <div class="custom-resource-item ${conEnlace}" data-resource-name="${nombre}" data-resource-link="${link || ''}">
+      <div>
+        <i class="fas fa-${tipo === 'material' ? 'cube' : 'globe'}"></i>
+        <span>${nombre}</span>
+        ${enlaceHTML}
+      </div>
+      <i class="fas fa-times delete-resource stop-propagation"></i>
+    </div>
+  `;
+  
+  $(contenedor).append(recursoHTML);
+  
+  // Seleccionar la tarjeta correspondiente si no está seleccionada
+  const $card = $(`.resource-card[data-value='${tipo}']`);
+  if (!$card.hasClass("selected")) {
+    $card.addClass("selected");
+    $card.find(".resource-options").removeClass("d-none").hide().slideDown(300);
+  }
+  
+  // Actualizar el campo oculto
+  actualizarRecursosSeleccionados();
+}
+
+// Eliminar un recurso personalizado
+$(document).on("click", ".delete-resource", function(e) {
+  e.stopPropagation(); // Detener la propagación
+  $(this).closest(".custom-resource-item").remove();
+  actualizarRecursosSeleccionados();
+});
+
+// Inicializar - asegurarse de que todas las tarjetas estén cerradas
+$(document).ready(function() {
+  // Asegurarse de que las opciones estén ocultas al principio
+  $(".resource-options").addClass("d-none");
+  
+  // Eliminar cualquier clase 'selected' que pudiera estar presente
+  $(".resource-card").removeClass("selected");
+  
+  // Inicializar el campo oculto
+  actualizarRecursosSeleccionados();
+});
+
+// Paso 6 Logica
+// Gestionar evaluaciones
+$(".evaluation-card").click(function(e) {
+  // Detener la propagación si el clic fue en elementos específicos
+  if ($(e.target).hasClass('stop-propagation') || $(e.target).closest('.stop-propagation').length) {
+    return;
+  }
+  
+  $(this).toggleClass("selected");
+  const criteriaList = $(this).find(".criteria-list");
+  
+  if ($(this).hasClass("selected")) {
+    criteriaList.removeClass("d-none").hide().slideDown(300);
+  } else {
+    criteriaList.slideUp(300, function() {
+      $(this).addClass("d-none");
+    });
+  }
+  
+  actualizarEvaluacion();
+});
+
+// Detener propagación en elementos interactivos
+$(document).on('click', '.stop-propagation', function(e) {
+  e.stopPropagation();
+});
+
+// Añadir nuevos criterios
+$(".add-criteria-btn").click(function(e) {
+  e.stopPropagation();
+  
+  const input = $(this).closest(".input-group").find(".new-criteria");
+  const criterio = input.val().trim();
+  
+  if (criterio) {
+    const criterioValue = criterio.toLowerCase().replace(/\s+/g, '-');
+    const checkboxItem = `
+      <div class="form-check mb-2 custom-criteria-item">
+        <div>
+          <input class="form-check-input stop-propagation" type="checkbox" value="${criterioValue}" checked>
+          <label class="form-check-label">${criterio}</label>
+        </div>
+        <i class="fas fa-times delete-item stop-propagation"></i>
+      </div>
+    `;
+    
+    $(this).closest(".criteria-list").find(".add-criteria-section").before(checkboxItem);
+    input.val("");
+    actualizarEvaluacion();
+  }
+});
+
+// Añadir nuevos instrumentos
+$(".add-instrument-btn").click(function(e) {
+  e.stopPropagation();
+  
+  const input = $(this).closest(".input-group").find(".new-instrument");
+  const instrumento = input.val().trim();
+  const tipo = input.data("type");
+  
+  if (instrumento) {
+    const instrumentoValue = instrumento.toLowerCase().replace(/\s+/g, '-');
+    const checkboxItem = `
+      <div class="instrument-option mb-2 custom-instrument-item">
+        <div class="form-check">
+          <input class="form-check-input stop-propagation" type="checkbox" value="${instrumentoValue}" checked>
+          <label class="form-check-label">${instrumento}</label>
+        </div>
+        <i class="fas fa-times delete-item stop-propagation"></i>
+      </div>
+    `;
+    
+    $(this).closest(".instruments-list").find(".add-instrument-section").before(checkboxItem);
+    input.val("");
+    actualizarEvaluacion();
+  }
+});
+
+// Eliminar criterios o instrumentos personalizados
+$(document).on("click", ".delete-item", function(e) {
+  e.stopPropagation();
+  $(this).closest(".form-check").closest('div').remove();
+  actualizarEvaluacion();
+});
+
+// También permitir añadir presionando Enter
+$(".new-criteria").keypress(function(e) {
+  if (e.which === 13) { // Enter key
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).closest(".input-group").find(".add-criteria-btn").click();
+  }
+});
+
+$(".new-instrument").keypress(function(e) {
+  if (e.which === 13) { // Enter key
+    e.preventDefault();
+    e.stopPropagation();
+    $(this).closest(".input-group").find(".add-instrument-btn").click();
+  }
+});
+
+// Actualizar campo oculto con la evaluación
+function actualizarEvaluacion() {
+  const evaluacion = {
+    criterios: {
+      conocimientos: [],
+      habilidades: [],
+      actitudes: []
+    },
+    instrumentos: {
+      formativos: [],
+      sumativos: []
+    }
+  };
+  
+  // Recoger criterios seleccionados
+  $(".evaluation-card").each(function() {
+    const dimension = $(this).data("dimension");
+    
+    $(this).find("input:checked").each(function() {
+      evaluacion.criterios[dimension].push({
+        valor: $(this).val(),
+        texto: $(this).next().text()
+      });
+    });
+  });
+  
+  // Recoger instrumentos seleccionados
+  $(".instrument-card[data-type='formativo'] input:checked").each(function() {
+    evaluacion.instrumentos.formativos.push({
+      valor: $(this).val(),
+      texto: $(this).next().text()
+    });
+  });
+  
+  $(".instrument-card[data-type='sumativo'] input:checked").each(function() {
+    evaluacion.instrumentos.sumativos.push({
+      valor: $(this).val(),
+      texto: $(this).next().text()
+    });
+  });
+  
+  // Actualizar campo oculto
+  $("#evaluacionSeleccionada").val(JSON.stringify(evaluacion));
+}
+
+// Inicializar
+$(document).ready(function() {
+  // Mantener las tarjetas de evaluación cerradas al inicio
+  $(".criteria-list").addClass("d-none");
+  $(".evaluation-card").removeClass("selected");
+  
+  // Inicializar el campo oculto
+  actualizarEvaluacion();
+  
+  // Asegurarse de que todos los elementos interactivos tengan la clase stop-propagation
+  $(".form-check-input, .form-control, .btn").addClass("stop-propagation");
+});
+
+
+      // Variables para control de pasos
+      let currentStep = 1;
+      const totalSteps = 6;
+
+// Función para validar el paso actual
+function validateCurrentStep() {
+  if (currentStep === 1) {
+    const asignatura = $("#asignatura").val();
+    const fechas = $("#fechas").val();
+    const grado = $("#gradoInput").val();
+    return asignatura && fechas && grado;
+  }
+  
+  if (currentStep === 2) {
+    const aprendizaje = $("#aprendizaje").val().trim();
+    return aprendizaje.length > 0;
+  }
+
+  if (currentStep === 3) {
+    const temasSeleccionados = $(".multi-select-item.selected").length;
+    return temasSeleccionados > 0;
+  }
+
+  if (currentStep === 4) {
+    const metodosSeleccionados = $(".method-card.selected").length;
+    const actividadesInicio = $("#inicio-activities .activity-item").length;
+    const actividadesDesarrollo = $("#desarrollo-activities .activity-item").length;
+    const actividadesCierre = $("#cierre-activities .activity-item").length;
+    
+    return metodosSeleccionados > 0 && 
+    (actividadesInicio > 0 || actividadesDesarrollo > 0 || actividadesCierre > 0);
+  }
+
+    if (currentStep === 5) {
+    const recursosSeleccionados = $(".resource-card.selected").length;
+    return recursosSeleccionados > 0;
+  }
+
+  if (currentStep === 6) {
+  const criteriosSeleccionados = Object.values(JSON.parse($("#evaluacionSeleccionada").val()).criterios)
+    .reduce((total, criterios) => total + criterios.length, 0);
+  
+  const instrumentosSeleccionados = 
+    JSON.parse($("#evaluacionSeleccionada").val()).instrumentos.formativos.length + 
+    JSON.parse($("#evaluacionSeleccionada").val()).instrumentos.sumativos.length;
+  
+  return criteriosSeleccionados > 0 && instrumentosSeleccionados > 0;
+  }
+
+  return false;
+}
+
+// Función para actualizar la barra de progreso
+function updateProgress() {
+  const progress = (currentStep / totalSteps) * 100;
+  $(".wizard-progress-bar").css("width", `${progress}%`);
+}
+
+// Función para cambiar de paso
+function goToStep(step) {
+  $(".wizard-step").addClass("d-none");
+  $(`#step${step}`).removeClass("d-none");
+  
+  // Actualizar flechas
+  if (step === 1) {
+    $("#btn-prev").addClass("disabled");
+  } else {
+    $("#btn-prev").removeClass("disabled");
+  }
+  
+  if (step === totalSteps) {
+    // Opcionalmente cambiar a un ícono de check en el último paso
+    $("#btn-next").removeClass("fa-arrow-down").addClass("fa-check");
+  } else {
+    $("#btn-next").addClass("fa-arrow-down").removeClass("fa-check");
+  }
+  
+  currentStep = step;
+  updateProgress();
+}
+
+// Manejar clic en flecha siguiente
+$("#btn-next").click(function() {
+  if ($(this).hasClass("disabled")) return;
+  
+  if (validateCurrentStep()) {
+    if (currentStep < totalSteps) {
+      goToStep(currentStep + 1);
+    } else {
+      // Aquí iría la lógica para finalizar el formulario
+      alert("¡Formulario completado!");
+    }
+  } else {
+    alert("Por favor complete todos los campos requeridos antes de continuar.");
+  }
+});
+
+// Manejar clic en flecha anterior
+$("#btn-prev").click(function() {
+  if ($(this).hasClass("disabled")) return;
+  
+  if (currentStep > 1) {
+    goToStep(currentStep - 1);
+  }
+});
+
+// Inicializar primer paso
+goToStep(1);
+
+
+    });
+  </script>
+</body>
+</html>
