@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Personal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome para íconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-size: 0.85rem;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            position: relative;
+            padding-bottom: 4rem; /* Espacio para el footer */
+        }
+        
+/* Tarjeta de información personal ultra compacta */
+.personal-card {
+   border-radius: 10px;
+   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 50%, #e9ecef 100%);
+   border: 1px solid #dee2e6;
+   padding: 1rem;
+   margin-bottom: 1rem;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+   position: relative;
+}
+
+.personal-card h2 {
+   font-size: 1.1rem;
+   font-weight: 700;
+   margin-bottom: 0.6rem;
+   color: #212529;
+   text-transform: uppercase;
+   letter-spacing: 1px;
+   border-bottom: 2px solid #0d6efd;
+   padding-bottom: 0.2rem;
+   display: inline-block;
+}
+
+.profile-section {
+   display: flex;
+   align-items: flex-start;
+   gap: 0.8rem;
+}
+
+.profile-img {
+   width: 110px;
+   height: 110px;
+   border-radius: 8px;
+   background: linear-gradient(135deg, #0d6efd, #6610f2);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   font-size: 1.2rem;
+   flex-shrink: 0;
+   box-shadow: 0 3px 8px rgba(13, 110, 253, 0.3);
+   border: 2px solid white;
+}
+
+.profile-info {
+   flex: 1;
+   margin-right: 160px;
+}
+
+.info-grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   gap: 0.4rem 1.2rem;
+   margin-top: 0.2rem;
+}
+
+.info-item {
+   background: rgba(255, 255, 255, 0.7);
+   padding: 0.35rem 0.6rem;
+   border-radius: 5px;
+   border-left: 2px solid #0d6efd;
+   transition: all 0.3s ease;
+}
+
+.info-item:hover {
+   background: rgba(255, 255, 255, 0.9);
+   transform: translateY(-1px);
+   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-label {
+   color: #6c757d;
+   font-weight: 600;
+   font-size: 0.6rem;
+   text-transform: uppercase;
+   letter-spacing: 1px;
+   margin-bottom: 0.1rem;
+   display: block;
+   line-height: 1;
+   margin-top: 5px;
+}
+
+.info-value {
+   color: #212529;
+   font-weight: 600;
+   font-size: 0.7rem;
+   display: block;
+   
+}
+
+/* Indicador de fiabilidad con forma de goniómetro */
+.reliability-section {
+   position: absolute;
+   top: 1.5rem;
+   right: 1.5rem;
+   width: 140px;
+   background: rgba(255, 255, 255, 0.95);
+   border-radius: 8px;
+   padding: 0.6rem;
+   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+   border: 1px solid #e9ecef;
+}
+
+.reliability-title {
+   font-size: 0.65rem;
+   font-weight: 700;
+   margin-bottom: 0.4rem;
+   color: #212529;
+   text-align: center;
+   text-transform: uppercase;
+   letter-spacing: 0.5px;
+}
+
+/* Goniómetro circular */
+.reliability-meter {
+   position: relative;
+   width: 80px;
+   height: 40px;
+   margin: 0 auto 0.5rem;
+   overflow: hidden;
+}
+
+.reliability-meter::before {
+   content: '';
+   position: absolute;
+   width: 80px;
+   height: 80px;
+   border: 4px solid #e9ecef;
+   border-radius: 50%;
+   top: 0;
+   left: 0;
+}
+
+.reliability-bar {
+   position: absolute;
+   width: 80px;
+   height: 80px;
+   border-radius: 50%;
+   border: 4px solid transparent;
+   border-top: 4px solid #dc3545;
+   border-right: 4px solid #ffc107;
+   border-bottom: 4px solid #198754;
+   transform: rotate(-90deg);
+
+   top: 0;
+   left: 0;
+}
+
+/* Aguja indicadora */
+.reliability-needle {
+   position: absolute;
+   width: 2px;
+   height: 30px;
+   background: #212529;
+   top: 5px;
+   left: 50%;
+   transform-origin: bottom center;
+   transform: translateX(-50%) rotate(45deg); /* 85% = aprox 45 grados */
+   border-radius: 1px;
+}
+
+.reliability-needle::after {
+   content: '';
+   position: absolute;
+   width: 6px;
+   height: 6px;
+   background: #212529;
+   border-radius: 50%;
+   bottom: -3px;
+   left: -2px;
+}
+
+.risk-indicators {
+   display: flex;
+   gap: 0.25rem;
+   margin-bottom: 0.5rem;
+   justify-content: center;
+}
+
+.risk-icon {
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background-color: rgba(220, 53, 69, 0.15);
+   color: #dc3545;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 0.65rem;
+}
+
+.good-icon {
+   width: 20px;
+   height: 20px;
+   border-radius: 50%;
+   background-color: rgba(53, 220, 81, 0.15);
+   color: #1bc005;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 0.65rem;
+}
+
+
+        
+        /* Secciones de información */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Tarjetas de información simplificada */
+        .simple-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            border-left: 4px solid #6c757d;
+            transition: transform 0.2s ease;
+        }
+        
+        .simple-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .phone-card { border-left-color: #0d6efd; }
+        .address-card { border-left-color: #6c757d; }
+        .relation-card { border-left-color: #6610f2; }
+        .employment-card { border-left-color: #198754; }
+        .property-card { border-left-color: #20c997; }
+        .vehicle-card { border-left-color: #fd7e14; }
+        
+
+        .phone-logo {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+        }
+
+/* Tarjetas de inmuebles optimizadas para 2 por fila */
+.property-card {
+    position: relative;
+    padding: 0.8rem 0.8rem 0.8rem 1rem;
+    border-left-color: #20c997;
+    min-height: 85px;
+}
+
+.property-value-badge {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    font-size: 0.65rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.value-low {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.value-medium {
+    background-color: #fd7e14;
+    color: white;
+}
+
+.value-high {
+    background-color: #dc3545;
+    color: white;
+}
+
+.value-ultra-high {
+    background-color: #6f42c1;
+    color: white;
+}
+
+.property-title {
+    font-weight: 700;
+    color: #343a40;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    margin-right: 4rem; /* Espacio para el badge */
+    line-height: 1.2;
+}
+
+.property-details {
+    font-size: 0.75rem;
+    color: #6c757d;
+    line-height: 1.3;
+    margin-bottom: 0.3rem;
+}
+
+.property-size {
+    font-size: 0.7rem;
+    color: #495057;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Tarjetas de vehículos rediseñadas */
+.vehicle-card {
+   position: relative;
+   padding: 0.8rem;
+   border-left-color: #fd7e14;
+   min-height: 110px;
+   padding-bottom: 2.5rem; /* Espacio para ambos badges */
+}
+
+.vehicle-header {
+   width: 100%;
+   margin-bottom: 0.5rem;
+}
+
+.vehicle-title {
+   font-weight: 700;
+   color: #343a40;
+   font-size: 0.85rem;
+   line-height: 1.2;
+   width: 100%; /* Ocupa todo el ancho */
+   margin: 0;
+}
+
+.vehicle-details {
+   font-size: 0.7rem;
+   color: #6c757d;
+   line-height: 1.4;
+}
+
+.vehicle-details div {
+   margin-bottom: 0.2rem;
+}
+
+.vehicle-details div:last-child {
+   margin-bottom: 0;
+}
+
+/* Badge de estado en esquina inferior izquierda - manteniendo estilo Bootstrap */
+.vehicle-status-badge {
+   position: absolute;
+   bottom: 0.5rem;
+   left: 0.6rem;
+}
+
+/* Badge de valor en esquina inferior derecha */
+.vehicle-value-badge {
+   position: absolute;
+   bottom: 0.5rem;
+   right: 0.6rem;
+   font-size: 0.55rem;
+   padding: 0.3rem 0.6rem;
+   border-radius: 12px;
+   font-weight: 700;
+   white-space: nowrap;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+   background-color: #6f42c1;
+   color: white !important;
+}
+
+.non-value {
+    background-color: #495057;
+}
+        
+        /* Tarjetas de empleo */
+        .employment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.3rem;
+        }
+        
+        .employment-title {
+            font-weight: 600;
+            color: #343a40;
+            font-size: 0.85rem;
+            flex: 1;
+        }
+        
+        .employment-period {
+            color: #6c757d;
+            font-size: 0.65rem;
+            white-space: nowrap;
+            letter-spacing: -0.5px;
+        }
+        
+        .employment-details {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: #6c757d;
+        }
+        
+/* Tarjetas de relaciones rediseñadas */
+.relation-card {
+   display: flex;
+   flex-direction: column;
+   padding: 0.8rem;
+   gap: 0.5rem;
+}
+
+.relation-header {
+   width: 100%;
+   margin-bottom: 0.3rem;
+}
+
+.relation-name {
+   font-weight: 700;
+   font-size: 0.8rem;
+   color: #212529;
+   line-height: 1.2;
+   margin: 0;
+}
+
+.relation-body {
+   display: flex;
+   gap: 0.8rem;
+   align-items: flex-start;
+}
+
+.relation-img {
+   width: 50px;
+   height: 50px;
+   border-radius: 50%;
+   background: linear-gradient(135deg, #6610f2, #8e44ad);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   font-size: 1.2rem;
+   box-shadow: 0 2px 6px rgba(102, 16, 242, 0.3);
+   flex-shrink: 0;
+   overflow: hidden;
+}
+
+.relation-img img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+   border-radius: 50%;
+}
+
+.relation-info {
+   flex: 1;
+}
+
+.relation-contact-line {
+   font-size: 0.7rem;
+   color: #495057;
+   margin-bottom: 0.3rem;
+   line-height: 1.2;
+}
+
+.relation-contact-line i {
+   color: #6c757d;
+   margin-right: 0.3rem;
+}
+
+.relation-type {
+   font-size: 0.65rem;
+   color: #6c757d;
+   margin: 0;
+   font-weight: 600;
+   text-transform: uppercase;
+   letter-spacing: 0.3px;
+}
+
+/* Imagen de perfil principal - soporte para imágenes */
+.profile-img {
+   width: 110px;
+   height: 110px;
+   border-radius: 8px;
+   background: linear-gradient(135deg, #0d6efd, #6610f2);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color: white;
+   font-size: 1.2rem;
+   flex-shrink: 0;
+   box-shadow: 0 3px 8px rgba(13, 110, 253, 0.3);
+   border: 2px solid white;
+   overflow: hidden;
+}
+
+.profile-img img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+   border-radius: 6px;
+}
+
+        /* Pie de página fijo */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 1.5rem;
+            font-size: 0.7rem;
+            color: #6c757d;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+            background-color: #f8f9fa;
+            margin: 0;
+        }
+
+
+        
+      /* Configuración para impresión mejorada */
+@media print {
+   * {
+       -webkit-print-color-adjust: exact !important;
+       color-adjust: exact !important;
+       print-color-adjust: exact !important;
+   }
+   
+   body {
+       background-color: white !important;
+       margin: 0 !important;
+       padding: 0 !important;
+       font-size: 0.85rem !important;
+   }
+   
+   .page {
+       width: 100% !important;
+       max-width: none !important;
+       box-shadow: none !important;
+       margin: 0 !important;
+       padding: 1rem !important;
+       min-height: auto !important;
+       padding-bottom: 3rem !important;
+       page-break-inside: avoid;
+   }
+   
+   .d-print-none {
+       display: none !important;
+   }
+   
+   /* Mantener estructura del grid */
+   .container-fluid, .row, .col-md-3, .col-md-4, .col-md-6 {
+       width: 100% !important;
+       max-width: none !important;
+       flex: none !important;
+       padding: 0 !important;
+       margin: 0 !important;
+   }
+   
+   .col-md-3 { width: 25% !important; float: left; }
+   .col-md-4 { width: 33.33333% !important; float: left; }
+   .col-md-6 { width: 50% !important; float: left; }
+   
+   .row {
+       display: flex !important;
+       flex-wrap: wrap !important;
+       margin: 0 !important;
+   }
+   
+   .row.g-2 > *, .row.g-3 > * {
+       padding: 0.25rem !important;
+   }
+   
+   /* Mantener colores y estilos exactos */
+   .personal-card {
+        background: none;
+       background-color: white !important;
+       border: 1px solid #dee2e6 !important;
+       border-radius: 10px !important;
+       box-shadow: none;
+   }
+   
+   .simple-card {
+       background-color: white !important;
+       border: 1px solid #e9ecef !important;
+       border-radius: 6px !important;
+   }
+   
+   .phone-card,.address-card,.relation-card,.employment-card,.property-card,.vehicle-card {
+        border-left: 4px solid grey !important; 
+    }
+   /* .phone-card { border-left: 4px solid #0d6efd !important; }
+   .address-card { border-left: 4px solid #6c757d !important; }
+   .relation-card { border-left: 4px solid #6610f2 !important; }
+   .employment-card { border-left: 4px solid #198754 !important; }
+   .property-card { border-left: 4px solid #20c997 !important; }
+   .vehicle-card { border-left: 4px solid #fd7e14 !important; } */
+   
+   /* Mantener medidor de fiabilidad */
+   .reliability-section {
+       background-color: white !important;
+       border: 1px solid #e9ecef !important;
+       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1) !important;
+   }
+   
+   .reliability-meter::before {
+       border: 4px solid #e9ecef !important;
+   }
+   
+   .reliability-bar {
+       border-top: 4px solid #dc3545 !important;
+       border-right: 4px solid #ffc107 !important;
+       border-bottom: 4px solid #198754 !important;
+   }
+   
+   .reliability-needle {
+       background: #212529 !important;
+   }
+   
+   .reliability-needle::after {
+       background: #212529 !important;
+       border: 2px solid white !important;
+   }
+   
+   /* Mantener badges y colores */
+   .badge.bg-success {
+       background-color: #198754 !important;
+       color: white !important;
+   }
+   
+   .badge.bg-warning {
+       background-color: #ffc107 !important;
+       color: #000 !important;
+   }
+   
+   .property-value-badge, .vehicle-value-badge {
+       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+   }
+   
+   .value-low {
+       background-color: #ffc107 !important;
+       color: #000 !important;
+   }
+   
+   .value-medium {
+       background-color: #fd7e14 !important;
+       color: white !important;
+   }
+   
+   .value-high {
+       background-color: #dc3545 !important;
+       color: white !important;
+   }
+   
+   .value-ultra-high {
+       background-color: #6f42c1 !important;
+       color: white !important;
+   }
+   
+   .value-unknown {
+       background-color: #6c757d !important;
+       color: white !important;
+   }
+   
+   /* Iconos de riesgo */
+   .risk-icon {
+       background-color: rgba(220, 53, 69, 0.15) !important;
+       color: #dc3545 !important;
+   }
+   
+   .good-icon {
+       background-color: rgba(53, 220, 81, 0.15) !important;
+       color: #1bc005 !important;
+   }
+   
+   /* Mantener info-items */
+   .info-item {
+       background: rgba(255, 255, 255, 0.7) !important;
+       border-left: 2px solid #0d6efd !important;
+   }
+   
+   /* Footer */
+   .footer {
+       position: relative !important;
+       margin-top: 1rem !important;
+       background-color: #f8f9fa !important;
+       border-top: 1px solid #e9ecef !important;
+   }
+   
+   /* Evitar saltos de página en elementos importantes */
+   .personal-card, .simple-card, .section-title, .dont-cut-print {
+       page-break-inside: avoid !important;
+       break-inside: avoid !important;
+   }
+   
+   /* Mantener espaciado */
+   .mb-4 {
+       margin-bottom: 1rem !important;
+   }
+   
+   .section-title {
+       border-bottom: 2px solid #e9ecef !important;
+   }
+
+    .employment-period {
+        color: #6c757d;
+        font-size: 0.65rem;
+        white-space: nowrap;
+        letter-spacing: -0.5px !important;
+    }
+
+   /* Relacionados: 2 por fila en impresión */
+   .relacionados-print .col-md-4 {
+       width: 50% !important;
+       float: left;
+   }
+   
+   /* Asegurar que se mantenga el layout de 2 columnas */
+   .relacionados-print .row {
+       display: flex !important;
+       flex-wrap: wrap !important;
+   }
+   
+   .relacionados-print .simple-card {
+       margin-bottom: 0.5rem !important;
+   }
+
+   * {
+    box-shadow: none !important;
+   }
+
+   /* .employment-title, .vehicle-title, .property-title {
+    font-size: 0.65rem;
+   } */
+}
+
+@page {
+   size: letter !important;
+   margin: 0.5in !important;
+}
+
+   /* Relacionados: 2 por fila en impresión */
+   .relacionados-print .col-md-4 {
+       width: 50% !important;
+       float: left;
+   }
+   
+   /* Asegurar que se mantenga el layout de 2 columnas */
+   .relacionados-print .row {
+       display: flex !important;
+       flex-wrap: wrap !important;
+   }
+   
+   .relacionados-print .simple-card {
+       margin-bottom: 0.5rem !important;
+   }
+   
+    </style>
+</head>
+<body>
+    <!-- Botón de impresión -->
+    <div class="container-fluid my-4 d-print-none">
+        <div class="text-center mb-3">
+            <button class="btn btn-primary btn-lg" onclick="window.print();">
+                <i class="fas fa-print me-2"></i>Imprimir Reporte
+            </button>
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- Información Personal con Fiabilidad -->
+        <div class="personal-card">
+            <h2>BOLIVAR ERNESTO VALERA ARIZA</h2>
+            <div class="d-flex justify-content-between">
+                <div class="profile-section">
+                    <div class="profile-img">
+                        <img src="data:image/jpeg;base64,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" alt="">
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-grid">
+                            <div style="margin-left: 10px;">
+                                <div class="info-row">
+                                    <div class="info-label">Cédula:</div>
+                                    <div class="info-value">00114935240</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Profesión:</div>
+                                    <div class="info-value">ARTISTA</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Nacionalidad:</div>
+                                    <div class="info-value">DOMINICANA</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="info-row">
+                                    <div class="info-label">Nacimiento:</div>
+                                    <div class="info-value">20/06/1981</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Estado Civil:</div>
+                                    <div class="info-value">Soltero</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Sexo:</div>
+                                    <div class="info-value">Masculino</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="info-row">
+                                    <div class="info-label">Correo:</div>
+                                    <div class="info-value">felix.jeiren.jeileen@gmail.com</div>
+                                </div>
+                                <div class="info-row">
+                                    <div class="info-label">Edad:</div>
+                                    <div class="info-value">39 años</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sección de Fiabilidad -->
+                <div class="reliability-section dont-cut-print">
+                    <div class="reliability-title">Índice de Fiabilidad</div>
+                    <div class="reliability-meter">
+                        <div class="reliability-bar"></div>
+                        <div class="reliability-needle"></div>
+                    </div>
+                    <div class="risk-indicators">
+                        <div class="good-icon" title="No ha sido detenido">
+                            <i class="fas fa-handcuffs"></i>
+                        </div>
+                        <div class="risk-icon" title="Múltiples vehículos con oposición">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="good-icon" title="No tiene armas">
+                            <i class="fas fa-gun"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teléfonos (ordenados del más reciente al más antiguo) -->
+        <div class="mb-4 dont-cut-print">
+            <h3 class="section-title">
+                <i class="fas fa-phone-alt"></i>Teléfonos
+            </h3>
+            <div class="row g-2">
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-271-4417</strong></div>
+                            <img class="phone-logo" src="assets/logo-claro.png">
+                        </div>
+                        <small class="text-muted">26/09/2023</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-483-4807</strong></div>
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <small class="text-muted">05/05/2023</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-592-4066</strong></div>
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <small class="text-muted">26/12/2022</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-258-9292</strong></div>
+                            <img class="phone-logo" src="assets/logo-claro.png">
+                        </div>
+                        <small class="text-muted">06/09/2022</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-882-8234</strong></div>
+                            <img class="phone-logo" src="assets/logo-altice.png">
+                        </div>
+                        <small class="text-muted">25/04/2022</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-994-8234</strong></div>
+                            <img class="phone-logo" src="assets/logo-altice.png">
+                        </div>
+                        <small class="text-muted">05/09/2021</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>829-728-1469</strong></div>
+                            <img class="phone-logo" src="assets/logo-altice.png">
+                        </div>
+                        <small class="text-muted">17/07/2021</small>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="simple-card phone-card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div><strong>809-849-3247</strong></div>
+                            <img class="phone-logo" src="assets/logo-altice.png">
+                        </div>
+                        <small class="text-muted">26/04/2021</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Direcciones -->
+        <div class="mb-4 dont-cut-print">
+            <h3 class="section-title">
+                <i class="fas fa-map-marker-alt"></i>Direcciones
+            </h3>
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <div class="simple-card address-card">
+                        <div><strong>MANZANA F #17, AMINA</strong></div>
+                        <div class="d-flex justify-content-between">
+                            <small>DISTRITO NACIONAL, SANTO DOMINGO</small>
+                            <small>Desde: 29/06/2023</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="simple-card address-card">
+                        <div><strong>SOL PONIENTE D4 EDIF MADRIGAL APTO D4</strong></div>
+                        <div class="d-flex justify-content-between">
+                            <small>ARROYO HONDO VIEJO, SANTO DOMINGO</small>
+                            <small>Desde: 06/01/2021</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Relacionados -->
+<div class="mb-4 relacionados-print">
+    <h3 class="section-title">
+        <i class="fas fa-users"></i>Relacionados
+    </h3>
+    <div class="row g-2">
+        <div class="col-md-4">
+            <div class="simple-card relation-card">
+                <div class="relation-header">
+                    <p class="relation-name">BOLIVAR ANDRES VALERA PICHARDO</p>
+                </div>
+                <div class="relation-body">
+                    <div class="relation-img">
+                        <img src="data:image/jpeg;base64,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" alt="">
+                    </div>
+                    <div class="relation-info">
+                        <div class="relation-contact-line">
+                            <i class="fas fa-id-card"></i>40205298124 | <i class="fas fa-phone-alt"></i>+1 (829)113-4021
+                        </div>
+                        <p class="relation-type">Hijo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="simple-card relation-card">
+                <div class="relation-header">
+                    <p class="relation-name">ISABEL MERCEDES VALERA GAUTREAU</p>
+                </div>
+                <div class="relation-body">
+                    <div class="relation-img">
+                        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASEhUSEBIVFRUXFxYVFRUVFxUXFRYYFxYXFhUVFRUYHSggGBolHRUXIjEhJSkrLi4uGB8zODMtNygtLisBCgoKDg0OGhAQGi0lHyUtLS8tLS0tLS0tKystLS0tLS8tLS4tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLS0tLS0tLf/AABEIAMABBgMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAAAQIEBQYHAwj/xABAEAABAgQDBQYEBAIJBQAAAAABAAIDBBEhBRIxBkFRYXETIoGRocEHMrHwI2LR4XLxFBUkQlKCkqKyJUNz0vL/xAAZAQEAAwEBAAAAAAAAAAAAAAAAAQIEAwX/xAAnEQEBAAICAQMDBAMAAAAAAAAAAQIRAyESIjFBBBMyI2FxsYGhwf/aAAwDAQACEQMRAD8A7AlRRKiCJCQNUpTfsKA9CEIBIlQgRCVCBEITb7kAUhRXihAiFVY7tDLSjaxnX1DBdx9gOZXMsc+Jc1FJbLDsmmwyjM89Xmw8Aq3KRMwtdfixGtu5wb1IH1UaJicu2xjQx/nb+q+dcSn5l780Uud/5CCb7qEVXm+OWk0saBtjYcfHVR5r/bfQ0TH5QVrMQrW+YH0Cmy8w2I0PY4OadC01B8V82CViOuTQUoCTutoKqwlJ2ahtDYUeKwDQMeQOpFAPVPOIvHX0OlquK4Pt5iMuR2rhNQx8wNGxQPyv3nrWvJdYwLGYM3BbGgGrXVsbOBHzNI3EK0sqtx0sg5Kmt5JQVaKlQhCkIghKhA1InFIgRIlKRAIQhBKSEpSmVP7KEgpwCGtTkCISoUBEJUiAQhCBrkoA3ocEwnigOmiyu121P9GYWwhmiaVPyt/U8grDabG2wGUF3GzWjUk6BYGLJPivMSMQ2gq86NYNQ0Hef560Kz8nL3qO2GHzWUmIEWYeYkUue5xrQ1Jr0+6ei8ZqULLEhv5RZ3iTSqvJ7Gmj8KVqxuhiDL2juhdUNHKlVHgYa51+8TxO/ru8gFz867TFnXsIIJGhFzrruNz6pkGWIJzD96mxC178EduFD6eS83YVTdvBp9/dk+4t9tl4rCQXO3X/AEUeE1xuWtpbl60r6rXf1M51RTVeUfZ7Slv4vl8fJTM4XCoOHQa3a6+ohxLscAKmjgatFtST4q7wbF4kGIYkAUi2EWA40ERovdos11+66mmtqKkqYZyPGV18tdOFQdwI3FSoLHRRckRmXY6tC78rqa/YVt6cssXa8HxOHMwmxYRsdQdWne1w4hTCuW7E4+WPNRluGx4fB26KPfkV1JrgRULRjltnyx0VAQgK6oQhCATU5IoDngbvReZCe0+aagahKhSJSQNSoUJCEIQIlQhQBCEIBIhCAXhNRQxpcdy91TbRv/DLRvt56qnJl442rYY7ykZZjXR4piuvfLDB9XXWZ2vxLvCWhuFBc8zxK2EaI2FBc/QNBAPQXK55stKGajPjOFauJvff7aLz8b8t0xXGz+BEjM4Vr4LXy2HNaPlU2RlA0C25TOzU91fqK8yzTuUSYw4OPBXXZJvZK3ijyVAkgBQBeEaUHBXroSixYVEuKZkwuPYUIgNr3uVm8NnDDdlfcA0rvH7LouIQRdYbFsNAJcBflv36eynG/FRnN9pOKwixzJuH0icxz4rpWx2KCLCDa1oO70Og8FzbZybDw6A+hBFuHIdDWx50N1YbMzjpSPlPyg06scd/MEHyXXHLxrLljuOtoTWOBAISrWzUqEBKpCIQhAiQpyaUCISoQSUIQoSEIQgEIQgEIQoCIQkQKs9jz79Pv76LQLN4n3ozW86nw+/VZ/qb6XbhnqZX4jxjBkCNC4Bvi51/KiifC6UDYFaa+y8vjTGAgwmk/wB4E+H/ANK2+H7KQGHiKhYp1h/ltxn9Ne0L1BXk1eoK6YopCUhKfYpCwLpFHi9ygzDlMjUCr5gqMlpFfM6LN43A7rqLSRr6KnxNvdIVF3PJKe7OOytr0r11aeRv0IHFbHFxZsUci7pUB31B8Suf4y0CIQeteHNdAkXdrKX1Av8A6aH0XXL4rPZ7ujbJzvaQG1NwKeyulhPh5N6wyb3t6j6DzW7Wrju8WXOapUJEoXRQIQhAJClSIEQhCCUkolQoSRCVIQgEIQgEhSpCgRCEKA2IaBZ5pzR3HwHhSv1CvJt9AqPDRV7j93ufSix/VX2jRwzq1zr41Vc6A0byR/vYFrdnYTocKGxjauyjWwApvWe2+gdtNSrKaxHV8O97LeS5bBhVO4V59Fll3jJ/NbZ0gxpCcIqIzAf4a+SrHRcThnWG8fX1Cq8a2inYufsAYDWtLg6K14DyP7rA0VPUkdFQYZNz74zW9q+nezPeHBotm7t6UrahXfHjtm5/aMs5jlrKf6dIwTEokWoiwyxw8jzBVnFJWfwObc9tXatNHddeniPQggaGZcMhPJUlpnNVU4nOhgLqE8hqs+/HJlxpDlyeeibGjvfFIvRtzTTxUGcxuZbDMWB2bYbS1uY3+Y0zCxLgDvoBU+KtjMrdQ3jjN1YMfPkVMBoHW6rp2bebRIZYeO7lfz9PCnhba4i5zg1sOIxjc5OUtNBQG1dak0veit8PxVk40OBFRYt60vT0urZYXH3Vx5Mc5055tcykRp41B8itrsTHzS4rva2vo0/RZfb2XoGngSPQq52AifgkD/DX1cVOf4SuWvVY1eyTuzmAODwCeRq3y7oXTFy2RiZZg88jvVp+pcuoNNlo4b0z8vucEqanLu4hCEIBIUqQoEQhCkSkISFVSMyKpQ22qaUCoQhAJEJEAkKVNKgQcUfRqr8PsCeZ9h7KTjD7AKHBdSFU7wSfGp6715/1F9bZwz0svHh9pPQs2gBI/iLT7XHG62wh2FrLnrZz/qjIXGEx+gqa1b3uYyrpJC5THqT9mm3aG5g0p6KHMS4OnorYw0ghAK8xpvXatgS5AvYHqveeqGU5KRELRvuNFFn4lWpEe7KyrHB7gN/qFYMlnO+ZrTyICjwojQ6hseK0EGFauqna3soY2zsN1SILBxsPZRJfZ+HCcXBrQ4/4f0WzZCCp8VaQaDf52Syol305d8QoQLD1UX4dxvwyDuafv1Ur4lRMoFfmJNvA0PJVOwsXvRRuoPKgC6WfpON/NtorKRGHoP8AST7FdUl3VaCFy2ZdQMedxv40XSMHfWG0VrQfSx9Quv096Z+aJyUJqcFqZyoQkQCbS9UqKIBCEKRKSFKhVSSyVFEIEKEFCBCkSlNKAqmlKmuKgU+Lnhu18VXz8XLBNtG18gpeJuNTTgq7GHdwj8h9V5fPd5Vv4p1GDhk/1vKv3OhBlTxa6KCB5ArsQXE8UjCHGkIp/uzJa48Kv+hDnnwXaGOsrfEv7f8AV53uCNGooLYxfpYcf0XlPPLnhmg1ceXBSITAAKKu9101JHlBjw8waXUdTQ1vxpxXrOvYGGqbGhtJqRXgoM5KZ7FxA5FW9lbZWfixGZnd5umlRW3JXuFTXcAJuqh2EwmmrWivFOhPLTTRFrZY074vNVk9HDRXVxHkmS0y4gg3/Tmq+ejEpMto05j8TIpzA0J/NuH37qt2GfR/gfqvD4gzRdNuYDYNa0jdX5r+YXrsgKRWjSod5kV9itWU1xMsy/VdBmz/AGcnhQ+R/dbzZKYzQW/eoB+tVhaZoJH5SPotPsPF/DaPDxaFz+nqOaNklCQJVtZaUlN6pSEgRB1EiEKQIQhSJSEIVUhCEIEKEIQIUwpxTSgRMimyeVGnImVpJ3AnyVcrqJk3VHMRMzz1ooOOaH+E+36JZR9TU7zX1TMc08HfWq8nLu7ehjNdOc7dwKyhLbERHPHG+Rw8mF/kun7EY62dk4UaozFuWIOD291wPXXxWFxgMMsM9m9oGP6OzQbdRQeIWL2D2liYXNuhRa9k5+SK3gQaCI0cvUeC044+WH8Ofl459voGag1KqcQwyLUPgRXtI1ZXuPHQ6HpRXcCKHgEEEG4O5epauM99tEzuNYONMTANCCeYc5pHhdRo0/NaNESnEPFB1qtzOykN/wAzb8dD5qkmcHh6BzvNdZY3Y/UcWU7jHTeJzDTZx55nD6UTsME3GfWJEDYe4BvePMuO7wV3EwaE01ylx4uNR5L3gMpfepuU10zc/Jhfxi0k4IYw1NTzVPi0yyGx8Rxo1oLj0F1LjTdqLlXxI2kzn+iwzYGsQjedzPc+CrxYeV0zZ5eOO2MxCbMaK+K7V7i6nAbh4CgWs2Whd5pO5tAeZNAPKqyErDq4Ld4RCyuhjeSCfCwH+4rVy3U0zcU722MuPwyOvoVY7CzHdpva4HwoQVBh2ZTrTyXhsHHyxshtUEeIJWbhdeWe7rDDUVT1GlTaikL0IxFQhIVKCoSIQCEIUiYkSpFVIQhCBEiVIgRNKcU0oGlUe0kxRmUavIb4C5V280CxuMTOeISNG90dfu6z/UZax07cGO8tvOSd7fX916Y7oOpHn/NRYbstAN7m06Cg+v0XvjMTQ8L+lV5zb8sfPQjEkZhlKkND6ccoa63VzHLnOPwe1Y2Zbd1A2LTi2jWv8RlrzXUcDGZz4ZuXQqdSGv8A3XNXVhF7GXBJLQdDStWEbw5uYU40Wzhrhyzt2rZKcIgsrplHgtXCfmCyWysMdhDpplFuFloITi3osvtWm9pkQBQY0JvBSDMhQ5iYC6Sykivm6BVsaLlBXvMxrklU8w4vNlKLFXtLizocGIWHvBpvwt9VyCICTXUm5PE7yV1LayX/ALPEA1ynxXMA6oWng6jLzd2J+FwhnH3SpAvz5LZyx/HA/wAJYB5ElY/Ax32j8zXeVSB5rVw3/ih3F59AP/ZU5r3pfinW2uce74O/41VZgUXJHYd+Y+xurMmw6H/iqFpLYrXfm+oBquPFel+Sdu1S5UsKFIuq1p5BTAvRjBSoQhWVCEIQCEiFImpEIVUhBQmuPBAqQpUhQIUwpxTHFBWY5PCGzmVjWRMxzVt7lWOOzRixKN0Cqoh1pusOv8/ovL5uTyyejw8fjikyrszs1LBwA6Num4zFow8vZl/dess0MYK6AVPjc+iz20865su5zRmc6wbzcf0JtyXPGbuo6XrszB42Wah03ktPLvB30fTxWMxCQcZoMaP+9l6BhJJ8m+i0WAB5iQSQa5mGpFL9m2v/ABKtpLCg6biRKaPePXVaJfFx15VrsBhUYArnKoUlCyqwpZc5F7e0ONCVZNwyrqI1QJhieC3koIsvXVDZeishAqbpIsOivMVcsmYxeWzAhcdxGSMCM6G6tK908WnRd3jQalZjaDZ1kc0IFdx3jxXXjy8XLPHyczwt9IgruWj7bKWE6i/QFzhU+Y8lX4ns5GgOzMBc0D/NrqQnvig5X6tplfxBBNa/VTnJbswupp0CWj5mNd0PpdQpuFRw+9NPRVGzmI5D2DzrdjuI3for6YuCeF/KxWWenLTvfVNuo4M+sJnQD0Vm1ZzZKZzS7L1pby09FoQvTwu483Kap6ElUK6gQkqlqgEISKRNQhMc5QFc5IgBORITSlKaVAQqJPO7pHFSioeIfKeh+ipyXWFXw/KMbNupWmpKgQwHOAGg19z6UCZi0ego52Ubzx5AJzIuRgoP1PAei8f3erJqHYrNhoPkB1tbjUkNHVZTFMPizhLGuythuDa61fSjyPFxvyV9AlnOf2jzehDRuDjvPMWvxVjhcoYdgNSTfiVo4/S5ZTaNszhHYlgN6U9G2NTv5q/w+SDSTxNfO/upkKEG8C7eeFqL3g0Ce9ROo94TF6hMa8J2ZW0rDHlQ4oUp5XiWVVtJeDWKNHarAw7KHEHFTpVFbATI8sMp/lWu4+Fwp0Nw+/Kv7Jr6UU1E3tmZvDw6tfvrxKoJ/Z5jgRSh4jVbeMxRIsFUrvrbmE1gMeH8vfA0pZw5gKxw7FDZsSzhxtm5338luXS1dyjR8Ehv+ZgKjLv3RJpP2KnAGmHXeHN6LcMdZc7w/ChBcDDLhTcTULYyuLw6DMS08xb0Wjhz1NVj5uO73FtVFV4wZqG/5XA+N/Jeq0ys1mj3NpwTapa110TSVIdVCbVCkWC88u5ehSKAJEJEASmkoJVdPzZHdZ4n2CpnlMZur4Y3K6iRMTbGam/AXKqJ6bdEGUCg9UwM4p7QsmfJc+vhrx4scO1LEwZjiHZQSN5vToki4NU5jcq7AXtZcvtx2+5WfbhpBU2DLkU5aKyLEobdTcU+W0PszTw9151crEsul7IKsxp5RXw3OUhtVJ7EJMivMaXKIuc1Xs1ybFYmNVt6RrZ7mqvi1BqFZNNl5PhhQdK01JT6FSXsSZaJpO0NzF5GGp0Rq8SxTpXaO1iflqnuCVoUaLTAwJzoQXqAF6NYmlNq2LBpcaqVh+NOYQ2KS5vHeP1C9YrFVzcJMcrjek5YzKdto1wIqDUG4ISrN7M4gQexeebPdq0ZK34ZeU2wZY+N0VCbVCsq/9k=" alt="">
+                    </div>
+                    <div class="relation-info">
+                        <div class="relation-contact-line">
+                            <i class="fas fa-id-card"></i>40245595729 | <i class="fas fa-phone-alt"></i>+1 (809)333-2907
+                        </div>
+                        <p class="relation-type">Hija</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="simple-card relation-card">
+                <div class="relation-header">
+                    <p class="relation-name">ROSA ISABEL ARIZA MEDRANO</p>
+                </div>
+                <div class="relation-body">
+                    <div class="relation-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3844WycdcYaHruR0fITKbVwdMgfB-umJdjg&s" alt="">
+                    </div>
+                    <div class="relation-info">
+                        <div class="relation-contact-line">
+                            <i class="fas fa-id-card"></i>00102822418 | <i class="fas fa-phone-alt"></i>+1 (829)132-7926
+                        </div>
+                        <p class="relation-type">Posible Relación</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Experiencia Laboral -->
+        <div class="mb-4 dont-cut-print">
+            <h3 class="section-title">
+                <i class="fas fa-briefcase"></i>Experiencia Laboral
+            </h3>
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <div class="simple-card employment-card">
+                        <div class="employment-header">
+                            <div class="employment-title">DOMINICAN DREAM AGENCY SRL</div>
+                            <div class="employment-period">RNC: 130969957</div>
+                        </div>
+                        <div class="employment-details">
+                            <div>Agosto 2022 - Abril 2025</div>
+                            <div>Salario: RD$ 100,000.00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="simple-card employment-card">
+                        <div class="employment-header">
+                            <div class="employment-title">CÁMARA DE DIPUTADOS DE LA REPÚBLICA</div>
+                            <div class="employment-period">RNC: 401007606</div>
+
+                        </div>
+                        <div class="employment-details">
+                            <div>Agosto 2022 - Abril 2025</div>
+                            <div>Salario: RD$ 368,000.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!-- Inmuebles -->
+<div class="mb-4 dont-cut-print">
+   <h3 class="section-title">
+       <i class="fas fa-home"></i>Inmuebles
+   </h3>
+   <div class="row g-2">
+       <div class="col-md-6">
+           <div class="simple-card property-card">
+               <span class="property-value-badge value-medium">RD$ 8.5M</span>
+               <div class="property-title">Apartamento - Arroyo Hondo</div>
+               <div class="property-details">Sol Poniente D4, Edif. Madrigal Apto D4</div>
+               <div class="property-size">120 m²</div>
+           </div>
+       </div>
+       <div class="col-md-6">
+           <div class="simple-card property-card">
+               <span class="property-value-badge value-low">RD$ 2.8M</span>
+               <div class="property-title">Terreno - Cancino Adentro</div>
+               <div class="property-details">Manzana F #17, Santo Domingo Este</div>
+               <div class="property-size">800 m²</div>
+           </div>
+       </div>
+       <div class="col-md-6">
+           <div class="simple-card property-card">
+               <span class="property-value-badge value-high">RD$ 12.3M</span>
+               <div class="property-title">Casa - Los Cacicazgos</div>
+               <div class="property-details">Calle Pedro Henríquez Ureña #45</div>
+               <div class="property-size">280 m²</div>
+           </div>
+       </div>
+       <div class="col-md-6">
+           <div class="simple-card property-card">
+               <span class="property-value-badge value-ultra-high">RD$ 22.8M</span>
+               <div class="property-title">Villa - Cap Cana</div>
+               <div class="property-details">Residencial Marina, Villa #23</div>
+               <div class="property-size">450 m²</div>
+           </div>
+       </div>
+   </div>
+</div>
+
+<!-- Vehículos (2 por fila con valores destacados) -->
+<div class="mb-4 dont-cut-print">
+    <h3 class="section-title">
+        <i class="fas fa-car"></i>Vehículos (Valor Total: RD$ 347,980.00)
+    </h3>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <div class="simple-card vehicle-card">
+                <div class="vehicle-header">
+                    <div class="vehicle-title">GACELA BULLET 150 (2023)</div>
+                </div>
+                <div class="vehicle-details">
+                    <div><strong>Placa:</strong> K2520924 | <strong>Color:</strong> ROJO</div>
+                    <div><strong>Chasis:</strong> LZBTX9C80P1000338</div>
+                    <div><strong>Dirección:</strong> SOL PONIENTE D4 EDIF MADRIGAL APTO D4 VIEJO ARROYO HONDO</div>
+                </div>
+                <span class="badge bg-success vehicle-status-badge">ACTIVO</span>
+                <span class="vehicle-value-badge non-value">Valor N/D</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="simple-card vehicle-card">
+                <div class="vehicle-header">
+                    <div class="vehicle-title">TOYOTA LAND CRUISER 300 VXR 4WD (2025)</div>
+                </div>
+                <div class="vehicle-details">
+                    <div><strong>Placa:</strong> Z008531 | <strong>Color:</strong> NEGRO</div>
+                    <div><strong>Chasis:</strong> JTMAA7BJ2R4086837</div>
+                    <div><strong>Dirección:</strong> SOL PONIENTE D4 EDIF MADRIGAL APTO D4 VIEJO ARROYO HONDO</div>
+                </div>
+                <span class="badge bg-warning text-dark vehicle-status-badge">OPOSICIÓN</span>
+                <span class="vehicle-value-badge non-value">Valor N/D</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="simple-card vehicle-card">
+                <div class="vehicle-header">
+                    <div class="vehicle-title">LAND ROVER RANGE ROVER SPORT SVR 4X4 (2019)</div>
+                </div>
+                <div class="vehicle-details">
+                    <div><strong>Placa:</strong> Z007118 | <strong>Color:</strong> NEGRO</div>
+                    <div><strong>Chasis:</strong> SALWZ2SE3KA873221</div>
+                    <div><strong>Dirección:</strong> SOL PONIENTE D4 EDIF MADRIGAL APTO D4 VIEJO ARROYO HONDO</div>
+                </div>
+                <span class="badge bg-warning text-dark vehicle-status-badge">OPOSICIÓN</span>
+                <span class="vehicle-value-badge non-value">Valor N/D</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="simple-card vehicle-card">
+                <div class="vehicle-header">
+                    <div class="vehicle-title">KIA PICANTO (2018)</div>
+                </div>
+                <div class="vehicle-details">
+                    <div><strong>Placa:</strong> A823647 | <strong>Color:</strong> AZUL</div>
+                    <div><strong>Chasis:</strong> KNAB2511BJT197249</div>
+                    <div><strong>Dirección:</strong> SOL PONIENTE D4 EDIF MADRIGAL APTO D4 VIEJO ARROYO HONDO</div>
+                </div>
+                <span class="badge bg-success vehicle-status-badge">ACTIVO</span>
+                <span class="vehicle-value-badge">RD$ 347,980</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Pie de página -->
+        <div class="footer">
+            Reporte generado el 21/05/2025 - Este documento es confidencial y para uso exclusivo de personal autorizado.
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
