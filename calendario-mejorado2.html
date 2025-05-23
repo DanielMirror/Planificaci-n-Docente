@@ -1,0 +1,2720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario Educativo Mejorado</title>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Select2 CSS y JS después de jQuery -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    
+    <!-- Bootstrap después de jQuery -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- GSAP al final -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --primary-dark: #0D3757;
+            --primary-light: #BBDEFB;
+            --accent-color: #4CAF50;
+            --text-primary: #212121;
+            --text-secondary: #757575;
+            --divider-color: #BDBDBD;
+            --danger-color: #f44336;
+            --warning-color: #ff9800;
+            --success-color: #4caf50;
+            --info-color: #03a9f4;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+        
+        /* Header estilizado */
+        .navbar-inverse {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            color: white !important;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Tarjetas mejoradas */
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: white;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+        
+        .card-header {
+            padding: 15px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: none;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        /* Botones mejorados */
+        .btn {
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 6px 16px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 2px 5px rgba(33, 150, 243, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 4px 8px rgba(33, 150, 243, 0.4);
+        }
+        
+        .btn-success {
+            background-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 2px 5px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-success:hover {
+            background-color: #388E3C;
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+        }
+        
+        .btn-lg {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        
+        /* Calendario mejorado */
+        .calendar-container {
+            position: relative;
+        }
+        
+        .calendar-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        .calendar-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fafafa;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .calendar-body {
+            padding: 0;
+            background-color: white;
+        }
+        
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 1px;
+            background-color: #f0f0f0;
+            border: 1px solid #eee;
+        }
+        
+        .calendar-cell {
+            min-height: 80px;
+            padding: 5px;
+            background-color: white;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-cell:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .day-header {
+            text-align: center;
+            font-weight: 500;
+            padding: 10px;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        .day-number {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 25px;
+            border-radius: 50%;
+        }
+        
+        .today .day-number {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .event-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 3px;
+        }
+        
+        .event-item {
+            font-size: 11px;
+            padding: 2px 4px;
+            margin: 2px 0;
+            border-radius: 3px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .event-item:hover {
+            transform: translateX(2px);
+        }
+        
+        /* Eventos por categoría */
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .category-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            transition: all 0.2s ease;
+        }
+        
+        .category-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .category-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .category-name {
+            flex-grow: 1;
+            font-weight: 500;
+        }
+        
+        .category-edit {
+            color: var(--primary-color);
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+        
+        .category-edit:hover {
+            opacity: 1;
+        }
+        
+        /* Próximos eventos */
+        .upcoming-events {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .event-list-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            transition: all 0.2s ease;
+        }
+        
+        .event-list-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .event-date {
+            min-width: 90px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .event-title {
+            flex-grow: 1;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        .event-action {
+            color: var(--primary-color);
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animated-fade {
+            animation: fadeIn 0.3s ease forwards;
+        }
+        
+        /* Responsividad */
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            .day-header {
+                display: none;
+            }
+            
+            .calendar-cell {
+                min-height: auto;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+            }
+            
+            .day-number {
+                margin-right: 10px;
+            }
+            
+            .mobile-day-name {
+                display: inline-block;
+                font-weight: 500;
+                margin-right: 10px;
+            }
+            
+            .event-container {
+                flex-grow: 1;
+            }
+        }
+        
+        /* Estilos para crear un zoom para la imagen hero */
+        .calendar-hero {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .calendar-hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.5s ease-out;
+            transform-origin: center;
+        }
+        
+        .calendar-hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px;
+        }
+        
+        .calendar-hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        
+        .calendar-hero-subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            max-width: 700px;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Para el efecto de zoom */
+        .zoomed .calendar-hero-img {
+            transform: scale(1.5);
+        }
+        
+        /* Categorías animadas */
+        .category-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-right: 5px;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .category-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+.calendar-filters {
+    background-color: #f9f9f9;
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.calendar-filters label {
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    display: block;
+}
+
+.calendar-filters .form-control {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: none;
+}
+
+.calendar-filters .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.calendar-cell.other-month {
+    opacity: 0.5;
+}
+
+.calendar-cell.other-month .day-number {
+    color: #999;
+}
+
+.calendar-cell.today {
+    background-color: rgba(33, 150, 243, 0.05);
+}
+
+.calendar-cell:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+}
+/* Estilos para la vista de agenda */
+.agenda-view {
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+}
+
+.agenda-container {
+    width: 100%;
+}
+
+.agenda-header {
+    background-color: #f5f5f5;
+    padding: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.agenda-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.agenda-day {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+}
+
+.agenda-day-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.agenda-day-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.agenda-day-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.agenda-events {
+    padding: 0 15px 0 37px;
+}
+
+.agenda-event {
+    display: flex;
+    padding: 12px 15px;
+    border-left: 3px solid transparent;
+    margin-bottom: 8px;
+    border-radius: 0 4px 4px 0;
+    background-color: #fafafa;
+    transition: all 0.2s ease;
+}
+
+.agenda-event:hover {
+    transform: translateX(5px);
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.agenda-time {
+    min-width: 80px;
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+.agenda-title {
+    flex-grow: 1;
+    font-weight: 500;
+    padding: 0 10px;
+}
+
+.agenda-category {
+    margin-right: 15px;
+}
+
+.agenda-actions .btn {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.agenda-actions .btn:hover {
+    opacity: 1;
+}
+
+.no-events-message {
+    padding: 30px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .agenda-event {
+        flex-wrap: wrap;
+    }
+    
+    .agenda-time {
+        min-width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .agenda-actions {
+        width: 100%;
+        margin-top: 10px;
+        text-align: right;
+    }
+}
+
+.navbar-educoco {
+    background-color: white;
+    color: black;
+}
+
+#filterCategory {
+    padding-right: 30px;
+    position: relative;
+}
+
+#filterCategory option {
+    padding: 8px 25px 8px 8px;
+    position: relative;
+}
+
+/* Estilos para el punto de color cuando se selecciona una opción */
+#filterCategory option[value="1"]::after { background-color: #C28CCA; }
+#filterCategory option[value="2"]::after { background-color: #B408B4; }
+#filterCategory option[value="3"]::after { background-color: #5F59D1; }
+#filterCategory option[value="4"]::after { background-color: #32BB61; }
+#filterCategory option[value="5"]::after { background-color: #E72323; }
+#filterCategory option[value="6"]::after { background-color: #F0FF1A; }
+#filterCategory option[value="7"]::after { background-color: #E91CC3; }
+#filterCategory option[value="8"]::after { background-color: #FFAE00; }
+#filterCategory option[value="9"]::after { background-color: #00FFEE; }
+#filterCategory option[value="10"]::after { background-color: #80FF66; }
+#filterCategory option[value="12"]::after { background-color: #4137CD; }
+
+#filterCategory option::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#viewSwitcher .btn {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+#viewSwitcher .btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.select2-container--default .select2-selection--single {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    height: 34px;
+    line-height: 32px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 32px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 32px;
+}
+
+.select2-results__option {
+    padding: 6px 12px;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 34px;
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 28px;
+    padding-left: 12px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 32px;
+}
+
+.select2-dropdown {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.select2-container--default .select2-results__option {
+    padding: 8px 12px;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--primary-color);
+}
+<style>
+.select2-container--default .select2-selection--single {
+    height: 34px;
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 28px;
+    padding-left: 12px;
+    padding-right: 30px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 32px;
+}
+
+.select2-dropdown {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.select2-results__option {
+    padding: 8px 12px !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #e9ecef;
+}
+</style>
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img src="assets/educoco-logo.jpg" alt="Logo" class="img-circle" style="margin-right: 10px; width: 12%;">
+                    <span>Plataforma Educativa</span>
+                </a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><i class="fa fa-user-circle"></i> José Angel</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i> Configuración</a></li>
+                    <li><a href="#"><i class="fa fa-sign-out"></i> Salir</a></li>
+                </ul>
+            </div>
+        </div>
+
+<!-- NAVBAR NATIVA DE EDUCOCO NAVBAR NATIVA DE EDUCOCO -->
+
+<div class="navbar-educoco navbar-collapse collapse" id="navbar-second-toggle">
+            <ul class="nav navbar-nav">
+                <li><a href="https://educoco.net/admin/"><i class=" icon-home2 position-left"></i>Inicio </a></li>
+
+	<li class="dropdown mega-menu mega-menu-wide">
+		<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-user-tie position-left"></i>Académico<span class="caret"></span></a> 
+		<div class="dropdown-menu dropdown-content">
+			<div class="dropdown-content-body">
+				<div class="row"> 
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Mantenimiento  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-179" js-bc="breadCrumb.push(&quot;Familia&quot;, &quot;irA(`modulos/academico/familia/lista_familia.php`)&quot;, &quot;icon-pencil6&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/familia/lista_familia.php&quot;)"><i class="icon-pencil6"></i>Familia</a></li>
+
+																					<li><a class="set-bc main-menu-5" js-bc="breadCrumb.push(&quot;Estudiantes&quot;, &quot;irA(`modulos/academico/estudiantes/lista_estudiantes.php`)&quot;, &quot; icon-graduation2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/estudiantes/lista_estudiantes.php&quot;)"><i class=" icon-graduation2"></i>Estudiantes</a></li>
+
+																					<li><a class="set-bc main-menu-21" js-bc="breadCrumb.push(&quot;Docentes&quot;, &quot;irA(`modulos/academico/profesor/lista.php?`)&quot;, &quot;icon-people&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/profesor/lista.php?&quot;)"><i class="icon-people"></i>Docentes</a></li>
+
+																					<li><a class="set-bc main-menu-6" js-bc="breadCrumb.push(&quot;Materias&quot;, &quot;irA(`modulos/academico/materias/materias.php`)&quot;, &quot; icon-stack2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/materias/materias.php&quot;)"><i class=" icon-stack2"></i>Materias</a></li>
+
+																					<li><a class="set-bc main-menu-95" js-bc="breadCrumb.push(&quot;Otros Cursos&quot;, &quot;irA(`modulos/academico/materias/otros_cursos.php`)&quot;, &quot; icon-stack2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/materias/otros_cursos.php&quot;)"><i class=" icon-stack2"></i>Otros Cursos</a></li>
+
+																					<li><a class="set-bc main-menu-7" js-bc="breadCrumb.push(&quot;Padres y tutores&quot;, &quot;irA(`modulos/academico/padres/lista_padres.php?`)&quot;, &quot; icon-users&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/padres/lista_padres.php?&quot;)"><i class=" icon-users"></i>Padres y tutores</a></li>
+
+																					<li><a class="set-bc main-menu-48" js-bc="breadCrumb.push(&quot;Asignar materias&quot;, &quot;irA(`modulos/academico/materias/asignar_materia.php`)&quot;, &quot; icon-clipboard5&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/materias/asignar_materia.php&quot;)"><i class=" icon-clipboard5"></i>Asignar materias</a></li>
+
+																					<li><a class="set-bc main-menu-104" js-bc="breadCrumb.push(&quot;Cursos técnicos&quot;, &quot;irA(`modulos/academico/materias/lista_cursos_instituto.php`)&quot;, &quot;icon-book3&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/materias/lista_cursos_instituto.php&quot;)"><i class="icon-book3"></i>Cursos técnicos</a></li>
+
+																					<li><a class="set-bc main-menu-9" js-bc="breadCrumb.push(&quot;Otros mantenimientos&quot;, &quot;irA(`modulos/academico/mantenimietos/varios.php?`)&quot;, &quot;icon-cogs&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/mantenimietos/varios.php?&quot;)"><i class="icon-cogs"></i>Otros mantenimientos</a></li>
+
+																					<li><a class="set-bc main-menu-194" js-bc="breadCrumb.push(&quot;Aulas disponibles&quot;, &quot;irA(`modulos/academico/salones_clases/salones.php?`)&quot;, &quot;icon-home7&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/salones_clases/salones.php?&quot;)"><i class="icon-home7"></i>Aulas disponibles</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Docentes  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-77" js-bc="breadCrumb.push(&quot;Clases Virtuales&quot;, &quot;irA(`modulos/academico/monitoreo_docente/carga_academica.php`)&quot;, &quot; icon-presentation&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/monitoreo_docente/carga_academica.php&quot;)"><i class=" icon-presentation"></i>Clases Virtuales</a></li>
+
+																					<li><a class="set-bc main-menu-20" js-bc="breadCrumb.push(&quot;Cierre de período&quot;, &quot;irA(`modulos/academico/periodo/cierre_de_periodo.php?`)&quot;, &quot;icon-notification2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/periodo/cierre_de_periodo.php?&quot;)"><i class="icon-notification2"></i>Cierre de período</a></li>
+
+																					<li><a class="set-bc main-menu-71" js-bc="breadCrumb.push(&quot;Horario de clases&quot;, &quot;irA(`modulos/academico/horrarios/horrarios.php`)&quot;, &quot;icon-calendar2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/horrarios/horrarios.php&quot;)"><i class="icon-calendar2"></i>Horario de clases</a></li>
+
+																					<li><a class="set-bc main-menu-72" js-bc="breadCrumb.push(&quot;Registros de Grados&quot;, &quot;irA(`modulos/academico/calificaciones/libro_notas.php`)&quot;, &quot;icon-file-stats&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/calificaciones/libro_notas.php&quot;)"><i class="icon-file-stats"></i>Registros de Grados</a></li>
+
+																					<li><a class="set-bc main-menu-73" js-bc="breadCrumb.push(&quot;Asistencias&quot;, &quot;irA(`modulos/academico/asistencia/asistencia.php`)&quot;, &quot; icon-clipboard5&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/asistencia/asistencia.php&quot;)"><i class=" icon-clipboard5"></i>Asistencias</a></li>
+
+																					<li><a class="set-bc main-menu-89" js-bc="breadCrumb.push(&quot;Salón de encuentro virtual&quot;, &quot;irA(`modulos/administracion/salonVirtual/salon_vitual.php`)&quot;, &quot; icon-presentation&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/salonVirtual/salon_vitual.php&quot;)"><i class=" icon-presentation"></i>Salón de encuentro virtual</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Gestión  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-10" js-bc="breadCrumb.push(&quot;Plan estudiantil&quot;, &quot;irA(`modulos/academico/calificaciones/principal.php?`)&quot;, &quot; icon-bookmark&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/calificaciones/principal.php?&quot;)"><i class=" icon-bookmark"></i>Plan estudiantil</a></li>
+
+																					<li><a class="set-bc main-menu-12" js-bc="breadCrumb.push(&quot;Calendario&quot;, &quot;irA(`modulos/academico/calendario/calendario.php?`)&quot;, &quot;icon-calendar3&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/calendario/calendario.php?&quot;)"><i class="icon-calendar3"></i>Calendario</a></li>
+
+																					<li><a class="set-bc main-menu-14" js-bc="breadCrumb.push(&quot;Notificaciones&quot;, &quot;irA(`modulos/academico/notificaciones/notificaciones_edit.php?`)&quot;, &quot;icon-bubbles9&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/notificaciones/notificaciones_edit.php?&quot;)"><i class="icon-bubbles9"></i>Notificaciones</a></li>
+
+																					<li><a class="set-bc main-menu-56" js-bc="breadCrumb.push(&quot;Biblioteca&quot;, &quot;irA(`modulos/academico/bibloteca/bibloteca.php`)&quot;, &quot;icon-books&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/bibloteca/bibloteca.php&quot;)"><i class="icon-books"></i>Biblioteca</a></li>
+
+																					<li><a class="set-bc main-menu-59" js-bc="breadCrumb.push(&quot;Calificaciones&quot;, &quot;irA(`modulos/academico/nota/record_notas.php`)&quot;, &quot;icon-certificate&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/nota/record_notas.php&quot;)"><i class="icon-certificate"></i>Calificaciones</a></li>
+
+																					<li><a class="set-bc main-menu-131" js-bc="breadCrumb.push(&quot;Carnet&quot;, &quot;irA(`modulos/administracion/carnet/solicitar_carnet2.php`)&quot;, &quot; icon-bookmark&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/carnet/solicitar_carnet2.php&quot;)"><i class=" icon-bookmark"></i>Carnet</a></li>
+
+																					<li><a class="set-bc main-menu-136" js-bc="breadCrumb.push(&quot;Portafolio estudiantil&quot;, &quot;irA(`modulos/portafolio/portafolios.php`)&quot;, &quot;icon-stack-picture&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/portafolio/portafolios.php&quot;)"><i class="icon-stack-picture"></i>Portafolio estudiantil</a></li>
+
+																					<li><a class="set-bc main-menu-137" js-bc="breadCrumb.push(&quot;Diplomas Generados &quot;, &quot;irA(`modulos/diplomas/diploma.php`)&quot;, &quot; icon-checkbox-partial&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/diplomas/diploma.php&quot;)"><i class=" icon-checkbox-partial"></i>Diplomas Generados </a></li>
+
+																					<li><a class="set-bc main-menu-186" js-bc="breadCrumb.push(&quot;Solicitudes&quot;, &quot;irA(`modulos/academico/solicitudes/lista_solicitudes.php`)&quot;, &quot;fa fa-address-book&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/solicitudes/lista_solicitudes.php&quot;)"><i class="fa fa-address-book"></i>Solicitudes</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Supervisión  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-22" js-bc="breadCrumb.push(&quot;Sugerencias y quejas&quot;, &quot;irA(`modulos/academico/quejas_sugerencias/nuvas_quejas_sugerencias.php?`)&quot;, &quot;icon-bubble-notification&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/quejas_sugerencias/nuvas_quejas_sugerencias.php?&quot;)"><i class="icon-bubble-notification"></i>Sugerencias y quejas</a></li>
+
+																					<li><a class="set-bc main-menu-53" js-bc="breadCrumb.push(&quot;Historial&quot;, &quot;irA(`modulos/academico/monitoreo/monitor_acceso.php`)&quot;, &quot; icon-list2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/monitoreo/monitor_acceso.php&quot;)"><i class=" icon-list2"></i>Historial</a></li>
+
+																					<li><a class="set-bc main-menu-70" js-bc="breadCrumb.push(&quot;Monitoreo&quot;, &quot;irA(`modulos/academico/clases/monitoreo.php`)&quot;, &quot;icon-station&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/clases/monitoreo.php&quot;)"><i class="icon-station"></i>Monitoreo</a></li>
+
+																					<li><a class="set-bc main-menu-86" js-bc="breadCrumb.push(&quot;Cumplimiento del Currículo&quot;, &quot;irA(`modulos/academico/calificaciones/curriculo.php`)&quot;, &quot;fa fa-newspaper-o&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/calificaciones/curriculo.php&quot;)"><i class="fa fa-newspaper-o"></i>Cumplimiento del Currículo</a></li>
+
+																					<li><a class="set-bc main-menu-88" js-bc="breadCrumb.push(&quot;Encuestas&quot;, &quot;irA(`modulos/academico/encuestas/new_encuesta/tabs.php`)&quot;, &quot; icon-list2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/encuestas/new_encuesta/tabs.php&quot;)"><i class=" icon-list2"></i>Encuestas</a></li>
+
+																					<li><a class="set-bc main-menu-193" js-bc="breadCrumb.push(&quot;Registro de conducta&quot;, &quot;irA(`modulos/academico/conducta/registro_de_conducta.php`)&quot;, &quot;icon-list2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/academico/conducta/registro_de_conducta.php&quot;)"><i class="icon-list2"></i>Registro de conducta</a></li>
+
+																			</ul>
+							</div>
+									</div>
+			</div>
+		</div>
+	</li>
+	<li class="dropdown mega-menu mega-menu-wide">
+		<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user-tie position-left"></i>Administración<span class="caret"></span></a> 
+		<div class="dropdown-menu dropdown-content">
+			<div class="dropdown-content-body">
+				<div class="row"> 
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Mantenimiento  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-44" js-bc="breadCrumb.push(&quot;Usuarios&quot;, &quot;irA(`modulos/usuarios/lista.php?`)&quot;, &quot;icon-user&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/usuarios/lista.php?&quot;)"><i class="icon-user"></i>Usuarios</a></li>
+
+																					<li><a class="set-bc main-menu-87" js-bc="breadCrumb.push(&quot;Roles de Usuarios&quot;, &quot;irA(`modulos/administracion/permisos_plantilla.php?`)&quot;, &quot;icon-collaboration&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/permisos_plantilla.php?&quot;)"><i class="icon-collaboration"></i>Roles de Usuarios</a></li>
+
+																					<li><a class="set-bc main-menu-98" js-bc="breadCrumb.push(&quot;Bloqueo de Usuario&quot;, &quot;irA(`modulos/administracion/bloqueo_usuario/get_bloqueo_usuario.php`)&quot;, &quot;icon-user-cancel&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/bloqueo_usuario/get_bloqueo_usuario.php&quot;)"><i class="icon-user-cancel"></i>Bloqueo de Usuario</a></li>
+
+																					<li><a class="set-bc main-menu-54" js-bc="breadCrumb.push(&quot;Datos del centro&quot;, &quot;irA(`modulos/administracion/empresa/datos_empresa.php?`)&quot;, &quot;icon-office&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/empresa/datos_empresa.php?&quot;)"><i class="icon-office"></i>Datos del centro</a></li>
+
+																					<li><a class="set-bc main-menu-132" js-bc="breadCrumb.push(&quot;Configuracion de carnet&quot;, &quot;irA(`modulos/administracion/carnet/carnet_container.php`)&quot;, &quot;icon-office&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/carnet/carnet_container.php&quot;)"><i class="icon-office"></i>Configuracion de carnet</a></li>
+
+																					<li><a class="set-bc main-menu-190" js-bc="breadCrumb.push(&quot;Pagina Web&quot;, &quot;irA(`modulos/administracion/pagina/configuracion.php`)&quot;, &quot; icon-IE&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/pagina/configuracion.php&quot;)"><i class=" icon-IE"></i>Pagina Web</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Admisiones   </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-168" js-bc="breadCrumb.push(&quot;Pre-matriculacion&quot;, &quot;irA(`modulos/administracion/inscripcion/preinscripcion/preinscripciones.php`)&quot;, &quot;icon-pencil6&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/inscripcion/preinscripcion/preinscripciones.php&quot;)"><i class="icon-pencil6"></i>Pre-matriculacion</a></li>
+
+																					<li><a class="set-bc main-menu-51" js-bc="breadCrumb.push(&quot;Matriculación&quot;, &quot;irA(`modulos/administracion/inscripcion/inscriciones.php`)&quot;, &quot; icon-pencil6&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/inscripcion/inscriciones.php&quot;)"><i class=" icon-pencil6"></i>Matriculación</a></li>
+
+																					<li><a class="set-bc main-menu-128" js-bc="breadCrumb.push(&quot;Rematriculación&quot;, &quot;irA(`modulos/administracion/inscripcion/reinscripcion/reinscripcion.php`)&quot;, &quot; icon-pencil6&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/inscripcion/reinscripcion/reinscripcion.php&quot;)"><i class=" icon-pencil6"></i>Rematriculación</a></li>
+
+																					<li><a class="set-bc main-menu-108" js-bc="breadCrumb.push(&quot;Descuentos especiales&quot;, &quot;irA(`modulos/administracion/becas/listado_becas.php`)&quot;, &quot; icon-percent&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/becas/listado_becas.php&quot;)"><i class=" icon-percent"></i>Descuentos especiales</a></li>
+
+																			</ul>
+							</div>
+									</div>
+			</div>
+		</div>
+	</li>
+	<li class="dropdown mega-menu mega-menu-wide">
+		<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user-tie position-left"></i>Facturación<span class="caret"></span></a> 
+		<div class="dropdown-menu dropdown-content">
+			<div class="dropdown-content-body">
+				<div class="row"> 
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Cuentas Por Cobrar  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-102" js-bc="breadCrumb.push(&quot;Facturación&quot;, &quot;irA(`modulos/administracion/facturacion/lista_factura.php`)&quot;, &quot; icon-file-text2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/facturacion/lista_factura.php&quot;)"><i class=" icon-file-text2"></i>Facturación</a></li>
+
+																					<li><a class="set-bc main-menu-191" js-bc="breadCrumb.push(&quot;Cotización&quot;, &quot;irA(`modulos/administracion/cotizacion/lista.php`)&quot;, &quot; icon-file-text2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/cotizacion/lista.php&quot;)"><i class=" icon-file-text2"></i>Cotización</a></li>
+
+																					<li><a class="set-bc main-menu-111" js-bc="breadCrumb.push(&quot;Cuadre de caja&quot;, &quot;irA(`modulos/cuadre_caja/cuadre.php`)&quot;, &quot; icon-file-text2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/cuadre_caja/cuadre.php&quot;)"><i class=" icon-file-text2"></i>Cuadre de caja</a></li>
+
+																					<li><a class="set-bc main-menu-134" js-bc="breadCrumb.push(&quot;Nota de credito&quot;, &quot;irA(`modulos/administracion/nota_credito/nota.php`)&quot;, &quot; icon-file-text2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/nota_credito/nota.php&quot;)"><i class=" icon-file-text2"></i>Nota de credito</a></li>
+
+																					<li><a class="set-bc main-menu-61" js-bc="breadCrumb.push(&quot;Agenda de Cobros&quot;, &quot;irA(`modulos/agenda_cobros/listado.php`)&quot;, &quot;icon-book3&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/agenda_cobros/listado.php&quot;)"><i class="icon-book3"></i>Agenda de Cobros</a></li>
+
+																					<li><a class="set-bc main-menu-139" js-bc="breadCrumb.push(&quot;Notificaciones&quot;, &quot;irA(``)&quot;, &quot;icon-bubbles9&quot;);" href="javascript:void(0);"><i class="icon-bubbles9"></i>Notificaciones</a></li>
+
+																					<li><a class="set-bc main-menu-101" js-bc="breadCrumb.push(&quot;Productos y Servicios&quot;, &quot;irA(`modulos/administracion/facturacion/productos_servicios.php`)&quot;, &quot; icon-cart-add&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/facturacion/productos_servicios.php&quot;)"><i class=" icon-cart-add"></i>Productos y Servicios</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Contabilidad  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-106" js-bc="breadCrumb.push(&quot;Parámetros Contables&quot;, &quot;irA(`modulos/administracion/contabilidad/parametros.php`)&quot;, &quot; icon-drawer3&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/contabilidad/parametros.php&quot;)"><i class=" icon-drawer3"></i>Parámetros Contables</a></li>
+
+																					<li><a class="set-bc main-menu-110" js-bc="breadCrumb.push(&quot;Reporte 606,607 y 608&quot;, &quot;irA(`modulos/contabilidad/dgii.php?`)&quot;, &quot; icon-file-stats&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/contabilidad/dgii.php?&quot;)"><i class=" icon-file-stats"></i>Reporte 606,607 y 608</a></li>
+
+																					<li><a class="set-bc main-menu-114" js-bc="breadCrumb.push(&quot;Registro Contable&quot;, &quot;irA(`modulos/movimiento_contable/listado.php?`)&quot;, &quot; icon-file-spreadsheet&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/movimiento_contable/listado.php?&quot;)"><i class=" icon-file-spreadsheet"></i>Registro Contable</a></li>
+
+																					<li><a class="set-bc main-menu-115" js-bc="breadCrumb.push(&quot;Mayor General&quot;, &quot;irA(``)&quot;, &quot; icon-stats-growth&quot;);" href="javascript:void(0);"><i class=" icon-stats-growth"></i>Mayor General</a></li>
+
+																					<li><a class="set-bc main-menu-116" js-bc="breadCrumb.push(&quot;Libro diario&quot;, &quot;irA(`modulos/contabilidad/libro.php?`)&quot;, &quot; icon-stats-growth&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/contabilidad/libro.php?&quot;)"><i class=" icon-stats-growth"></i>Libro diario</a></li>
+
+																					<li><a class="set-bc main-menu-117" js-bc="breadCrumb.push(&quot;Reportes contables&quot;, &quot;irA(`modulos/contabilidad/reportes.php`)&quot;, &quot; icon-stats-growth&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/contabilidad/reportes.php&quot;)"><i class=" icon-stats-growth"></i>Reportes contables</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Cuentas Por Pagar  </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-119" js-bc="breadCrumb.push(&quot;Digitación de factura&quot;, &quot;irA(`modulos/cxp/lista_dig_factura.php?`)&quot;, &quot; icon-file-text&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/cxp/lista_dig_factura.php?&quot;)"><i class=" icon-file-text"></i>Digitación de factura</a></li>
+
+																					<li><a class="set-bc main-menu-120" js-bc="breadCrumb.push(&quot;Caja chica&quot;, &quot;irA(`modulos/cxp/digitacion.php`)&quot;, &quot; icon-cash3&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/cxp/digitacion.php&quot;)"><i class=" icon-cash3"></i>Caja chica</a></li>
+
+																					<li><a class="set-bc main-menu-121" js-bc="breadCrumb.push(&quot;Proveedores&quot;, &quot;irA(`modulos/suplidores/lista.php`)&quot;, &quot;icon-users4&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/suplidores/lista.php&quot;)"><i class="icon-users4"></i>Proveedores</a></li>
+
+																					<li><a class="set-bc main-menu-122" js-bc="breadCrumb.push(&quot;Notas de creditos&quot;, &quot;irA(``)&quot;, &quot;fas fa-file-invoice&quot;);" href="javascript:void(0);"><i class="fas fa-file-invoice"></i>Notas de creditos</a></li>
+
+																			</ul>
+							</div>
+												<div class="col-sm-3">
+								<span class="menu-heading">
+									<i class=""></i> <a href="javascript:void(0);" style="color:#000">Financiero   </a>
+								</span>
+									<ul class="menu-list">
+																					<li><a class="set-bc main-menu-124" js-bc="breadCrumb.push(&quot;Proyección &quot;, &quot;irA(`modulos/financiero/proyecciones.php`)&quot;, &quot; icon-stats-growth&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/financiero/proyecciones.php&quot;)"><i class=" icon-stats-growth"></i>Proyección </a></li>
+
+																					<li><a class="set-bc main-menu-125" js-bc="breadCrumb.push(&quot;Balance de antigüedad&quot;, &quot;irA(`modulos/financiero/balance_antiguedad.php`)&quot;, &quot; icon-stats-growth&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/financiero/balance_antiguedad.php&quot;)"><i class=" icon-stats-growth"></i>Balance de antigüedad</a></li>
+
+																					<li><a class="set-bc main-menu-127" js-bc="breadCrumb.push(&quot;Tasa de divisas &quot;, &quot;irA(`modulos/financiero/divisas/lista.php`)&quot;, &quot; icon-cash2&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/financiero/divisas/lista.php&quot;)"><i class=" icon-cash2"></i>Tasa de divisas </a></li>
+
+																					<li><a class="set-bc main-menu-113" js-bc="breadCrumb.push(&quot;Reporte financiero&quot;, &quot;irA(`modulos/financiero/reportes/reportes.php`)&quot;, &quot; icon-stats-bars3&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/financiero/reportes/reportes.php&quot;)"><i class=" icon-stats-bars3"></i>Reporte financiero</a></li>
+
+																					<li><a class="set-bc main-menu-130" js-bc="breadCrumb.push(&quot;Bancos&quot;, &quot;irA(`modulos/caja/lista_caja.php`)&quot;, &quot;icon-piggy-bank&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/caja/lista_caja.php&quot;)"><i class="icon-piggy-bank"></i>Bancos</a></li>
+
+																					<li><a class="set-bc main-menu-192" js-bc="breadCrumb.push(&quot;Almacenes&quot;, &quot;irA(`modulos/administracion/facturacion/almacenes/almacenes.php`)&quot;, &quot;icon-piggy-bank&quot;);" href="javascript:void(0);" onclick=" irA(&quot;modulos/administracion/facturacion/almacenes/almacenes.php&quot;)"><i class="icon-piggy-bank"></i>Almacenes</a></li>
+
+																			</ul>
+							</div>
+									</div>
+			</div>
+		</div>
+	</li>
+<!-- <li><a href="javascript:;" onclick="accesoDrh()"><i class=' icon-man-woman'></i> <img src='drh.png' height='30' style="    height: 40px; margin-top: -12px;position: absolute;"> </a></li> -->
+<li>
+	<a href="javascript:;" onclick="accesoDrh()">
+		<i><img src="./Plataforma Educativa_files/drh.png" height="30" style="    height: 30px; margin-top: -9px;"> </i> 
+		DRH
+	</a>
+</li>            </ul>
+                                                </div>
+    </nav>
+    <!-- final NAVBAR NATIVA DE EDUCOCO NAVBAR NATIVA DE EDUCOCO -->
+    <div class="container">
+        <!-- Hero con zoom -->
+        <div class="calendar-hero zoomed" id="calendarHero">
+            <img src="assets/banner-calendar.jpg" alt="Calendario" class="calendar-hero-img">
+            <div class="calendar-hero-content">
+                <h1 class="calendar-hero-title">Calendario Académico</h1>
+                <p class="calendar-hero-subtitle">Administra eventos educativos, reuniones y recordatorios importantes para tu institución.</p>
+                <div>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#eventoModal"><i class="fa fa-calendar-plus-o"></i> Nuevo Evento</button>
+                    <button class="btn btn-success" style="margin-left: 10px;"><i class="fa fa-download"></i> Exportar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <!-- Calendario principal -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="panel-title"><i class="fa fa-calendar"></i> Calendario de Eventos</h3>
+                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#eventoModal"><i class="fa fa-plus"></i> Nuevo Evento</button>
+                    </div>
+                        <div class="calendar-controls">
+                            <div>
+                                <button class="btn btn-default" id="prevMonth"><i class="fa fa-arrow-left"></i></button>
+                                <button class="btn btn-default" id="nextMonth"><i class="fa fa-arrow-right"></i></button>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 500;" id="currentMonthYear">Mayo 2025</div>
+                            <div>
+                                <button class="btn btn-default btn-sm" id="goToday">Hoy</button>
+                                <div class="btn-group" id="viewSwitcher">
+                                    <div class="btn-group" id="viewSwitcher">
+                                        <button class="btn btn-default btn-sm active" data-view="month">Calendario</button>
+                                        <button class="btn btn-default btn-sm" data-view="agenda">Agenda</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<div class="calendar-filters">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label><i class="fa fa-filter"></i> Filtrar por usuario:</label>
+                <select class="form-control input-sm" id="filterVisibility">
+                    <option value="all">Todos los usuarios</option>
+                    <option value="5">Administrador y Docente</option>
+                    <option value="4">Administración</option>
+                    <option value="2">Docentes</option>
+                    <option value="3">Padres</option>
+                    <option value="1">Estudiantes</option>
+                    <option value="6">Psicólogos</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label><i class="fa fa-tags"></i> Filtrar por categoría:</label>
+                <select class="form-control input-sm" id="filterCategory">
+                    <option value="all">Todas las categorías</option>
+                    <option value="1" data-color="#C28CCA">Evento Escolar</option>
+                    <option value="2" data-color="#B408B4">Evento Administrativo</option>
+                    <option value="3" data-color="#5F59D1">Reunión</option>
+                    <option value="4" data-color="#32BB61">Capacitación Docente</option>
+                    <option value="5" data-color="#E72323">Día Feriado</option>
+                    <option value="6" data-color="#F0FF1A">Fiesta del Centro</option>
+                    <option value="7" data-color="#E91CC3">Cumpleaños</option>
+                    <option value="8" data-color="#FFAE00">Efemérides y conmemoraciones</option>
+                    <option value="9" data-color="#00FFEE">Hoy se celebra ...</option>
+                    <option value="10" data-color="#80FF66">Psicología</option>
+                    <option value="12" data-color="#4137CD">Graduación</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <p class="filter-summary text-muted" style="margin-top: 5px; font-size: 12px;">Mostrando todos los eventos</p>
+</div>
+                    <div class="calendar-body">
+                        <div id="calendar-view" class="calendar-grid">
+                            <!-- Encabezados de los días -->
+                            <div class="day-header">Domingo</div>
+                            <div class="day-header">Lunes</div>
+                            <div class="day-header">Martes</div>
+                            <div class="day-header">Miércoles</div>
+                            <div class="day-header">Jueves</div>
+                            <div class="day-header">Viernes</div>
+                            <div class="day-header">Sábado</div>
+                            
+                            <!-- Días del mes anterior -->
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">27</span>
+                                <span class="mobile-day-name">Dom 27/04</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">28</span>
+                                <span class="mobile-day-name">Lun 28/04</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">29</span>
+                                <span class="mobile-day-name">Mar 29/04</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">30</span>
+                                <span class="mobile-day-name">Mié 30/04</span>
+                            </div>
+                            
+                            <!-- Días del mes actual -->
+                            <div class="calendar-cell">
+                                <span class="day-number">1</span>
+                                <span class="mobile-day-name">Jue 01/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(76, 175, 80, 0.2); color: #388E3C;">
+                                        <span class="event-dot" style="background-color: #4CAF50;"></span>
+                                        Día del Trabajo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">2</span>
+                                <span class="mobile-day-name">Vie 02/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">3</span>
+                                <span class="mobile-day-name">Sáb 03/05</span>
+                            </div>
+                            
+                            <!-- Segunda semana -->
+                            <div class="calendar-cell">
+                                <span class="day-number">4</span>
+                                <span class="mobile-day-name">Dom 04/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">5</span>
+                                <span class="mobile-day-name">Lun 05/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(33, 150, 243, 0.2); color: #1976D2;">
+                                        <span class="event-dot" style="background-color: #2196F3;"></span>
+                                        Reunión Docentes
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">6</span>
+                                <span class="mobile-day-name">Mar 06/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">7</span>
+                                <span class="mobile-day-name">Mié 07/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">8</span>
+                                <span class="mobile-day-name">Jue 08/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">9</span>
+                                <span class="mobile-day-name">Vie 09/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">10</span>
+                                <span class="mobile-day-name">Sáb 10/05</span>
+                            </div>
+                            
+                            <!-- Tercera semana -->
+                            <div class="calendar-cell">
+                                <span class="day-number">11</span>
+                                <span class="mobile-day-name">Dom 11/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">12</span>
+                                <span class="mobile-day-name">Lun 12/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(156, 39, 176, 0.2); color: #7B1FA2;">
+                                        <span class="event-dot" style="background-color: #9C27B0;"></span>
+                                        Capacitación
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">13</span>
+                                <span class="mobile-day-name">Mar 13/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">14</span>
+                                <span class="mobile-day-name">Mié 14/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">15</span>
+                                <span class="mobile-day-name">Jue 15/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">16</span>
+                                <span class="mobile-day-name">Vie 16/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">17</span>
+                                <span class="mobile-day-name">Sáb 17/05</span>
+                            </div>
+                            
+                            <!-- Cuarta semana -->
+                            <div class="calendar-cell">
+                                <span class="day-number">18</span>
+                                <span class="mobile-day-name">Dom 18/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">19</span>
+                                <span class="mobile-day-name">Lun 19/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(255, 152, 0, 0.2); color: #F57C00;">
+                                        <span class="event-dot" style="background-color: #FF9800;"></span>
+                                        Entrega Calificaciones
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell today">
+                                <span class="day-number">20</span>
+                                <span class="mobile-day-name">Mar 20/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(244, 67, 54, 0.2); color: #D32F2F;">
+                                        <span class="event-dot" style="background-color: #F44336;"></span>
+                                        Día Feriado
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">21</span>
+                                <span class="mobile-day-name">Mié 21/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">22</span>
+                                <span class="mobile-day-name">Jue 22/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">23</span>
+                                <span class="mobile-day-name">Vie 23/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">24</span>
+                                <span class="mobile-day-name">Sáb 24/05</span>
+                            </div>
+                            
+                            <!-- Quinta semana -->
+                            <div class="calendar-cell">
+                                <span class="day-number">25</span>
+                                <span class="mobile-day-name">Dom 25/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(233, 30, 99, 0.2); color: #C2185B;">
+                                        <span class="event-dot" style="background-color: #E91E63;"></span>
+                                        Día de las madres
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">26</span>
+                                <span class="mobile-day-name">Lun 26/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">27</span>
+                                <span class="mobile-day-name">Mar 27/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">28</span>
+                                <span class="mobile-day-name">Mié 28/05</span>
+                                <div class="event-container">
+                                    <div class="event-item" style="background-color: rgba(0, 150, 136, 0.2); color: #00796B;">
+                                        <span class="event-dot" style="background-color: #009688;"></span>
+                                        Graduación
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">29</span>
+                                <span class="mobile-day-name">Jue 29/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">30</span>
+                                <span class="mobile-day-name">Vie 30/05</span>
+                            </div>
+                            <div class="calendar-cell">
+                                <span class="day-number">31</span>
+                                <span class="mobile-day-name">Sáb 31/05</span>
+                            </div>
+                            
+                            <!-- Días del mes siguiente -->
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">1</span>
+                                <span class="mobile-day-name">Dom 01/06</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">2</span>
+                                <span class="mobile-day-name">Lun 02/06</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">3</span>
+                                <span class="mobile-day-name">Mar 03/06</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">4</span>
+                                <span class="mobile-day-name">Mié 04/06</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">5</span>
+                                <span class="mobile-day-name">Jue 05/06</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">6</span>
+                                <span class="mobile-day-name">Vie 06/06</span>
+                            </div>
+                            <div class="calendar-cell" style="opacity: 0.5;">
+                                <span class="day-number">7</span>
+                                <span class="mobile-day-name">Sáb 07/06</span>
+                            </div>
+                        </div>
+                            <!-- Vista de agenda -->
+                            <div id="agenda-view" class="agenda-view" style="display: none;">
+                                <div class="agenda-container">
+                                    <div class="agenda-header">
+                                        <div class="row">
+                                            <div class="col-xs-2 col-md-1">Fecha</div>
+                                            <div class="col-xs-2 col-md-1">Hora</div>
+                                            <div class="col-xs-5 col-md-6">Evento</div>
+                                            <div class="col-xs-3 col-md-2">Categoría</div>
+                                            <div class="hidden-xs col-md-2">Acciones</div>
+                                        </div>
+                                    </div>
+                                    <div class="agenda-body" id="agenda-events">
+                                        <!-- Los eventos en formato agenda irán aquí -->
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <!-- Próximos eventos -->
+                <div class="card animated-fade">
+                    <div class="card-header">
+                        <h3 class="panel-title"><i class="fa fa-clock-o"></i> Próximos Eventos</h3>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#allEventsModal"><i class="fa fa-list"></i> Ver Todo</button>
+                    </div>
+                    <div class="card-body upcoming-events">
+                        <div class="event-list-item">
+                            <div class="event-date">20-05-2025<br><small>12:00</small></div>
+                            <div class="event-title">Día Feriado</div>
+                            <div class="event-action">
+                                <button class="btn btn-link btn-sm" title="Editar"><i class="fa fa-pencil"></i></button>
+                            </div>
+                        </div>
+                        <div class="event-list-item">
+                            <div class="event-date">25-05-2025<br><small>Todo el día</small></div>
+                            <div class="event-title">Día de las madres</div>
+                            <div class="event-action">
+                                <button class="btn btn-link btn-sm" title="Editar"><i class="fa fa-pencil"></i></button>
+                            </div>
+                        </div>
+                        <div class="event-list-item">
+                            <div class="event-date">28-05-2025<br><small>09:00</small></div>
+                            <div class="event-title">Graduación</div>
+                            <div class="event-action">
+                                <button class="btn btn-link btn-sm" title="Editar"><i class="fa fa-pencil"></i></button>
+                            </div>
+                        </div>
+                        <div class="event-list-item">
+                            <div class="event-date">05-06-2025<br><small>14:30</small></div>
+                            <div class="event-title">Reunión Docentes</div>
+                            <div class="event-action">
+                                <button class="btn btn-link btn-sm" title="Editar"><i class="fa fa-pencil"></i></button>
+                            </div>
+                        </div>
+                        <div class="event-list-item">
+                            <div class="event-date">12-06-2025<br><small>08:00</small></div>
+                            <div class="event-title">Capacitación Docente</div>
+                            <div class="event-action">
+                                <button class="btn btn-link btn-sm" title="Editar"><i class="fa fa-pencil"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Categorías de Eventos -->
+                <div class="card animated-fade" style="animation-delay: 0.2s;">
+                    <div class="card-header">
+                        <h3 class="panel-title"><i class="fa fa-tags"></i> Categorías</h3>
+                        <button class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Nueva</button>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <ul class="category-list">
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #C28CCA;"></div>
+                                <div class="category-name">Evento Escolar</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #B408B4;"></div>
+                                <div class="category-name">Evento Administrativo</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #5F59D1;"></div>
+                                <div class="category-name">Reunión</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #32BB61;"></div>
+                                <div class="category-name">Capacitación Docente</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #E72323;"></div>
+                                <div class="category-name">Día Feriado</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #F0FF1A;"></div>
+                                <div class="category-name">Fiesta del Centro</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #E91CC3;"></div>
+                                <div class="category-name">Cumpleaños</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #FFAE00;"></div>
+                                <div class="category-name">Efemérides y conmemoraciones</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #00FFEE;"></div>
+                                <div class="category-name">Hoy se celebra ...</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #4137CD;"></div>
+                                <div class="category-name">Graduación</div>
+                                <div class="category-edit"><i class="fa fa-pencil"></i></div>
+                            </li>
+                            <li class="category-item">
+                                <div class="category-color" style="background-color: #E91E63;"></div>
+                                <div class="category-name">Nueva Categoría</div>
+                                <div class="category-edit"><i class="fa fa-plus"></i></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES A PARTIR DE AQUI -->
+    
+    <!-- Modal para agregar/editar eventos -->
+    <div class="modal fade" id="eventoModal" tabindex="-1" role="dialog" aria-labelledby="eventoModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: var(--primary-color); color: white;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="eventoModalLabel"><i class="fa fa-calendar-plus-o"></i> Nuevo Evento</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="eventoForm" method="post" enctype="multipart/form-data" target="ifFormData">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label"><i class="fa fa-pencil"></i> Nombre del Evento</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre descriptivo del evento" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label"><i class="fa fa-align-left"></i> Descripción</label>
+                                    <textarea class="form-control" name="descripcion" id="descripcion" rows="3" placeholder="Detalles del evento"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"><i class="fa fa-calendar"></i> Fecha</label>
+                                    <input type="date" class="form-control" name="fecha_inicial" id="fecha_inicial" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"><i class="fa fa-clock-o"></i> Hora</label>
+                                    <input type="time" class="form-control" name="hora_inicio" id="hora_inicio">
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label"><i class="fa fa-tags"></i> Categoría</label>
+                                    <div class="input-group">
+                                        <select class="form-control" name="categorias" id="categorias" required onchange="setCategoryColor(this.value);">
+                                            <option value="" selected disabled>-- Seleccione una categoría --</option>
+                                            <option value="1" data-color="#C28CCA">Evento Escolar</option>
+                                            <option value="2" data-color="#B408B4">Evento Administrativo</option>
+                                            <option value="3" data-color="#5F59D1">Reunión</option>
+                                            <option value="4" data-color="#32BB61">Capacitación Docente</option>
+                                            <option value="5" data-color="#E72323">Día Feriado</option>
+                                            <option value="6" data-color="#F0FF1A">Fiesta del Centro</option>
+                                            <option value="7" data-color="#E91CC3">Cumpleaños</option>
+                                            <option value="8" data-color="#FFAE00">Efemérides y conmemoraciones</option>
+                                            <option value="9" data-color="#00FFEE">Hoy se celebra ...</option>
+                                            <option value="10" data-color="#80FF66">Psicología</option>
+                                            <option value="12" data-color="#4137CD">Graduación</option>
+                                        </select>
+                                        <span class="input-group-addon" id="colorEvento" style="width: 40px;"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapseVisibility">
+                                                <i class="fa fa-eye"></i> Visibilidad <i class="fa fa-chevron-down pull-right"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseVisibility" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <label class="control-label">Visible para:</label>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="permisos[]" value="5"> <i class="fa fa-user-circle-o"></i> Administrador y Docente
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="permisos[]" value="4"> <i class="fa fa-building-o"></i> Administración
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="permisos[]" value="2"> <i class="fa fa-graduation-cap"></i> Docentes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="permisos[]" value="3"> <i class="fa fa-users"></i> Padres
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="permisos[]" value="1"> <i class="fa fa-user"></i> Estudiantes
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="permisos[]" value="6"> <i class="fa fa-heartbeat"></i> Psicólogos
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapseLevels">
+                                                <i class="fa fa-list-ol"></i> Niveles Académicos <i class="fa fa-chevron-down pull-right"></i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseLevels" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                                            <input type="text" class="form-control" id="searchLevel" placeholder="Buscar nivel...">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn btn-sm btn-default" id="selectAllLevels">Seleccionar Todos</button>
+                                                    <button type="button" class="btn btn-sm btn-default" id="unselectAllLevels">Deseleccionar Todos</button>
+                                                </div>
+                                                
+                                                <div class="col-md-12 level-checkboxes">
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <h5><strong>SECUNDARIA</strong></h5>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="1" class="level-check"> 6to Grado - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="2" class="level-check"> 5to Grado - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="3" class="level-check"> 4to Grado - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="4" class="level-check"> 3er Grado - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="5" class="level-check"> 2do Grado - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="6" class="level-check"> 1er Grado - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="67" class="level-check"> ryan - SECUNDARIA
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-4">
+                                                            <h5><strong>PRIMARIA</strong></h5>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="14" class="level-check"> 1er Grado - PRIMARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="15" class="level-check"> 2do Grado - PRIMARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="16" class="level-check"> 3er Grado - PRIMARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="17" class="level-check"> 4to Grado - PRIMARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="18" class="level-check"> 5to Grado - PRIMARIA
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="19" class="level-check"> 6to Grado - PRIMARIA
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-md-4">
+                                                            <h5><strong>INICIAL</strong></h5>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="8" class="level-check"> PARVULO I - INICIAL
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="9" class="level-check"> PARVULO II - INICIAL
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="10" class="level-check"> PARVULO III - INICIAL
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="11" class="level-check"> Pre-Kínder - INICIAL
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="12" class="level-check"> Kínder - INICIAL
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="niveles_academicos[]" value="20" class="level-check"> Pre-primario - INICIAL
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label"><i class="fa fa-toggle-on"></i> Estado</label>
+                                    <select class="form-control" name="estado" id="estado">
+                                        <option value="1">Activo</option>
+                                        <option value="0">Inactivo</option>
+                                    </select>
+                                    <small class="text-muted">Si está inactivo, no aparecerá en el calendario</small>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <input type="hidden" name="id" id="evento_id" value="0">
+                            </div>
+                        </div>
+                    </form>
+                    <iframe name="ifFormData" width="100%" style="display:none"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveEvent">
+                        <i class="fa fa-save"></i> Guardar Evento
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal para Ver Todos los Eventos -->
+<div class="modal fade" id="allEventsModal" tabindex="-1" role="dialog" aria-labelledby="allEventsModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: var(--primary-color); color: white;">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="allEventsModalLabel"><i class="fa fa-calendar"></i> Listado Completo de Eventos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="text" class="form-control" id="searchEvent" placeholder="Buscar evento...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover" id="eventsTable">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Evento</th>
+                                <th>Categoría</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20-05-2025</td>
+                                <td>12:00</td>
+                                <td>Día Feriado</td>
+                                <td><span class="category-badge" style="background-color: #E72323;">Día Feriado</span></td>
+                                <td><span class="label label-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>25-05-2025</td>
+                                <td>Todo el día</td>
+                                <td>Día de las madres</td>
+                                <td><span class="category-badge" style="background-color: #E91CC3;">Cumpleaños</span></td>
+                                <td><span class="label label-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>28-05-2025</td>
+                                <td>09:00</td>
+                                <td>Graduación</td>
+                                <td><span class="category-badge" style="background-color: #4137CD;">Graduación</span></td>
+                                <td><span class="label label-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>05-06-2025</td>
+                                <td>14:30</td>
+                                <td>Reunión Docentes</td>
+                                <td><span class="category-badge" style="background-color: #5F59D1;">Reunión</span></td>
+                                <td><span class="label label-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>12-06-2025</td>
+                                <td>08:00</td>
+                                <td>Capacitación Docente</td>
+                                <td><span class="category-badge" style="background-color: #32BB61;">Capacitación Docente</span></td>
+                                <td><span class="label label-success">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>15-06-2025</td>
+                                <td>10:00</td>
+                                <td>Taller de Ciencias</td>
+                                <td><span class="category-badge" style="background-color: #C28CCA;">Evento Escolar</span></td>
+                                <td><span class="label label-default">Inactivo</span></td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" id="exportEvents">
+                    <i class="fa fa-file-excel-o"></i> Exportar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Registro de plugin ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Variables globales
+        var categoryColors = {
+            1: '#C28CCA', // Evento Escolar
+            2: '#B408B4', // Evento Administrativo
+            3: '#5F59D1', // Reunión
+            4: '#32BB61', // Capacitación Docente
+            5: '#E72323', // Día Feriado
+            6: '#F0FF1A', // Fiesta del Centro
+            7: '#E91CC3', // Cumpleaños
+            8: '#FFAE00', // Efemérides y conmemoraciones
+            9: '#00FFEE', // Hoy se celebra ...
+            10: '#80FF66', // Psicología
+            12: '#4137CD'  // Graduación
+        };
+        
+        // Función para establecer el color de la categoría seleccionada
+        function setCategoryColor(categoryId) {
+            if (categoryId && categoryColors[categoryId]) {
+                $('#colorEvento').css('background-color', categoryColors[categoryId]);
+            } else {
+                $('#colorEvento').css('background-color', '#f5f5f5');
+            }
+        }
+        
+        // Efecto de zoom out al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar el datepicker para la fecha actual por defecto
+            var today = new Date();
+            var formattedDate = today.toISOString().split('T')[0];
+            $('#fecha_inicial').val(formattedDate);
+            
+            // Efecto de zoom inicial
+            const heroImg = document.querySelector('.calendar-hero-img');
+            
+            // Animación de scroll para el zoom out
+            gsap.to(heroImg, {
+                scale: 1,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: "#calendarHero",
+                    start: "top top",
+                    end: "30% top",
+                    scrub: true
+                }
+            });
+            
+            // Animación para los elementos de la UI
+            gsap.utils.toArray('.animated-fade').forEach((element, i) => {
+                gsap.fromTo(element, 
+                    { 
+                        y: 20, 
+                        opacity: 0 
+                    },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.6,
+                        delay: 0.2 * i,
+                        ease: "power2.out"
+                    }
+                );
+            });
+            
+            // Resaltar el día actual
+            const today = document.querySelector('.today');
+            if(today) {
+                gsap.fromTo(today, 
+                    { 
+                        backgroundColor: "#E3F2FD"
+                    }, 
+                    {
+                        backgroundColor: "white",
+                        duration: 2,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut"
+                    }
+                );
+            }
+            
+            // Animación para las categorías
+            gsap.utils.toArray('.category-item').forEach((element, i) => {
+                gsap.fromTo(element, 
+                    { 
+                        x: -20, 
+                        opacity: 0 
+                    },
+                    {
+                        x: 0,
+                        opacity: 1,
+                        duration: 0.4,
+                        delay: 0.05 * i,
+                        ease: "power1.out"
+                    }
+                );
+            });
+        });
+        
+        // Funcionalidad para filtrar eventos por categoría
+        document.querySelectorAll('.category-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const categoryName = this.querySelector('.category-name').textContent;
+                const categoryColor = this.querySelector('.category-color').style.backgroundColor;
+                
+                // Aquí iría la lógica para filtrar los eventos según la categoría
+                console.log(`Filtrar por: ${categoryName}`);
+                
+                // Efecto visual de selección
+                document.querySelectorAll('.category-item').forEach(cat => {
+                    cat.style.fontWeight = 'normal';
+                });
+                this.style.fontWeight = 'bold';
+            });
+        });
+        
+        // Funcionalidad para mostrar detalles de eventos al hacer clic
+        document.querySelectorAll('.event-item').forEach(event => {
+            event.addEventListener('click', function() {
+                const eventTitle = this.textContent.trim();
+                // Aquí iría la lógica para mostrar detalles del evento
+                alert(`Detalles de: ${eventTitle}`);
+            });
+        });
+        
+        // Funcionalidad para abrir el modal de nuevo evento
+        document.querySelectorAll('.btn-success, .calendar-cell').forEach(element => {
+            // Solo vinculamos la función a los botones "Nuevo Evento"
+            if (element.classList.contains('btn-success') || element.classList.contains('calendar-cell')) {
+                element.addEventListener('click', function(e) {
+                    // Si es una celda del calendario, solo abrimos el modal si se hace clic directamente en la celda
+                    // y no en un evento dentro de la celda
+                    if (element.classList.contains('calendar-cell') && e.target.classList.contains('event-item')) {
+                        return;
+                    }
+                    
+                    // Si es una celda del calendario, establecemos la fecha
+                    if (element.classList.contains('calendar-cell')) {
+                        const dayNumber = element.querySelector('.day-number').textContent;
+                        
+                        // Obtener el mes y año actual (del título del calendario)
+                        const calendarTitle = document.querySelector('.calendar-controls div:nth-child(2)').textContent;
+                        const [monthName, year] = calendarTitle.split(' ');
+                        
+                        // Convertir el nombre del mes a número
+                        const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+                        const monthIndex = monthNames.indexOf(monthName);
+                        
+                        // Crear la fecha y formatearla para el input date
+                        let date = new Date(parseInt(year), monthIndex, parseInt(dayNumber));
+                        let formattedDate = date.toISOString().split('T')[0];
+                        
+                        // Establecer la fecha en el formulario
+                        $('#fecha_inicial').val(formattedDate);
+                    }
+                    
+                    // Restablecer el formulario
+                    $('#eventoForm')[0].reset();
+                    $('#evento_id').val('0');
+                    $('#eventoModalLabel').html('<i class="fa fa-calendar-plus-o"></i> Nuevo Evento');
+                    
+                    // Mostrar el modal
+                    $('#eventoModal').modal('show');
+                });
+            }
+        });
+        
+        // Funcionalidad para guardar el evento
+        $('#saveEvent').on('click', function() {
+            // Validar el formulario
+            if ($('#nombre').val() === '' || $('#fecha_inicial').val() === '' || $('#categorias').val() === null) {
+                alert('Por favor complete los campos obligatorios');
+                return;
+            }
+            
+            // Si todo está bien, simulamos el envío del formulario
+            // En una implementación real, habría que ajustar esto para enviar a una API
+            // ya que el objetivo de este ejemplo es mostrar la funcionalidad del modal
+            
+            // Notificar al usuario
+            alert('Evento guardado correctamente');
+            
+            // Cerrar el modal
+            $('#eventoModal').modal('hide');
+            
+            // En un caso real, aquí recargaríamos el calendario o actualizaríamos la vista
+        });
+        
+        // Funcionalidad para el buscador de niveles
+        $('#searchLevel').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $('.level-check').each(function () {
+                var text = $(this).parent().text().toLowerCase();
+                $(this).closest('.checkbox').toggle(text.indexOf(value) > -1);
+            });
+        });
+        
+        // Funcionalidad para seleccionar/deseleccionar todos los niveles
+        $('#selectAllLevels').on('click', function() {
+            $('.level-check:visible').prop('checked', true);
+        });
+        
+        $('#unselectAllLevels').on('click', function() {
+            $('.level-check').prop('checked', false);
+        });
+
+        // Funcionalidad para el buscador de eventos en el modal "Ver Todo"
+$('#searchEvent').on('keyup', function() {
+    var value = $(this).val().toLowerCase();
+    $("#eventsTable tbody tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+    });
+});
+
+// Funcionalidad para exportar eventos
+$('#exportEvents').on('click', function() {
+    alert('Exportando eventos a Excel...');
+    // Aquí iría la lógica real para exportar, como usar una librería para generar Excel
+});
+
+// Funcionalidad para editar eventos desde la tabla
+$('#eventsTable .btn-primary').on('click', function() {
+    var row = $(this).closest('tr');
+    var date = row.find('td:eq(0)').text();
+    var time = row.find('td:eq(1)').text();
+    var title = row.find('td:eq(2)').text();
+    var category = row.find('td:eq(3) .category-badge').text();
+    
+    // Cerrar el modal actual
+    $('#allEventsModal').modal('hide');
+    
+    // Esperar a que se cierre el modal anterior antes de abrir el nuevo
+    setTimeout(function() {
+        // Configurar el modal de edición
+        $('#eventoModalLabel').html('<i class="fa fa-pencil"></i> Editar Evento');
+        $('#nombre').val(title);
+        
+        // Convertir la fecha al formato requerido (yyyy-mm-dd)
+        var parts = date.split('-');
+        var formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+        $('#fecha_inicial').val(formattedDate);
+        
+        // Establecer la hora si no es "Todo el día"
+        if (time !== 'Todo el día') {
+            $('#hora_inicio').val(time);
+        }
+        
+        // Abrir el modal de edición
+        $('#eventoModal').modal('show');
+    }, 500);
+});
+
+// Funcionalidad para eliminar eventos
+$('#eventsTable .btn-danger').on('click', function() {
+    if (confirm('¿Está seguro de que desea eliminar este evento?')) {
+        $(this).closest('tr').fadeOut();
+        // Aquí iría la lógica real para eliminar el evento de la base de datos
+    }
+});
+    </script>
+    <script>
+        // Objeto para gestionar el calendario
+const Calendar = {
+    // Fecha actual del calendario
+    currentDate: new Date(),
+    
+    // Fecha actual (real)
+    today: new Date(),
+    
+    // Nombres de los meses
+    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    
+    // Nombres de los días de la semana
+    dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+    
+    // Eventos (simulados para demostración)
+    events: [
+        { id: 1, title: 'Día del Trabajo', date: '2025-05-01', time: '12:00', category: 5, color: '#E72323' },
+        { id: 2, title: 'Reunión Docentes', date: '2025-05-05', time: '10:00', category: 3, color: '#5F59D1' },
+        { id: 3, title: 'Día Feriado', date: '2025-05-20', time: '00:00', category: 5, color: '#E72323' },
+        { id: 4, title: 'Día de las madres', date: '2025-05-25', time: '00:00', category: 7, color: '#E91CC3' },
+        { id: 5, title: 'Graduación', date: '2025-05-28', time: '09:00', category: 12, color: '#4137CD' },
+        { id: 6, title: 'Capacitación Docente', date: '2025-06-12', time: '08:00', category: 4, color: '#32BB61' }
+    ],
+    
+    // Inicializar el calendario
+    init: function() {
+        // Configurar controladores de eventos
+        this.bindEvents();
+        
+        // Renderizar el calendario para el mes actual
+        this.renderCalendar();
+    },
+    
+    // Configurar controladores de eventos
+    bindEvents: function() {
+        const self = this;
+        
+        // Botón mes anterior
+        $('#prevMonth').on('click', function() {
+            self.currentDate.setMonth(self.currentDate.getMonth() - 1);
+            self.renderCalendar();
+        });
+        
+        // Botón mes siguiente
+        $('#nextMonth').on('click', function() {
+            self.currentDate.setMonth(self.currentDate.getMonth() + 1);
+            self.renderCalendar();
+        });
+        
+        // Botón hoy
+        $('#goToday').on('click', function() {
+            self.currentDate = new Date(self.today);
+            self.renderCalendar();
+        });
+    },
+    
+    // Renderizar el calendario
+    renderCalendar: function() {
+        // Actualizar el título del mes y año
+        const monthYear = `${this.monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+        $('#currentMonthYear').text(monthYear);
+        
+        // Construir las celdas del calendario
+        let calendarHTML = '';
+        
+        // Encabezados de los días de la semana
+        for (let i = 0; i < 7; i++) {
+            calendarHTML += `<div class="day-header">${this.dayNames[i]}</div>`;
+        }
+        
+        // Obtener el primer día del mes
+        const firstDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1);
+        
+        // Obtener el último día del mes
+        const lastDayOfMonth = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0);
+        
+        // Obtener el día de la semana del primer día del mes (0-6)
+        const firstDayOfWeek = firstDayOfMonth.getDay();
+        
+        // Calcular el primer día a mostrar (puede ser del mes anterior)
+        const firstDayToShow = new Date(firstDayOfMonth);
+        firstDayToShow.setDate(firstDayToShow.getDate() - firstDayOfWeek);
+        
+        // Número total de filas en el calendario (normalmente 6 semanas)
+        const totalWeeks = 6;
+        
+        // Fecha actual para iterar
+        const currentDay = new Date(firstDayToShow);
+        
+        // Crear las filas y celdas del calendario
+        for (let week = 0; week < totalWeeks; week++) {
+            for (let day = 0; day < 7; day++) {
+                // Verificar si el día es de este mes
+                const isCurrentMonth = currentDay.getMonth() === this.currentDate.getMonth();
+                
+                // Verificar si es hoy
+                const isToday = this.isSameDay(currentDay, this.today);
+                
+                // Crear la celda
+                calendarHTML += `<div class="calendar-cell ${!isCurrentMonth ? 'other-month' : ''} ${isToday ? 'today' : ''}">
+                    <span class="day-number">${currentDay.getDate()}</span>
+                    <span class="mobile-day-name">${this.dayNames[day]} ${currentDay.getDate()}/${currentDay.getMonth() + 1}</span>
+                    <div class="event-container">
+                        ${this.getEventsForDay(currentDay)}
+                    </div>
+                </div>`;
+                
+                // Avanzar al siguiente día
+                currentDay.setDate(currentDay.getDate() + 1);
+            }
+        }
+        
+        // Actualizar el HTML del calendario
+        $('.calendar-grid').html(calendarHTML);
+        
+        // Volver a añadir los event listeners a las celdas
+        this.bindCellEvents();
+        
+        // Resaltar el día actual con una animación si está visible
+        if ($('.today').length) {
+            gsap.fromTo('.today', 
+                { backgroundColor: "#E3F2FD" }, 
+                { backgroundColor: "white", duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" }
+            );
+        }
+    },
+    
+    // Obtener los eventos para un día específico
+    getEventsForDay: function(date) {
+        // Formato YYYY-MM-DD para comparación
+        const dateStr = this.formatDate(date);
+        
+        // Filtrar eventos para esta fecha
+        const dayEvents = this.events.filter(event => event.date === dateStr);
+        
+        // Si no hay eventos, devolver cadena vacía
+        if (dayEvents.length === 0) return '';
+        
+        // Construir HTML para los eventos
+        let eventsHTML = '';
+        
+        dayEvents.forEach(event => {
+            eventsHTML += `<div class="event-item" data-event-id="${event.id}" data-category="${event.category}" style="background-color: ${this.getEventBackground(event.color)}; color: ${this.getEventTextColor(event.color)};">
+                <span class="event-dot" style="background-color: ${event.color};"></span>
+                ${event.title}
+            </div>`;
+        });
+        
+        return eventsHTML;
+    },
+    
+    // Obtener color de fondo para un evento (versión más clara)
+    getEventBackground: function(color) {
+        return color + '20'; // Agregar transparencia (0.12)
+    },
+    
+    // Obtener color de texto para un evento (basado en el color de fondo)
+    getEventTextColor: function(color) {
+        // Simplificado - en una implementación real, calcularíamos el contraste
+        // Para determinar si usar texto blanco o negro
+        return color;
+    },
+    
+    // Comparar si dos fechas son el mismo día
+    isSameDay: function(date1, date2) {
+        return date1.getDate() === date2.getDate() &&
+               date1.getMonth() === date2.getMonth() &&
+               date1.getFullYear() === date2.getFullYear();
+    },
+    
+    // Formatear fecha como YYYY-MM-DD
+    formatDate: function(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    },
+    
+    // Vincular eventos a las celdas del calendario
+    bindCellEvents: function() {
+        // Vincular clic en las celdas para añadir evento
+        $('.calendar-cell').on('click', function(e) {
+            // Solo abrir modal si se hace clic directamente en la celda
+            // y no en un evento dentro de la celda
+            if (!$(e.target).hasClass('event-item') && 
+                !$(e.target).closest('.event-item').length) {
+                
+                // Obtener día, mes y año de la celda
+                const dayNumber = $(this).find('.day-number').text();
+                const monthYear = $('#currentMonthYear').text().split(' ');
+                const monthName = monthYear[0];
+                const year = monthYear[1];
+                
+                // Convertir mes a número
+                const monthIndex = Calendar.monthNames.indexOf(monthName);
+                
+                // Crear fecha
+                const date = new Date(parseInt(year), monthIndex, parseInt(dayNumber));
+                const formattedDate = Calendar.formatDate(date);
+                
+                // Restablecer formulario y establecer fecha
+                $('#eventoForm')[0].reset();
+                $('#fecha_inicial').val(formattedDate);
+                $('#evento_id').val('0');
+                $('#eventoModalLabel').html('<i class="fa fa-calendar-plus-o"></i> Nuevo Evento');
+                
+                // Mostrar modal
+                $('#eventoModal').modal('show');
+            }
+        });
+        
+        // Vincular clic en eventos para editar
+        $('.event-item').on('click', function(e) {
+            e.stopPropagation(); // Evitar que se propague al contenedor
+            
+            // Obtener ID del evento
+            const eventId = $(this).data('event-id');
+            const event = Calendar.events.find(e => e.id === eventId);
+            
+            if (event) {
+                // Configurar el formulario con los datos del evento
+                $('#evento_id').val(event.id);
+                $('#nombre').val(event.title);
+                $('#fecha_inicial').val(event.date);
+                $('#hora_inicio').val(event.time);
+                $('#categorias').val(event.category);
+                setCategoryColor(event.category);
+                
+                // Actualizar título modal
+                $('#eventoModalLabel').html('<i class="fa fa-pencil"></i> Editar Evento');
+                
+                // Mostrar modal
+                $('#eventoModal').modal('show');
+            } else {
+                console.error('Evento no encontrado:', eventId);
+            }
+        });
+    }
+};
+
+// Inicializar el calendario cuando el documento esté listo
+$(document).ready(function() {
+    Calendar.init();
+    
+    // Añadir evento para actualizar el calendario cuando se guarda un evento
+    $('#saveEvent').on('click', function() {
+        // Validar formulario
+        if ($('#nombre').val() === '' || $('#fecha_inicial').val() === '' || $('#categorias').val() === null) {
+            alert('Por favor complete los campos obligatorios');
+            return;
+        }
+        
+        // Simulación: Guardar el evento
+        const eventId = parseInt($('#evento_id').val()) || (Calendar.events.length + 1);
+        const eventTitle = $('#nombre').val();
+        const eventDate = $('#fecha_inicial').val();
+        const eventTime = $('#hora_inicio').val() || '00:00';
+        const eventCategory = parseInt($('#categorias').val());
+        
+        // Obtener color según categoría
+        const categoryColor = categoryColors[eventCategory];
+        
+        // Si es un nuevo evento, añadirlo a la lista
+        if (eventId > Calendar.events.length) {
+            Calendar.events.push({
+                id: eventId,
+                title: eventTitle,
+                date: eventDate,
+                time: eventTime,
+                category: eventCategory,
+                color: categoryColor
+            });
+        } else {
+            // Si es edición, actualizar el evento existente
+            const eventIndex = Calendar.events.findIndex(e => e.id === eventId);
+            if (eventIndex !== -1) {
+                Calendar.events[eventIndex] = {
+                    id: eventId,
+                    title: eventTitle,
+                    date: eventDate,
+                    time: eventTime,
+                    category: eventCategory,
+                    color: categoryColor
+                };
+            }
+        }
+        
+        // Cerrar modal
+        $('#eventoModal').modal('hide');
+        
+        // Actualizar calendario
+        Calendar.renderCalendar();
+        
+        // Notificar al usuario
+        alert('Evento guardado correctamente');
+    });
+});
+
+// Estilo para días de otros meses
+document.head.insertAdjacentHTML('beforeend', `
+<style>
+    .calendar-cell.other-month {
+        opacity: 0.5;
+    }
+</style>
+`);
+    </script>
+    <script>
+        // Añadir a tu objeto Calendar estas propiedades y métodos
+Calendar.currentView = 'month'; // Por defecto, vista de mes
+
+// Modificar el método bindEvents para incluir el cambiador de vistas
+Calendar.bindEvents = function() {
+    const self = this;
+    
+    // Botones de navegación existentes...
+    $('#prevMonth').on('click', function() {
+        self.currentDate.setMonth(self.currentDate.getMonth() - 1);
+        self.renderView();
+    });
+    
+    $('#nextMonth').on('click', function() {
+        self.currentDate.setMonth(self.currentDate.getMonth() + 1);
+        self.renderView();
+    });
+    
+    $('#goToday').on('click', function() {
+        self.currentDate = new Date(self.today);
+        self.renderView();
+    });
+    
+    // Botones de cambio de vista
+    $('#viewSwitcher button').on('click', function() {
+        $('#viewSwitcher button').removeClass('active');
+        $(this).addClass('active');
+        
+        self.currentView = $(this).data('view');
+        self.renderView();
+    });
+};
+
+// Método para renderizar la vista actual
+Calendar.renderView = function() {
+    // Actualizar título
+    this.updateTitle();
+    
+    // Ocultar ambas vistas inicialmente
+    $('#calendar-view').hide();
+    $('#agenda-view').hide();
+    
+    // Mostrar la vista correspondiente
+    switch (this.currentView) {
+        case 'month':
+            this.renderCalendar();
+            $('#calendar-view').show();
+            break;
+        case 'agenda':
+            this.renderAgenda();
+            $('#agenda-view').show();
+            break;
+    }
+};
+
+// Actualizar el título según la vista
+Calendar.updateTitle = function() {
+    const monthYear = `${this.monthNames[this.currentDate.getMonth()]} ${this.currentDate.getFullYear()}`;
+    
+    switch (this.currentView) {
+        case 'month':
+            $('#currentMonthYear').text(monthYear);
+            break;
+        case 'agenda':
+            $('#currentMonthYear').text(`Agenda: ${monthYear}`);
+            break;
+        // Otros casos para semana y día
+    }
+};
+
+// Renderizar la vista de agenda
+Calendar.renderAgenda = function() {
+    // Ordenar eventos por fecha
+    const sortedEvents = [...this.events].sort((a, b) => {
+        if (a.date !== b.date) {
+            return a.date.localeCompare(b.date);
+        }
+        return a.time.localeCompare(b.time);
+    });
+    
+    // Agrupar eventos por fecha
+    const eventsByDate = {};
+    sortedEvents.forEach(event => {
+        if (!eventsByDate[event.date]) {
+            eventsByDate[event.date] = [];
+        }
+        eventsByDate[event.date].push(event);
+    });
+    
+    // Generar HTML de la agenda
+    let agendaHTML = '';
+    
+    // Si no hay eventos
+    if (sortedEvents.length === 0) {
+        agendaHTML = '<div class="no-events-message">No hay eventos programados para este período.</div>';
+    } else {
+        // Generar secciones por día
+        Object.keys(eventsByDate).sort().forEach(date => {
+            // Convertir fecha YYYY-MM-DD a objeto Date
+            const eventDate = new Date(date);
+            
+            // Formatear fecha para mostrar
+            const formattedDate = `${this.dayNames[eventDate.getDay()]}, ${eventDate.getDate()} de ${this.monthNames[eventDate.getMonth()]} de ${eventDate.getFullYear()}`;
+            
+            agendaHTML += `
+                <div class="agenda-day">
+                    <div class="agenda-day-header">
+                        <div class="agenda-day-dot"></div>
+                        <div class="agenda-day-title">${formattedDate}</div>
+                    </div>
+                    <div class="agenda-events">
+            `;
+            
+            // Añadir eventos para este día
+            eventsByDate[date].forEach(event => {
+                // Formatear hora
+                const timeDisplay = event.time === '00:00' ? 'Todo el día' : this.formatTime(event.time);
+                
+                // Obtener nombre de categoría
+                const categoryId = event.category;
+                const categoryName = this.getCategoryName(categoryId);
+                
+                agendaHTML += `
+                    <div class="agenda-event" style="border-left-color: ${event.color};" data-event-id="${event.id}">
+                        <div class="agenda-time">${timeDisplay}</div>
+                        <div class="agenda-title">${event.title}</div>
+                        <div class="agenda-category">
+                            <span class="category-badge" style="background-color: ${event.color};">${categoryName}</span>
+                        </div>
+                        <div class="agenda-actions">
+                            <button class="btn btn-primary btn-xs edit-event" title="Editar">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                            <button class="btn btn-danger btn-xs delete-event" title="Eliminar">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            agendaHTML += `
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    // Actualizar el HTML de la agenda
+    $('#agenda-events').html(agendaHTML);
+    
+    // Vincular eventos para editar/eliminar
+    this.bindAgendaEvents();
+};
+
+// Vincular eventos a los elementos de la agenda
+Calendar.bindAgendaEvents = function() {
+    const self = this;
+    
+    // Clic en botón de editar evento
+    $('.edit-event').on('click', function(e) {
+        e.stopPropagation();
+        
+        const eventId = parseInt($(this).closest('.agenda-event').data('event-id'));
+        const event = self.events.find(e => e.id === eventId);
+        
+        if (event) {
+            // Configurar formulario con datos del evento
+            $('#evento_id').val(event.id);
+            $('#nombre').val(event.title);
+            $('#fecha_inicial').val(event.date);
+            $('#hora_inicio').val(event.time);
+            $('#categorias').val(event.category);
+            setCategoryColor(event.category);
+            
+            // Actualizar título modal
+            $('#eventoModalLabel').html('<i class="fa fa-pencil"></i> Editar Evento');
+            
+            // Mostrar modal
+            $('#eventoModal').modal('show');
+        }
+    });
+    
+    // Clic en botón de eliminar evento
+    $('.delete-event').on('click', function(e) {
+        e.stopPropagation();
+        
+        const eventId = parseInt($(this).closest('.agenda-event').data('event-id'));
+        
+        if (confirm('¿Está seguro de que desea eliminar este evento?')) {
+            // Eliminar el evento
+            const eventIndex = self.events.findIndex(e => e.id === eventId);
+            
+            if (eventIndex !== -1) {
+                self.events.splice(eventIndex, 1);
+                
+                // Actualizar vista
+                self.renderView();
+            }
+        }
+    });
+    
+    // Clic en evento para ver detalles (futuro)
+    $('.agenda-event').on('click', function() {
+        const eventId = parseInt($(this).data('event-id'));
+        const event = self.events.find(e => e.id === eventId);
+        
+        if (event) {
+            // Aquí podemos implementar un modal de detalles en el futuro
+            alert(`Evento: ${event.title}\nFecha: ${event.date}\nHora: ${event.time || 'Todo el día'}`);
+        }
+    });
+};
+
+// Obtener nombre de categoría por ID
+Calendar.getCategoryName = function(categoryId) {
+    const categories = {
+        1: 'Evento Escolar',
+        2: 'Evento Administrativo',
+        3: 'Reunión',
+        4: 'Capacitación Docente',
+        5: 'Día Feriado',
+        6: 'Fiesta del Centro',
+        7: 'Cumpleaños',
+        8: 'Efemérides',
+        9: 'Hoy se celebra',
+        10: 'Psicología',
+        12: 'Graduación'
+    };
+    
+    return categories[categoryId] || 'Evento';
+};
+
+// Formatear tiempo (HH:MM a formato legible)
+Calendar.formatTime = function(timeStr) {
+    if (!timeStr || timeStr === '00:00') return 'Todo el día';
+    
+    const [hours, minutes] = timeStr.split(':');
+    const h = parseInt(hours);
+    const period = h >= 12 ? 'PM' : 'AM';
+    const hour12 = h === 0 ? 12 : (h > 12 ? h - 12 : h);
+    
+    return `${hour12}:${minutes} ${period}`;
+};
+
+// Modificar init para usar renderView en lugar de renderCalendar
+Calendar.init = function() {
+    this.bindEvents();
+    this.renderView();
+};
+
+// Actualizar el calendario después de guardar un evento
+$('#saveEvent').on('click', function() {
+    // Validación y guardado del evento (código existente)...
+    
+    // Cerrar modal
+    $('#eventoModal').modal('hide');
+    
+    // Actualizar la vista actual
+    Calendar.renderView();
+    
+    // Notificar al usuario
+    alert('Evento guardado correctamente');
+});
+    </script>
+
+<script>
+$(document).ready(function() {
+    $('#filterCategory').select2({
+        width: '100%',
+        templateResult: formatOption,
+        templateSelection: formatOption
+    });
+
+    function formatOption(option) {
+        if (!option.id || option.id === 'all') {
+            return option.text;
+        }
+
+        // Definir colores específicos para cada categoría
+        const colors = {
+            '1': '#C28CCA', // Evento Escolar
+            '2': '#B408B4', // Evento Administrativo
+            '3': '#5F59D1', // Reunión
+            '4': '#32BB61', // Capacitación Docente
+            '5': '#E72323', // Día Feriado
+            '6': '#F0FF1A', // Fiesta del Centro
+            '7': '#E91CC3', // Cumpleaños
+            '8': '#FFAE00', // Efemérides y conmemoraciones
+            '9': '#00FFEE', // Hoy se celebra ...
+            '10': '#80FF66', // Psicología
+            '12': '#4137CD'  // Graduación
+        };
+
+        const color = colors[option.id];
+        return $(`
+            <div style="display: flex; align-items: center;">
+                <span style="
+                    display: inline-block;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background-color: ${color};
+                    margin-right: 8px;
+                    border: 1px solid rgba(0,0,0,0.1);
+                "></span>
+                <span>${option.text}</span>
+            </div>
+        `);
+    }
+});
+</script>
+</body>
+</html>
