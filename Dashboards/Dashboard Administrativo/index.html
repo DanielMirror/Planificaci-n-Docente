@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <!-- Latest compiled and minified CSS -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+     <!-- Optional theme -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+     <!-- Iconos -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+     <!-- Highcharts -->
+     <script src="https://code.highcharts.com/highcharts.js"></script>
+     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+     <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+
+     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <main>
+        <header class="form-container" style="margin-top: 10px;">            
+    <div class="form-row">
+            <div class="form-group">
+                <label>Estudiantes</label>
+                <select>
+                    <option>Todos</option>
+                </select>
+            </div>
+        <div class="form-group">
+            <label>Desde</label>
+            <input type="date" value="2025-03-18">
+        </div>
+
+        <div class="form-group">
+            <label>Hasta</label>
+            <input type="date" value="2025-03-18">
+        </div>
+
+        <div class="form-group">
+            
+            <label>Grados</label>
+            <select>
+                <option>Todos</option>
+                <option style="font-weight: bold; color: black;" disabled>NIVEL INICIAL</option>
+                <option>PARVULO I</option>
+                <option>PARVULO II</option>
+                <option>PARVULO III</option>
+                <option>Pre-Kínder</option>
+                <option>Kínder</option>
+                <option>Pre-Primario</option>
+                <option style="font-weight: bold; color: black;" disabled>NIVEL PRIMARIO</option>
+                <option>1er Primaria</option>
+                <option>2ndo Primaria</option>
+                <option>3er Primaria</option>
+                <option>4to Primaria</option>
+                <option>5to Primaria</option>
+                <option>6to Primaria</option>
+                <option style="font-weight: bold; color: black;" disabled>NIVEL SECUNDARIO</option>
+                <option>1er Secundaria</option>
+                <option>2ndo Secundaria</option>
+                <option>3er Secundaria</option>
+                <option>4to Secundaria</option>
+                <option>5to Secundaria</option>
+                <option>6to Secundaria</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Materias</label>
+            <select>
+                <option>Todos</option>
+            </select>
+        </div>
+    </div>
+</header>
+    <article id="contenedor1">
+    <!-- Inicio del Diseño -->
+        <article class="dashboard-administrativo">
+            <header>
+                <h3>DASHBOARD ADMINISTRATIVO🧑‍💼</h3>
+            </header>
+            <section>
+                <article class="dash-admin-item">
+                    <img src="https://educoco.net/admin/img/school.svg" height="45">
+                    <span><i class="fa fa-users"></i> Usuarios</span>
+                    <span>1824 / 1584</span>
+                    <div class="progress">
+                        <div title="" class="  text-center progress-bar progress-bar-success" style="width:23.30864197530864%;background:#ff9800 !important;box-shadow:none !important" id="graphic0">
+                            23%
+                        </div>
+                    </div>
+                </article>
+                <article class="dash-admin-item">
+                    <img src="https://educoco.net/admin/img/parents%20(2).svg">
+                    <span>ADMINISTRATIVO</span>
+                    <span>75 / 100</span>
+                    <div class="progress">
+                        <div title="" class="text-center progress-bar progress-bar-success" style="width :75%;background:#00bcd4 !important; box-shadow:none !important" id="graphic4">
+                            75%
+                        </div>
+                    </div>
+                </article>
+                <article class="dash-admin-item">
+                    <img src="https://educoco.net/admin/img/docente.svg">
+                    <span>DOCENTES</span>
+                    <span>77 / 100</span>
+                    <div class="progress">
+                        <div title="" class="text-center progress-bar progress-bar-success" style="width :77%;background:#00bcd4 !important; box-shadow:none !important" id="graphic2">
+                            77%
+                        </div>
+                    </div>
+                </article>
+                <article class="dash-admin-item">
+                    <div>
+                        <img src="https://educoco.net/admin/img/family%20(2).svg">
+                        <img src="https://educoco.net/admin/img/family2%20(1).svg">
+                    </div>
+                    <span>ALUMNOS</span>
+                    <span>1099 / 2461</span>
+                    <div class="progress">
+                        <div title="" class="text-center progress-bar progress-bar-success" style="width :44.656643640796%;background:orange !important;  box-shadow:none !important" id="graphic1">
+                            45%
+                        </div>
+                    </div>
+                </article>
+                <article class="dash-admin-item">
+                    <img src="https://educoco.net/admin/img/parents.svg">
+                    <span>PADRES</span>
+                    <span>1462 / 3445</span>
+                    <div class="progress">
+                        <div title="" class="text-center progress-bar progress-bar-success" style="width:42.438316400581%; box-shadow:none !important;" id="graphic3">
+                            42%
+                        </div>
+                    </div>
+                </article>
+                <article class="dash-admin-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2/2123.png">
+                    <span>ASISTENCIA</span>
+                    <span>1721 / 2123</span>
+                    <div class="progress">
+                        <div title="" class="text-center progress-bar progress-bar-success" style="width:89.438316400581%; box-shadow:none !important;" id="graphic3">
+                            89%
+                        </div>
+                    </div>
+                </article>
+            </section>
+            </article>
+    </article>
+    
+    <article id="contenedor2">
+
+      <div class="main-container">
+        <div class="tabs-container">
+            <div class="tabs-grid" id="nivelTabs">
+                <div class="tab active" data-tab="inicial">INICIAL</div>
+                <div class="tab" data-tab="primaria">PRIMARIA</div>
+                <div class="tab" data-tab="secundaria">SECUNDARIA</div>
+                <div class="tab" data-tab="tecnico">TÉCNICO</div>
+                <div class="tab" data-tab="im">IM</div>
+                <div class="tab" data-tab="semitec">SEMITEC</div>
+            </div>
+        </div>
+
+        <!-- Mostrar directamente el gráfico de INICIAL -->
+        <div class="tab-content" id="tabContent">
+            <div class="chart-container">
+                <div id="graficoInicial" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+        
+    </article>
+
+    <article id="contenedor3">
+
+      <div class="dashboard-flex-container">
+        <div class="table-container">
+            <h3>LISTA DE CURSOS📚 </h3>
+            <table>
+                <thead>
+                <tr>
+                    <th>Docentes</th>
+                    <th>Materias</th>
+                    <th>Estudiantes</th>
+                    <th>Grados</th>
+                    <th>% Asistencia</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                <tr>
+                    <td>3</td> 
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+                <tr>
+                    <td>3</td> 
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                <tr>
+                    <td>3</td>
+                    <td>
+                      <i class="fas fa-layer-group" style="cursor:pointer;" onclick="abrirModalMaterias()"></i> 2
+                    </td>                    
+                    <td><img src="img/estudiante.svg" height="25"> 7</td>
+                    <td class="grado">PARVULO I - A<span>INICIAL</span></td>
+                    <td>
+                        <div class="progreso-bar">
+                            <div class="progress-fill"></div>
+                            <div class="progress-text">0%</div>
+                          </div>
+                          
+                    </td>
+                    <td><i class="fas fa-bars menu-icon"></i></td>
+                </tr>
+        
+                </tbody>
+            </table>
+            </div>
+            <div class="container">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h3 style="margin: 0;">LISTADO DE DOCENTES 👨‍🏫</h3>
+                <img src="https://storage.googleapis.com/cdn-educoco/public-v1/video-ico.svg" height="25" class="animated tada infinite" aria-hidden="true" onclick="abrirModal()" style="cursor: pointer;">
+              </div>
+              <br>
+              <div class="buscador">
+                <input type="text" placeholder="Buscador...">
+              </div>
+              <div class="docente-lista">
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado en-linea"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Laura Pérez', 'D-001', 'laura.perez@email.com', 'https://randomuser.me/api/portraits/women/1.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Laura Pérez</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                  <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Juan Martínez', 'D-002', 'juan.martinez@email.com', 'https://randomuser.me/api/portraits/men/2.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Juan Martínez</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Ana Rodríguez', 'D-003', 'ana.rodriguez@email.com', 'https://randomuser.me/api/portraits/women/3.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Ana Rodríguez</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Pedro Gómez', 'D-004', 'pedro.gomez@email.com', 'https://randomuser.me/api/portraits/men/4.jpg')">
+                    <</div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Pedro Gómez</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Lucía Herrera', 'D-005', 'lucia.herrera@email.com', 'https://randomuser.me/api/portraits/women/5.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Lucía Herrera</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Carlos Ruiz', 'D-006', 'carlos.ruiz@email.com', 'https://randomuser.me/api/portraits/men/6.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Carlos Ruiz</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/women/7.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Patricia Díaz', 'D-007', 'patricia.diaz@email.com', 'https://randomuser.me/api/portraits/women/7.jpg')">
+                    <</div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Patricia Díaz</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado en-linea"></span>
+                  <div class="docente-foto">
+                    <img src="https://randomuser.me/api/portraits/men/8.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Andrés Torres', 'D-008', 'andres.torres@email.com', 'https://randomuser.me/api/portraits/men/8.jpg')">
+                    <</div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Andrés Torres</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado en-linea"></span>
+                  <div class="docente-foto">
+                      <img src="https://randomuser.me/api/portraits/women/11.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Gabriela Castro', 'D-011', 'gabriela.castro@email.com', 'https://randomuser.me/api/portraits/women/11.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Gabriela Castro</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="docente-item">
+                  <div class="estado-contenedor">
+                    <span class="estado desconectado"></span>
+                  <div class="docente-foto">
+                      <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Docente" style="cursor:pointer;" onclick="abrirModalDocente('Rodrigo Peña', 'D-012', 'rodrigo.pena@email.com', 'https://randomuser.me/api/portraits/men/12.jpg')">
+                    </div>
+                  </div>
+                  <div class="docente-info">
+                    <h3>Rodrigo Peña</h3>
+                    <span>Docente</span>
+                  </div>
+                  <div class="docente-chat">
+                    <button class="chat-btn"><i class="fas fa-comments"></i> CHAT</button>
+                    <div class="estrellas">
+                      <span>★★★★★</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div id="videoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.7); z-index:9999; justify-content: center; align-items: center;">
+            <div style="position: relative; width: 90%; max-width: 800px; background: white; border-radius: 10px; padding: 10px;">
+              <span class="modal-close" onclick="cerrarModal()">&times;</span>
+              <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+                <iframe id="videoIframe" style="position:absolute; top:0; left:0; width:100%; height:100%;" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+          
+          <div id="modalDocente" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.5); z-index:9999; justify-content:center; align-items:center;">
+            <div style="background:white; border-radius:10px; padding:20px; width:90%; max-width:900px; position:relative;">
+              <span class="modal-close" onclick="cerrarModalDocente()">&times;</span>
+              
+              <h3 id="tituloDocente" style="margin-top: 0;">Reporte de docente</h3>
+              <hr>
+          
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center;">
+                  <img id="fotoDocente" src="" alt="Foto docente" style="width:80px; height:80px; border-radius:50%; object-fit:cover; margin-right:15px;">
+                  <div>
+                    <strong id="nombreDocente">Nombre Docente</strong><br>
+                    <span id="codigoDocente">Código</span><br>
+                    <span id="correoDocente">Correo</span>
+                  </div>
+                </div>
+                <button style="background-color:#2196F3; color:white; padding:10px 15px; border:none; border-radius:5px; cursor:pointer;">
+                  Entrar <br> Aula Virtual
+                </button>
+              </div>
+          
+              <ul style="display:flex; list-style:none; padding:0; margin-top:20px; border-bottom:1px solid #ccc; overflow-x:auto;">
+                <li style="padding:10px 15px; border-bottom:2px solid #2196F3; font-weight:bold; cursor:pointer;">Asistencia</li>
+                <li style="padding:10px 15px; cursor:pointer;">Asignaciones</li>
+                <li style="padding:10px 15px; cursor:pointer;">Materias</li>
+                <li style="padding:10px 15px; cursor:pointer;">Horario de clases</li>
+                <li style="padding:10px 15px; cursor:pointer;">Historial de acceso</li>
+                <li style="padding:10px 15px; cursor:pointer;">Planificación</li>
+              </ul>
+          
+              <div style="padding:20px; color:#888;">
+                <em>No se encontraron datos.</em>
+              </div>
+            </div>
+          </div>
+          
+
+            
+    </article>
+
+    <div>
+      <div id="modalMaterias" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color: rgba(0,0,0,0.7); z-index:9999; justify-content: center; align-items: center;">
+        <div style="position: relative; width: 90%; max-width: 800px; background: white; border-radius: 10px; padding: 20px;">
+          <span class="modal-close" onclick="cerrarModalMaterias()">&times;</span>
+          <h2>Listado de Materias</h2>
+      
+          <div class="resumen" style="display:flex; justify-content:center; gap:15px; margin:20px 0;">
+            <button style="background-color:#f9f9f9; border:1px solid #ccc; padding:6px 12px; border-radius:4px;">Total de Materias: <strong>2</strong></button>
+            <button style="background-color:#f9f9f9; border:1px solid #ccc; padding:6px 12px; border-radius:4px;">Total de Horas: <strong>0</strong></button>
+            <button style="background-color:#f9f9f9; border:1px solid #ccc; padding:6px 12px; border-radius:4px;">Total de Docentes: <strong>3</strong></button>
+          </div>
+      
+          <table style="width:100%; border-collapse:collapse;">
+            <thead style="background-color:#f2f2f2;">
+              <tr>
+                <th>COD</th>
+                <th>Materia</th>
+                <th>Horas</th>
+                <th>Docente Principal</th>
+                <th>Docente Suplente</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MAT-0263</strong></td>
+                <td>Artes Plástica</td>
+                <td>0</td>
+                <td><img src="https://randomuser.me/api/portraits/women/44.jpg" class="foto" style="width:28px; height:28px; border-radius:50%;"> Amy Ramirez</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td><strong>MAT-0343</strong></td>
+                <td>PARVULO I</td>
+                <td>0</td>
+                <td><img src="https://randomuser.me/api/portraits/women/68.jpg" class="foto" style="width:28px; height:28px; border-radius:50%;"> Gumercinda Perez</td>
+                <td><i class="fas fa-user"></i> Admin admin</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+    </div>
+
+  
+    
+    </main>    
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            background-color: #d7e8f8;
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        main {
+            display: grid;
+            grid-template-rows: 100px 235px 595px 630px;
+            width: 100vw;
+            height: 100%;
+            gap: 30px;
+        }
+
+        #contenedor1, #contenedor3, #contenedor4 {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            height: auto;
+        }
+
+        #contenedor2 {
+          display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        #contenedor4 {
+            margin-top: 30px;
+        }
+
+
+        /* Header CSS */
+        .form-container {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            justify-self: center;
+            height: auto;          
+
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .form-group {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+
+        .form-container label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #272727;
+            margin-bottom: 5px;
+        }
+
+        .form-container input {
+            width: 90%;
+            padding: 0px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+
+
+        .form-container input[type="date"] {
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .form-container input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+        }
+        
+        /* ADMINISTRATIVO */
+
+        .dashboard-administrativo {
+            background-color: #FCFCFC;
+            width: 95%;
+            padding-bottom: 10px;
+            border: 1px solid #DDDDDD;
+            border-radius: 10px;
+            box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.186);
+            }
+
+        .dashboard-administrativo header {
+            display: flex;
+            align-items: center;
+            background-color: #FCFCFC;
+            border-bottom: 1px solid #DDDDDD;
+            padding: 0px;
+        }
+
+        .dashboard-administrativo header h3 {
+            margin-left: 10px;
+        }
+
+        /* .dashboard-administrativo header span {
+            font-size: 23px;
+            margin-left: 10px;
+        }
+
+        .dashboard-administrativo header section {
+            margin-left: auto;
+            margin-right: 10px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+
+        .dashboard-administrativo header section button {
+            width: 190px;
+            height: 35px;
+            border-radius: 8px;
+            color: white;
+            border: none;
+            transition: 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                transform: scale(1.03);
+                filter: drop-shadow(3px 5px 1px rgba(0, 0, 0, 0.428));
+            }
+        }
+
+        .dashboard-administrativo header section button span {
+            font-size: 16px;
+        } */
+
+
+        .dashboard-administrativo section {
+          background-color: white;
+          padding-top: 15px;
+          padding-left: auto;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 13px;
+          }
+        
+
+        .dash-admin-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1px;
+          background-color: white;
+          border-radius: 8px;
+          padding: 5px;
+          box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
+          transition: 0.3s;
+          flex: 1 1 180px;
+          min-width: 150px;
+          max-width: 230px;
+
+            &:hover{
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.155);
+            }
+
+        }
+
+        .dash-admin-item img {
+            width: 45px;
+        }
+
+        .progress {
+            width: 95%;
+            height: 20px;
+        }
+
+        #clases-btn {
+            background-color: #4CAF50;
+        }
+
+        #asistencia-btn {
+            background-color: #2196F3;
+        }
+
+        .switcher-container {
+            width: 90px;
+            height: 35px;
+            border-radius: 16px;
+            background-color: #DFDFDF;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .switcher-activated {
+            justify-content: flex-end;
+            background-color: #64BD63;
+        }
+
+        #switcher-item {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: white;
+            filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.574));
+        }
+        
+        .main-container {
+            width: 95%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 2px;
+        }
+
+        .tabs-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .tabs-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+        
+
+        .tab {
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 13px;
+            font-weight: normal;
+            min-width: 100px;
+            flex: 1;
+        }
+
+        .tab:hover {
+            background-color: #f1f1f1;
+        }
+
+        .tab.active {
+            background-color: #00c0df;
+            color: white;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .chart-container {
+            width: 100%;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .highcharts-axis-labels text {
+            font-size: 20px;
+        }
+
+        .highcharts-title {
+            font-size: 20px;
+        }
+
+        .highcharts-legend-item text {
+            font-size: 16px;
+        }
+            
+        
+        /* CSS LIS */
+        .table-container {
+        background: white;
+        border: 1px solid #ffffff;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        flex: 1;
+        min-width: 500px;
+        max-width: 65%;
+        }
+
+        .dashboard-flex-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 2px;
+        width: 95%;
+        margin: auto;
+        flex-wrap: wrap; 
+        }
+
+        h3 {
+        font-size: 22px;
+        padding: 0px;  
+        margin-bottom: 10px;
+        font-weight: normal;
+        }
+
+        table {
+        width: 100%;
+        border-collapse: collapse;
+        }
+
+        th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+        }
+
+        td i {
+        font-size: 1.3em;
+        }
+
+        .grado {
+        text-align: left;
+        }
+
+        .grado span {
+        display: block;
+        color: green;
+        font-size: 0.8em;
+        }
+
+        .progreso-bar {
+        background: #fdd;
+        height: 10px;
+        width: 100%;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 5px;
+        }
+
+        .progress-fill {
+          background: #4CAF50;
+          height: 100%;
+          width: 15%;
+          transition: width 1s ease;
+        }
+
+        .progress-text {
+          position: absolute;
+          top: 0;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          left: 0%;
+          transform: translateX(-50%);
+          font-size: 12px;
+          font-weight: bold;
+          color: white;
+          pointer-events: none;
+          z-index: 2;
+          padding-left: 5px;
+          left: 10%;        
+        }
+        
+        .menu-icon {
+          font-size: 1.2em;
+          cursor: pointer;
+        }
+
+        table tr:hover {
+          background-color: #f8f9f9; 
+        }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex: 1;
+      min-width: 600px;
+      max-width: 35%;
+      flex-direction: column;
+      background-color: #fff;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-height: 630px;
+      overflow-y: auto;
+    }
+
+    .buscador {
+      margin-bottom: 20px;
+    }
+
+    .buscador input {
+      width: 100%;
+      padding: 5px;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    .docente-lista {
+      padding: 8px;
+}
+
+    .docente-item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding: 5px 10px;
+    }
+
+    .docente-item:last-child {
+      border-bottom: none;
+    }
+
+    .docente-foto {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+    }
+
+    .docente-foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .docente-info {
+      flex: 1;
+    }
+
+    .docente-info h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .docente-info span {
+      color: #43A047;
+      font-size: 14px;
+    }
+
+    .docente-chat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chat-btn {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .chat-btn i {
+      margin-right: 5px;
+    }
+
+    .estrellas span {
+      color: #ccc;
+      font-size: 16px;
+    }
+
+    .estado-contenedor {
+      position: relative;
+      width: auto;
+      height: auto;
+    }
+
+    .estado {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid white;
+      z-index: 2;
+  }
+
+    .en-linea {
+      background-color: #43A047; /* Verde */
+    }
+
+    .desconectado {
+      background-color: #f44336; /* Rojo */
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.3s ease;
+  }
+
+    .modal-close:hover {
+      color: #f44336;
+    }
+       
+        
+ </style>
+    
+    <script>
+        
+        function renderChartInicial() {
+            Highcharts.chart('graficoInicial', {
+                chart: { type: 'column' },
+                title: { text: 'Gráfico de Valores por Nivel Inicial' },
+                xAxis: {
+                    categories: ['PARVULO I-A', 'PARVULO II-A', 'PARVULO III-A', 'Pre-Kínder-A', 'Pre-Kínder-B', 'Kínder-A', 'Pre-primario-A']
+                },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'Valores (%)' }
+                },
+                series: [{
+                    name: 'Valores',
+                    data: [0, 0, 0, 0, 0, 0, 0],
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: { fontWeight: 'bold', color: '#000000' }
+                    }
+                }]
+            });
+        }
+
+        function renderChartPrimaria() {
+            Highcharts.chart('graficoPrimaria', {
+                chart: { type: 'column' },
+                title: { text: 'Gráfico de Valores por Nivel Primaria' },
+                xAxis: {
+                    categories: ['1er Grado-A', '2do Grado-A', '3er Grado-A', '4to Grado-A', '5to Grado-A', '6to Grado-A']
+                },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'Valores (%)' }
+                },
+                series: [{
+                    name: 'Valores',
+                    data: [0, 0, 0, 0, 0, 0],
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: { fontWeight: 'bold', color: '#000000' }
+                    }
+                }]
+            });
+        }
+
+        function renderChartSecundaria() {
+            Highcharts.chart('graficoSecundaria', {
+                chart: { type: 'column' },
+                title: { text: 'Gráfico de Valores por Nivel Secundaria' },
+                xAxis: {
+                    categories: ['1er Grado-A', '2do Grado-A', '3er Grado-A', '3er Grado-B', '4to Grado-A', '5to Grado-A', '6to Grado-A', '6to Grado-C', 'DABEIBA – NO TOCAR-A']
+                },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'Valores (%)' }
+                },
+                series: [{
+                    name: 'Valores',
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: { fontWeight: 'bold', color: '#000000' }
+                    }
+                }]
+            });
+        }
+
+        function renderChartTecnico() {
+            Highcharts.chart('graficoTecnico', {
+                chart: { type: 'column' },
+                title: { text: 'Gráfico de Valores por Nivel Técnico' },
+                xAxis: { categories: ['Técnico-A', 'Técnico-B', 'Técnico-C'] },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'Valores (%)' }
+                },
+                series: [{
+                    name: 'Valores',
+                    data: [0, 0, 0],
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: { fontWeight: 'bold', color: '#000000' }
+                    }
+                }]
+            });
+        }
+
+        function renderChartIM() {
+            Highcharts.chart('graficoIM', {
+                chart: { type: 'column' },
+                title: { text: 'Gráfico de Valores por Nivel IM' },
+                xAxis: { categories: ['IM-A', 'IM-B'] },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'Valores (%)' }
+                },
+                series: [{
+                    name: 'Valores',
+                    data: [0, 0],
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: { fontWeight: 'bold', color: '#000000' }
+                    }
+                }]
+            });
+        }
+
+        function renderChartSemitec() {
+            Highcharts.chart('graficoSemitec', {
+                chart: { type: 'column' },
+                title: { text: 'Gráfico de Valores por Nivel SEMITEC' },
+                xAxis: { categories: ['Semitec-A', 'Semitec-B'] },
+                yAxis: {
+                    min: 0,
+                    title: { text: 'Valores (%)' }
+                },
+                series: [{
+                    name: 'Valores',
+                    data: [0, 0],
+                    dataLabels: {
+                        enabled: true,
+                        format: '{y}%',
+                        style: { fontWeight: 'bold', color: '#000000' }
+                    }
+                }]
+            });
+        }
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function () {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                const contenido = {
+                    inicial: `
+                        <div class="chart-container">
+                            <div id="graficoInicial" style="width: 100%; height: 400px;"></div>
+                        </div>`,
+                    primaria: `
+                        <div class="chart-container">
+                            <div id="graficoPrimaria" style="width: 100%; height: 400px;"></div>
+                        </div>`,
+                    secundaria: `
+                        <div class="chart-container">
+                            <div id="graficoSecundaria" style="width: 100%; height: 400px;"></div>
+                        </div>`,
+                    tecnico: `
+                        <div class="chart-container">
+                            <div id="graficoTecnico" style="width: 100%; height: 400px;"></div>
+                        </div>`,
+                    im: `
+                        <div class="chart-container">
+                            <div id="graficoIM" style="width: 100%; height: 400px;"></div>
+                        </div>`,
+                    semitec: `
+                        <div class="chart-container">
+                            <div id="graficoSemitec" style="width: 100%; height: 400px;"></div>
+                        </div>`
+                };
+
+                const tabName = this.dataset.tab;
+                document.getElementById('tabContent').innerHTML = contenido[tabName] || "";
+
+                if (tabName === 'inicial') renderChartInicial();
+                if (tabName === 'primaria') renderChartPrimaria();
+                if (tabName === 'secundaria') renderChartSecundaria();
+                if (tabName === 'tecnico') renderChartTecnico();
+                if (tabName === 'im') renderChartIM();
+                if (tabName === 'semitec') renderChartSemitec();
+            });
+        });
+
+        // Renderizar gráfico inicial al cargar la página
+        renderChartInicial();
+       
+
+
+        function abrirModal() {
+      document.getElementById('videoModal').style.display = 'flex';
+      document.getElementById('videoIframe').src = "https://www.youtube.com/embed/UscCDq6oXAY";
+    }
+  
+    function cerrarModal() {
+      document.getElementById('videoModal').style.display = 'none';
+      document.getElementById('videoIframe').src = "";
+    }
+    function abrirModalDocente(nombre, codigo, correo, foto) {
+    document.getElementById('tituloDocente').innerText = `Reporte de docente: ${nombre}`;
+    document.getElementById('nombreDocente').innerText = nombre;
+    document.getElementById('codigoDocente').innerText = codigo;
+    document.getElementById('correoDocente').innerText = correo;
+    document.getElementById('fotoDocente').src = foto;
+
+    document.getElementById('modalDocente').style.display = 'flex';
+  }
+
+  function cerrarModalDocente() {
+    document.getElementById('modalDocente').style.display = 'none';
+  }
+
+  function abrirModalMaterias() {
+  document.getElementById('modalMaterias').style.display = 'flex';
+}
+
+function cerrarModalMaterias() {
+  document.getElementById('modalMaterias').style.display = 'none';
+}
+
+    </script>
+</body>
+</html>

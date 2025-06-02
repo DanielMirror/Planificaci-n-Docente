@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <header>Usuarios de Finsta</header>
+        <article class="container">
+            <section class="user-card">
+                <img src="https://unavatar.io/pepe">
+                    <div class="user-details">
+                        <span>Nombre: Pepe Antonio</span>
+                        <span>Username: @pepe</span>
+                        <span>Edad: 37</span>
+                        <span><b>Sobre mi:</b></span>
+                        <p class="sobre-mi">Una Persona normal, me gustan los árboles y la naturaleza.</p>
+                    </div>
+            </section>
+            <section class="user-card">
+                <img src="https://unavatar.io/Brynner">
+                    <div class="user-details">
+                        <span>Nombre: Brynner Constanzo</span>
+                        <span>Username: @BryConst</span>
+                        <span>Edad: 24</span>
+                        <span><b>Sobre mi:</b></span>
+                        <p class="sobre-mi">Me gusta la tecnología y los viajes. Aficionado al conocimiento.</p>
+                    </div>
+            </section>
+            <section class="user-card">
+                <img src="https://unavatar.io/MartaAgui">
+                    <div class="user-details">
+                        <span>Nombre: Marta Aguilar</span>
+                        <span>Username: @MartaAgui</span>
+                        <span>Edad: 17</span>
+                        <span><b>Sobre mi:</b></span>
+                        <p class="sobre-mi">La lectura es mi pasatiempo favorito, cada libro es un mundo nuevo que explorar</p>
+                    </div>
+            </section>
+        </article>
+    </main>
+
+    <style>
+        body {
+            background-color: beige;
+            margin: 0px;
+        }
+        header {
+            font-size: 30px;
+            background-color: rgba(0, 0, 0, 0.753);
+            color: aliceblue;
+        }
+        .container {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+        .user-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid black;
+            width: 200px;
+            border-radius: 16px;
+            padding: 5px;
+        }
+        .user-card img {
+            width: 140px;
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .user-details {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+            gap: 10px;
+        }
+
+        .sobre-mi {
+            background-color: white;
+            padding: 4px;
+            border: 1px solid black;
+            border-radius: 16px;
+            margin-bottom: auto;
+            margin-top: auto;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6to grado del Tecnico en Madera</title>
+</head>
+<body>
+    <section class="table-container">
+        <aside class="container-item rotated">6to. Grado</aside>
+        <header class="container-item">
+            <span style="align-self: center;"><b>Segundo Ciclo de la Educación Secundaria, ordenanzas 04-2023</b></span>
+            <span style="margin-top: 10px;">Familia Profesional de <b>Madera y Mueble ordenanza no. 16-2017,</b></span>
+            <span>Bachillerato Técnico en <b>Muebles y Estructuras de Madera</b></span>
+        </header>
+        <div class="grid-table">
+            <div style="grid-row: 1 / 3; display: flex; flex-direction: column; align-items: center;">
+                <span><b>Asignaturas</b></span>
+                <span><b>Ordenanza curricular (No. 16-2017)</b></span>
+            </div>
+            <div style="grid-column: 2 / 5; text-align: center;">
+                <span><b>5to. Grado Año escolar 2024-2025</b></span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <span><b>Calific.</b></span>
+                <span><b>Final</b></span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <span><b>FECHA</b></span>
+            </div>
+            <div>
+                <span style="display: flex; flex-direction: column; align-items: center;"><b>AÑO LECTIVO</b></span>
+            </div>
+            <div class="materias-table2">
+                <div>Lengua Española</div>
+                <div>Inglés Técnico </div>
+                <div>Matemática</div>
+                <div>Ciencias Sociales</div>
+                <div>Ciencias de la Naturaleza</div>
+                <div>Formación Integral Humana Y Religiosa</div>
+                <div>Educación Física</div>
+                <div>Educación Artística</div>
+                <div>Emprendimiento</div>
+                <div>Elaboración de Muebles de bambú y tejido.</div>
+                <div>Instalación de mobiliario</div>
+                <div>Formación de centros de trabajo</div>
+            </div>
+            <div class="notas-table2">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div><b>Apto</b></div>
+            </div>
+            <div class="fechas-table2">
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+                <div>05/2025</div>
+            </div>
+            <div class="grid-final">
+                <div style="display: flex; justify-content: center; align-items: center; font-size: 40px;">2025</div>
+                <div style="display: flex; justify-content: center; align-items: center;"><b>Centro de Procedencia</b></div>
+                <div style="font-size: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <span><b>08984</b></span>
+                    <span>Instituto Politécnico </span>
+                    <span>Industrial de </span>
+                    <span>Santiago </span>
+                    <span>IPISA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        /* body {
+            display: flex;
+            justify-content: center;
+        } */
+        .table-container {
+            display: grid;
+            width: 80%;
+            grid-template-columns: 1fr 13fr;
+            grid-template-rows: 1fr 6fr;
+            border: 1px solid black;
+
+            margin-top: 20px;
+        }
+        .container-item {
+            border: 2px solid black;
+        }
+
+        aside {
+            grid-row: 1 / 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rotated {
+            writing-mode:sideways-lr; 
+            padding: 10px;
+            font-size: 50px;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+        }
+
+        .grid-table {
+            display: grid;
+            grid-template-columns: 7fr 2fr 2.5fr 3fr;
+            grid-template-rows: 0.5fr 1fr 7fr;
+        }
+
+        .grid-table div {
+            border: 1px solid black;
+        }
+
+        .materias-table2, .notas-table2, .fechas-table2 {
+            display: grid;
+            grid-template-rows: repeat(12, 1fr);
+        }
+
+        .materias-table2 div, .notas-table2 div, .fechas-table2 div {
+            border-right: none;
+            border-left: none;
+            padding-left: 5px;
+        }
+
+        .grid-final {
+            display: grid;
+            grid-template-rows: 6fr 1fr 5fr;
+        }
+
+    </style>
+</body>
+
+</html>

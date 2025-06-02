@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .empresa-container {
+            display: grid;
+            grid-template-columns: 0.6fr 1fr;
+            grid-template-rows: 0.8fr 1fr;
+            border: 1px solid #ddd3fe;
+            width: 350px;
+            height: 150px;
+            background-image: linear-gradient(to right, #552eda, #8462fb);
+            color: #f4f1ff;
+            border-radius: 18px;
+            transition: .5s;
+
+            &:hover {
+                transform: scale(1.03);
+            }
+        }
+
+        .empresa-container .item:first-child {
+            grid-column-end: span 2;
+            display: flex;
+            justify-content: center;
+            margin-top: 8px;
+            font-size: 20px;
+        }
+
+        .empresa-container .item:nth-child(2) {
+            display: flex;
+            justify-content: center;
+        }
+
+        .empresa-container .item:nth-child(3) {
+            margin-right: 10px;
+        }
+
+        .empresa-container .item img {
+            border-radius: 100%;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="empresa-container">
+        <div class="item"><b>Black Burger</b></div>
+        <div class="item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuB6vXg11Rv14tVGT2DT7tvl9KGWK0ciwetw&s">
+        </div>
+        <div class="item">
+            <p>Restaurante de Hamburguesas y mas.</p>
+            <div class="item-container">5 de 10 menus</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú de Asignaciones - Pasantía Mediasoft</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3a5a9c;
+            --secondary-color: #5687d8;
+            --accent-color: #ff7043;
+            --light-bg: #f8f9fa;
+            --dark-bg: #343a40;
+            --transition-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            padding-top: 56px;
+            background-image: linear-gradient(to bottom, #f8f9fa, #ffffff);
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+            letter-spacing: 0.5px;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            margin-bottom: 30px;
+            margin-top: 50px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 15px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            margin-bottom: 20px;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+        }
+        
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: 600;
+            padding: 15px 18px;
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+        
+        .card-body {
+            padding: 25px;
+            background-color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .card-text {
+            color: #555;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .card-link {
+            color: var(--secondary-color);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all var(--transition-speed);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .card-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width var(--transition-speed);
+        }
+        
+        .card-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .card-link:hover::after {
+            width: 100%;
+        }
+        
+        .card-link i {
+            margin-left: 8px;
+            transition: transform var(--transition-speed);
+        }
+        
+        .card-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        .card-icon {
+            background: linear-gradient(135deg, rgba(58, 90, 156, 0.1), rgba(86, 135, 216, 0.1));
+            color: var(--primary-color);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 18px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card:hover .card-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(58, 90, 156, 0.3);
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-bg), #1a1d20);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 30px 0;
+            margin-top: 70px;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+        }
+        
+        /* Animación para el cargado de tarjetas */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-card {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        /* Ajuste para tarjetas de diferentes tamaños */
+        .card-columns {
+            column-count: 3;
+            column-gap: 1.25rem;
+        }
+        
+        @media (max-width: 992px) {
+            .card-columns {
+                column-count: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .card-columns {
+                column-count: 1;
+            }
+        }
+        
+        /* Indicador de tipo de proyecto */
+        .badge-project {
+            background: linear-gradient(135deg, var(--accent-color), #ff9a76);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-left: 8px;
+            font-weight: normal;
+            box-shadow: 0 2px 5px rgba(255, 112, 67, 0.3);
+        }
+        
+        /* Estilos para el banner principal */
+        .main-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cGF0aCBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIGQ9Ik0wIDBoMjAwdjIwMEgweiIvPjxwYXRoIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGQ9Ik0wIDBoMTAwdjEwMEgweiIvPjxwYXRoIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiIGQ9Ik0xMDAgMTAwaDEwMHYxMDBIMTAweiIvPjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .banner-title {
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .banner-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            font-size: 1.2rem;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-laptop-code me-2"></i>
+                Mediasoft
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#calendario">Calendario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#dashboards">Dashboards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#educoco">Educoco</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tablas">Tablas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#otros">Otros Proyectos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <div class="container mt-4">
+        <div class="main-banner">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="banner-title display-5 fw-bold">Menú de Asignaciones – Pasantía Mediasoft</h1>
+                    <p class="banner-text my-4">Accede a todos los proyectos y tareas desarrolladas durante la pasantía en Mediasoft.</p>
+                    <a href="#educoco" class="btn btn-light btn-lg px-4 shadow-sm">Explorar proyectos <i class="fas fa-arrow-right ms-2"></i></a>
+                </div>
+                <div class="col-md-4 d-none d-md-flex justify-content-center align-items-center">
+                    <div class="text-center">
+                        <i class="fas fa-laptop-code text-white" style="font-size: 6rem; opacity: 0.8;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sección Calendario -->
+        <h2 id="calendario" class="section-title">Calendario</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.1s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Calendario</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <p class="card-text">Mejora del calendario y adición de funciones para psicólogos.</p>
+                        <a href="./Calendario/calendario.html" class="card-link" target="_blank">Ver calendario <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Dashboards -->
+        <h2 id="dashboards" class="section-title">Dashboards</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.2s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Dashboard Combinado</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <p class="card-text">Dashboard para Educoco con información general del sistema.</p>
+                        <a href="./Dashboards/Dashboard-combinado.html" class="card-link" target="_blank">Ver dashboard <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.3s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Dashboard Administrativo</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <p class="card-text">Dashboard para Educoco a nivel administrativo con funciones especializadas.</p>
+                        <a href="./Dashboards/Dashboard Administrativo/index.html" class="card-link" target="_blank">Ver dashboard <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Educoco -->
+        <h2 id="educoco" class="section-title">Educoco</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.4s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Cierre Académico</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <p class="card-text">Panel de Cierre Académico para Educoco.</p>
+                        <a href="./Educoco/Cierre-Academico.html" class="card-link" target="_blank">Ver panel <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.5s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Facturación Detallada</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <p class="card-text">Panel de vista detallada de facturación en Educoco.</p>
+                        <a href="./Educoco/Facturacion-detallada-educoco.html" class="card-link" target="_blank">Ver panel <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.6s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Resumen Facturación</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <p class="card-text">Panel de facturación en Educoco (versión final está en el dashboard).</p>
+                        <a href="./Educoco/resumen.html" class="card-link" target="_blank">Ver panel <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Asignaciones Abiertas -->
+        <h3 class="section-title ms-4">Asignaciones Abiertas</h3>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.7s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Vista General</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <p class="card-text">Vista general de las asignaciones abiertas.</p>
+                        <a href="./Educoco/Asignaciones Abiertas/Asignaciones-Abiertas.html" class="card-link" target="_blank">Ver asignaciones <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Asignaciones Generales -->
+        <h4 class="section-title ms-5">Asignaciones Generales</h4>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.8s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Vista Ampliada General</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-list-alt"></i>
+                        </div>
+                        <p class="card-text">Asignaciones abiertas detalladas generales.</p>
+                        <a href="./Educoco/Asignaciones Abiertas/General/AmpliadaG.html" class="card-link" target="_blank">Ver vista ampliada <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 0.9s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Vista Resumida General</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <p class="card-text">Asignaciones abiertas resumidas generales.</p>
+                        <a href="./Educoco/Asignaciones Abiertas/General/ResumidaG.html" class="card-link" target="_blank">Ver vista resumida <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Asignaciones del Momento -->
+        <h4 class="section-title ms-5">Asignaciones del Momento</h4>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.0s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Vista Ampliada Momento</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <p class="card-text">Asignaciones abiertas detalladas del curso que toca en el momento.</p>
+                        <a href="./Educoco/Asignaciones Abiertas/Momento/AmpliadaM.html" class="card-link" target="_blank">Ver vista ampliada <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.1s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Vista Resumida Momento</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-clipboard"></i>
+                        </div>
+                        <p class="card-text">Asignaciones abiertas resumidas del curso que toca en el momento.</p>
+                        <a href="./Educoco/Asignaciones Abiertas/Momento/ResumidaM.html" class="card-link" target="_blank">Ver vista resumida <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Tablas -->
+        <h2 id="tablas" class="section-title">Tablas</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.2s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>5to Grado Técnico Madera</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-table"></i>
+                        </div>
+                        <p class="card-text">Diseño de tabla HTML para 5to Grado Técnico Madera.</p>
+                        <a href="./Tablas/5to-Grado-Tecnico-Madera.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.3s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>6to Grado Técnico Madera</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-table"></i>
+                        </div>
+                        <p class="card-text">Diseño de tabla HTML para 6to Grado Técnico Madera.</p>
+                        <a href="./Tablas/6to-Grado-Tecnico-Madera.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.4s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Aprendiendo Grupo</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-table"></i>
+                        </div>
+                        <p class="card-text">Tabla para gestión de aprendizaje grupal.</p>
+                        <a href="./Tablas/aprendiendoGrupo.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.5s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Desarrollo Curricular</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-table"></i>
+                        </div>
+                        <p class="card-text">Tabla para seguimiento de desarrollo curricular.</p>
+                        <a href="./Tablas/desarrolloCurricular.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.6s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Esquema de Vacunación</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-syringe"></i>
+                        </div>
+                        <p class="card-text">Esquema de vacunación del Ministerio de Salud Pública.</p>
+                        <a href="./Tablas/ESQUEMA DE VACUNACIÓN DEL MINISTERIO DE SALUD PÚBLICA.html" class="card-link" target="_blank">Ver esquema <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.7s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Estadística del Centro</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <p class="card-text">Fortaleciendo y construyendo la estadística del centro.</p>
+                        <a href="./Tablas/FORTALECIENDO Y CONSTRUYENDO LA ESTADÍSTICA DEL CENTRO.html" class="card-link" target="_blank">Ver estadística <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.8s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Inmunización-Vacunación</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-notes-medical"></i>
+                        </div>
+                        <p class="card-text">Tabla sobre inmunización y vacunación.</p>
+                        <a href="./Tablas/INMUNIZACIÓN-VACUNACIÓN.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 1.9s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Quién Compartiremos</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <p class="card-text">Tabla para organización de grupos compartidos.</p>
+                        <a href="./Tablas/quienCompartiremos.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 2.0s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Respuesta Diversidad</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <p class="card-text">Tabla para manejo de respuestas a la diversidad.</p>
+                        <a href="./Tablas/respuestaDiversidad.html" class="card-link" target="_blank">Ver tabla <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección Otros Proyectos -->
+        <h2 id="otros" class="section-title">Otros Proyectos</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 2.1s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Tea Shop Project</span>
+                        <span class="badge-project">Flexbox</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-mug-hot"></i>
+                        </div>
+                        <p class="card-text">Proyecto de una tienda de té usando Flexbox.</p>
+                        <a href="./teaShopProject/index.html" class="card-link" target="_blank">Ver proyecto <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 2.2s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Tarjeta de Empresa</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <p class="card-text">Tarjeta de empresa para página de menús (ejemplo).</p>
+                        <a href="./jefe/empresa_card.html" class="card-link" target="_blank">Ver tarjeta <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card animate-card" style="animation-delay: 2.3s">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Tarjetas de Usuario</span>
+                        <span class="badge-project">Flexbox</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fas fa-address-card"></i>
+                        </div>
+                        <p class="card-text">Tarjetas de usuarios (práctica con Flexbox).</p>
+                        <a href="./x/users-cards.html" class="card-link" target="_blank">Ver tarjetas <i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-2">&copy; 2025 Daniel Espejo. Todos los derechos reservados.</p>
+                    <p class="text-muted small">Desarrollado como parte del programa de pasantías en MediaSoft</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-2">Diseñado y desarrollado con <i class="fas fa-heart text-danger"></i></p> por Daniel Espejo
+                    <p class="text-muted small">Versión 1.2 - Actualizado Mayo 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animación de aparición al hacer scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.animate-card');
+            
+            // Función para comprobar si un elemento está en el viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom >= 0
+                );
+            }
+            
+            // Función para animar las tarjetas cuando entran en el viewport
+            function animateOnScroll() {
+                cards.forEach((card, index) => {
+                    if (isInViewport(card) && card.style.opacity !== '1') {
+                        setTimeout(() => {
+                            card.style.animationDelay = '0s';
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50 * index);
+                    }
+                });
+            }
+            
+            // Primer chequeo al cargar la página
+            setTimeout(animateOnScroll, 100);
+            
+            // Escuchar el evento scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Suavizar el scroll al hacer clic en los enlaces del menú
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Efecto hover en la barra de navegación
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.transition = 'all 0.3s ease';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

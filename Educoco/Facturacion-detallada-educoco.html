@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="icon/styles.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/core.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/components.min.css" rel="stylesheet" type="text/css">
+    <link href="noticia/canvas_style.css" rel="stylesheet" type="text/css">
+        <link href="assets/css/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link href="assets/css/colors.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="">Escolaridad</span> &nbsp;
+
+                <div class="pull-right">
+                                                <select class="form-control" id="anio_factura">
+                        
+                        <option value="1" id_factura="">
+                            2020-2021 ($0.00)</option>
+
+                        
+                        <option value="2" id_factura="">
+                            2021-2022 ($0.00)</option>
+
+                        
+                        <option value="4" id_factura="">
+                            2022-2023 ($0.00)</option>
+
+                        
+                        <option value="5" id_factura="9" selected="">
+                            2023-2024 ($0.00)</option>
+
+                                                    </select>
+                </div>
+            </h3>
+        </div>
+        <!-- panel-body -->
+        <div class="panel-body" style="padding: 5px; min-height: 70px;" id="tabla_add_estu_3">
+<div class="row" >
+
+<div class="col-md-12">
+<div class="row">
+    <div class="col-sm-12" style="margin-top: 10px;">
+        <h5 style="margin-left: 10px;" class="pull-left bold text-muted">DETALLES DE LAS CUOTAS</h5>
+        <div class="text-right">
+            <div class="btn-group pull-right" style="margin-right: 7px;">
+                <button type="button" onclick="printPage('modulos/administracion/facturacion/imprimir_estado_de_cuestas.php?id_estu=184&amp;id_factura=9')" class="btn btn-danger btn-xs" style="margin-right: 5px;" data-uw-rm-kbnav="click">
+                    <i class="fa fa-money"></i> ESTADO DE CUENTAS
+                </button>
+
+                <button type="button" onclick="pagarCuotas('9')" class="btn btn-success btn-xs" style="margin-right: 5px;" data-uw-rm-kbnav="click">
+                    <i class="fa fa-money"></i> PAGAR CUOTAS
+                </button>
+                <button type="button" onclick="notaCreditoCuota('9')" class="btn btn-warning btn-xs" data-uw-rm-kbnav="click">
+                    <i class="fa fa-money"></i> NOTA DE CRÉDITO CUOTAS
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<table class="table table-striped table-responsive2" style="width: 90%; justify-self: center;">
+    <thead>
+        <tr>
+            <th class="bold">Cuotas</th>
+            <th class="bold">Fecha</th>
+            <th class="bold text-right">Monto</th>
+            <th class="bold text-right">Mora</th>
+            <th class="bold text-right">Descuento</th>
+            <th class="bold text-right">Monto Total</th>
+            <th class="bold text-success text-right">Pago</th>
+
+        </tr>
+    </thead>
+    <tbody>
+</tr><tr>
+    <td>
+        <button onclick="verDetalleCuota(109)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">#10</button>
+    </td>
+    <td title="07-02-2024">Miercoles 7 de Febrero del 2024</td>
+    <td class="text-right">$7,000.00</td>
+    <td class="text-right">$0.00
+        <br>
+        <small></small>
+    </td>
+    <td class="text-right">$0.00</td>
+    <td class="text-right">$7,000.00</td>
+    <td class="text-right">
+        <button onclick="pagarCuotas(9)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">$7,000.00</button> 
+    </td>
+
+
+</tr>            
+    <tr  id="pago-medio">
+    <td>
+        <button onclick="verDetalleCuota(101)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">#2</button>
+    </td>
+    <td title="16-10-2023">Pago Medio test</td>
+    <td class="text-right">$7,000.00</td>
+    <td class="text-right">$0.00
+        <br>
+        <small></small>
+    </td>
+    <td class="text-right">$0.00</td>
+    <td class="text-right">$7,000.00</td>
+    <td class="text-right">
+        <button onclick="pagarCuotas(9)" 
+    class="btn btn-xs btn-success" 
+    style="padding: 5px; letter-spacing: 0.5px; font-weight: bold; 
+           background: linear-gradient(to right, #ffe96b 50%, white 50%);
+           color: black; border: none;"
+    type="button" data-uw-rm-kbnav="click">
+    $3,500.00
+</button>
+    </td>
+
+    </tr>
+    <tr  id="pago-nulo">
+        <td>
+            <button onclick="verDetalleCuota(101)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">#2</button>
+        </td>
+        <td title="16-10-2023">Pago Nulo test</td>
+        <td class="text-right">$7,000.00</td>
+        <td class="text-right">$0.00
+            <br>
+            <small></small>
+        </td>
+        <td class="text-right">$0.00</td>
+        <td class="text-right">$7,000.00</td>
+        <td class="text-right">
+            <button onclick="pagarCuotas(9)" 
+        class="btn btn-xs btn-success" 
+        style="padding: 5px; letter-spacing: 0.5px; font-weight: bold; 
+               background: rgba(163, 17, 17, 0.7);
+               color: rgb(255, 255, 255); border: none;"
+        type="button" data-uw-rm-kbnav="click">
+        $3,500.00
+    </button>
+        </td>
+
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            
+            <td class="bold" colspan="2"></td>
+
+            <td class="bold text-right">$70,000.00</td>
+            <td class="bold text-right">$0.00</td>
+            <td class="bold text-right">$0.00</td>
+            <td class="bold text-success text-right"><span class="text-success">+$80,000.00</span></td>
+
+            <td class="bold text-right" style="padding:0;">
+                <div style="display: flex;align-items: center;justify-content: flex-end;">
+                    <div style="position: absolute;padding: 10px;">PAGADAS
+                        10/10</div>
+                    <div style="width: 100%;height: 40px;background: #dbf5dc;position: initial;">
+                    </div>
+                    <div style="width: 0%;height: 40px;background: #fbc0c0;position: initial;
+            "></div>
+                </div>
+            </td>
+        </tr>
+    </tfoot>
+<style>
+    tbody tr {
+        transition: 0.1s;
+
+        &:hover {
+            transform: scale(1.0066);
+            box-shadow: 2px 2px 2px #46b446;
+        }
+    }
+
+    /* #pago-medio {
+        background-color: #fffb00;
+        opacity: 0.8;
+    } */
+</style>
+</body>
+</html>

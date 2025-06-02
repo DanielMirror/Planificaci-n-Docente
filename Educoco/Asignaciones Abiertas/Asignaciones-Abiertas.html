@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignaciones Abiertas</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+</head>
+<body>
+    <header class="asignaciones-header">
+        <h1>📝 ASIGNACIONES ABIERTAS</h1>
+        <form class="asignaciones-header-form">
+            <fieldset class="form-set">
+                <label for="tipo-vista">Tipo de Vista</label>
+                    <select id="tipo-vista">
+                        <option>General</option>
+                        <option>Actual</option>
+                    </select>
+            </fieldset>
+            <fieldset class="form-set">
+                <label for="tipo-orden">Tipo de Orden</label>
+                    <select id="tipo-orden">
+                        <option>Fecha de Entrega</option>
+                        <option>Fecha de Asignacion</option>
+                        <option>Nombre (ABC)</option>
+                    </select>
+            </fieldset>
+            <fieldset class="form-set">
+                <label for="buscar-nombre">Buscar por Nombre</label>
+                    <input id="buscar-nombre" type="search">
+            </fieldset>
+            <fieldset class="form-set">
+                <label for="buscar-fecha">Buscar por Fecha</label>
+                    <input type="date">
+            </fieldset>
+        </form>
+    </header>
+    <main class="asignaciones-main">
+        <article class="asignacion-item-container">
+            <h2>Informe de Lectura</h2>
+            <h4>Fecha de Entrega: 28/04/2025</h4>
+            <section>
+                <p>Debes realizar un informe crítico del capítulo 3 del libro asignado. En este trabajo, se espera que identifiques las ideas principales del autor, analices cómo estas se desarrollan a lo largo del capítulo y reflexiones sobre su relevancia en el contexto actual. Puedes incluir ejemplos, citas textuales y comparaciones con otros textos o situaciones reales que hayas estudiado en clase. La redacción debe ser clara, coherente y con una estructura lógica que permita al lector seguir tu línea de pensamiento sin dificultad.</p>
+            </section>
+        </article>
+        
+        <article class="asignacion-item-container">
+            <h2>Debate Argumentativo</h2>
+            <h4>Fecha de Entrega: 02/05/2025</h4>
+            <section>
+                <p>Organizarás un conjunto de argumentos sólidos a favor o en contra del uso de la inteligencia artificial en el ámbito educativo. El objetivo es desarrollar tu capacidad crítica, tu habilidad para estructurar un discurso lógico y tu destreza para comunicar ideas de manera efectiva. Recuerda apoyar tus argumentos con datos verificables, estudios o ejemplos concretos. La presentación se hará en formato oral durante la clase, y también deberás entregar por escrito un resumen de tus puntos principales con una conclusión reflexiva.</p>
+            </section>
+        </article>
+        
+        <article class="asignacion-item-container">
+            <h2>Proyecto de Investigación</h2>
+            <h4>Fecha de Entrega: 10/05/2025</h4>
+            <section>
+                <p>Este proyecto consiste en investigar una problemática social que afecte directa o indirectamente a tu comunidad. Luego de identificar el problema, deberás desarrollar una propuesta innovadora y factible que contribuya a solucionarlo o a reducir su impacto. La entrega debe incluir un informe escrito con introducción, objetivos, desarrollo, propuesta y conclusiones, además de una presentación visual (puede ser un cartel, infografía o diapositivas) que resuma los puntos más importantes de tu investigación. Se evaluará la creatividad, profundidad del análisis y viabilidad de la propuesta.</p>
+            </section>
+        </article>
+        
+        <article class="asignacion-item-container">
+            <h2>Análisis de Película</h2>
+            <h4>Fecha de Entrega: 30/04/2025</h4>
+            <section>
+                <p>Después de ver la película asignada por el docente, redactarás un análisis detallado centrado en los dilemas éticos y morales que se presentan en la trama. Deberás describir las situaciones más relevantes, identificar los valores en conflicto y argumentar tu postura frente a las decisiones tomadas por los personajes. El análisis debe conectarse con los contenidos abordados en clase y debe incluir citas específicas de la película, así como referencias teóricas que sustenten tu interpretación. La profundidad del análisis será clave para una buena evaluación.</p>
+            </section>
+        </article>
+        
+        <article class="asignacion-item-container">
+            <h2>Crónica Personal</h2>
+            <h4>Fecha de Entrega: 08/05/2025</h4>
+            <section>
+                <p>Redactarás una crónica basada en una experiencia personal que haya tenido un impacto significativo en tu forma de pensar o ver el mundo. El texto debe tener un enfoque narrativo, con una introducción que capte la atención, un desarrollo que relate los hechos de forma vívida y una conclusión que muestre cómo dicha experiencia te transformó o te enseñó algo importante. Puedes usar recursos literarios como descripciones detalladas, diálogos y reflexiones internas para enriquecer tu historia. Se valorará la autenticidad, la coherencia y la capacidad para conectar emocionalmente con el lector.</p>
+            </section>
+        </article>
+        
+    </main>
+
+    <style>
+        body {
+            background-color: #EDF5FC;
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding-bottom: 50px;
+        }
+
+        .asignaciones-header {
+            width: 95%;
+            min-height: 10vh;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.308);
+            margin-top: 20px;
+            border-radius: 16px;
+            transition: 0.5s;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+            &:hover {
+                box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.411);
+            }
+        }
+
+        .asignaciones-header-form {
+            border: none;
+            width: 60%;
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .asignaciones-form-legend {
+            border: 1px solid #d6d6d6;
+        }
+
+        .form-set {
+            box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.219);
+            padding: 5px;
+            display: flex;
+            transition: 0.3s;
+            flex-direction: column;
+            
+            &:hover {
+                box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.384);
+            }
+        }
+
+        select {
+            border: none;
+        }
+
+        input[type="date"] {
+            height: 20px;
+        }
+
+        input[type="search"] {
+            border-radius: 8px;
+        }
+
+        .asignaciones-main {
+            width: 95%;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.308);
+            margin-top: 20px;
+            border-radius: 16px;
+            transition: 0.5s;
+            display: flex;
+            justify-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            padding: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            min-height: 78vh;
+
+            &:hover {
+                box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.411);
+            }
+        }
+
+        h1 {
+            font-size: 18px;
+            color: black;
+            text-align: left;
+        }
+
+        h2 {
+            font-size: 25px;
+            justify-self: center;
+        }
+
+        h4 {
+            margin-left: 10px;
+        }
+
+        .asignacion-item-container {
+            width: 30%;
+            height: 450px;
+            border-radius: 4px;
+            box-shadow: 2px 8px 8px rgba(0, 0, 0, 0.274);
+            transition: 0.3s;
+            overflow-y: scroll;
+
+
+            &:hover {
+                box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.575);
+            }
+        }
+
+        section {
+            padding-left: 15px;
+            padding-right: 15px;
+            background-color: #f5f5f57a;
+
+        }
+    </style>
+</body>
+</html>

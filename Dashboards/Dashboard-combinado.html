@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Combinado</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+<body>
+    
+    <main>
+        <header class="form-container" style="margin-top: 35px;">
+            
+    <div class="form-row">
+            <div class="form-group">
+                <label>Estudiantes</label>
+                <select>
+                    <option>Todos</option>
+                </select>
+            </div>
+        <div class="form-group">
+            <label>Desde</label>
+            <input type="date" value="2025-03-18">
+        </div>
+
+        <div class="form-group">
+            <label>Hasta</label>
+            <input type="date" value="2025-03-18">
+        </div>
+
+        <div class="form-group">
+            
+            <label>Grados</label>
+            <select>
+                <option>Todos</option>
+                <option style="font-weight: bold; color: black;" disabled>NIVEL INICIAL</option>
+                <option>PARVULO I</option>
+                <option>PARVULO II</option>
+                <option>PARVULO III</option>
+                <option>Pre-Kínder</option>
+                <option>Kínder</option>
+                <option>Pre-Primario</option>
+                <option style="font-weight: bold; color: black;" disabled>NIVEL PRIMARIO</option>
+                <option>1er Primaria</option>
+                <option>2ndo Primaria</option>
+                <option>3er Primaria</option>
+                <option>4to Primaria</option>
+                <option>5to Primaria</option>
+                <option>6to Primaria</option>
+                <option style="font-weight: bold; color: black;" disabled>NIVEL SECUNDARIO</option>
+                <option>1er Secundaria</option>
+                <option>2ndo Secundaria</option>
+                <option>3er Secundaria</option>
+                <option>4to Secundaria</option>
+                <option>5to Secundaria</option>
+                <option>6to Secundaria</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Materias</label>
+            <select>
+                <option>Todos</option>
+            </select>
+        </div>
+    </div>
+        </header>
+        <article id="contenedor1">
+            <article class="container-facturacion">
+                <header>
+                    <h5>💸 FACTURACIÓN</h5>
+                    <button data-btn="facturacion" class="extraButton">+</button>
+                </header>
+                <section class="details">
+                    <div class="details-item">
+                        <div class="detail-bar good-bar" style="height: 85%;"></div>
+                        <span><b>7,000.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar good-bar" style="height: 70%;"></div>
+                        <span><b>9,000.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar good-bar" style="height: 100%;"></div>
+                        <span><b>8,500.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar medium-bar" style="height: 50%;"></div>
+                        <span><b>9,500.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar bad-bar" style="height: 35%;"></div>
+                        <span><b>6,000.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar bad-bar" style="height: 30%;"></div>
+                        <span><b>5,000.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar bad-bar" style="height: 20%;"></div>
+                        <span><b>10,000.00</b></span>
+                    </div>
+                    <div class="details-item">
+                        <div class="detail-bar bad-bar" style="height: 10%;"></div>
+                        <span><b>6,550.00</b></span>
+                    </div>
+                </section>
+                <section class="summary">
+                    <div class="summary-bar">
+                        <span class="summary-bar-percent">40%</span>
+                        <div style="width: 40%; height: 100%; border-radius: 5px; background: rgb(33, 150, 243);"></div>
+                    </div>
+                    <span>Facturación al dia | Próxima factura 1 de julio 2023</span>
+                </section>
+            </article>
+            <article class="container-actividades">
+                <header>
+                    <h5>📝 ACTIVIDADES PENDIENTES</h5>
+                    <button data-btn="actividades" class="extraButton">+</button>
+                </header>
+                <section class="summary-actividades">
+                    <article class="item-actividades">
+                        <header>
+                            <span>Lengua Española</span>
+                            <div style="width: 8px; height: 8px; background-color: #f44236; border-radius: 50%; margin-left: auto;"></div>
+                        </header>
+                        <section>
+                            <span>5 Actividades Pendientes</span>
+                        </section>
+                    </article>
+                    <article class="item-actividades">
+                        <header>
+                            <span>Ciencias Sociales</span>
+                            <div style="width: 8px; height: 8px; background-color: #4cb050; border-radius: 50%; margin-left: auto;"></div>
+                        </header>
+                        <section>
+                            <span>2 Actividades Pendientes</span>
+                        </section>
+                    </article>
+                    <article class="item-actividades">
+                        <header>
+                            <span>Ciencias Naturales</span>
+                            <div style="width: 8px; height: 8px; background-color: #f44236; border-radius: 50%; margin-left: auto;"></div>
+                        </header>
+                        <section>
+                            <span>6 Actividades Pendientes</span>
+                        </section>
+                    </article>
+                    <article class="item-actividades">
+                        <header>
+                            <span>Matemáticas</span>
+                            <div style="width: 8px; height: 8px; background-color: #4cb050; border-radius: 50%; margin-left: auto;"></div>
+                        </header>
+                        <section>
+                            <span>1 Actividades Pendientes</span>
+                        </section>
+                    </article>
+                    <article class="item-actividades">
+                        <header>
+                            <span>Educación Física</span>
+                            <div style="width: 8px; height: 8px; background-color: #fea500; border-radius: 50%; margin-left: auto;"></div>
+                        </header>
+                        <section>
+                            <span>3 Actividades Pendientes</span>
+                        </section>
+                    </article>
+                    <article class="item-actividades">
+                        <header>
+                            <span>Inglés</span>
+                            <div style="width: 8px; height: 8px; background-color: #fea500; border-radius: 50%; margin-left: auto;"></div>
+                        </header>
+                        <section>
+                            <span>4 Actividades Pendientes</span>
+                        </section>
+                    </article>
+                </section>
+            </article>
+        </article>
+        <article id="contenedor2">
+            <!-- Calendario -->
+            
+            <div class="main-container">
+
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <div class="header-left">
+                            <h5 id="monthYear"></h5>
+                            <div id="calendar-m-fix">
+                                <button id="prevMonth">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="transform: scale(1.5);" width="90" height="90" fill="#2196F3" class="bi bi-arrow-left-circle-fill" viewBox="0 0 15 16">
+                                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                                    </svg>
+                                </button>
+                                <button id="nextMonth">
+                                    <svg xmlns="http://www.w3.org/2000/svg" style="transform: scale(1.5);" width="90" height="90" fill="#2196F3" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div class="header-right">
+                            <button data-btn="calendario" class="extraButton">+</button>
+                        </div>
+                    </div>
+        
+                    
+                    <div id="calendarView" class="calendar-grid"></div>
+                </div>
+                </div>
+
+            <!-- Horario -->
+            <div class="container">
+                <header>
+        <h5>📅 HORARIO DE CLASES</h5>
+            <button data-btn="horario" class="extraButton">+</button>
+        </header>
+        <label class="contenedor-cont fisica">
+            <span class="horario-hr">08:30 AM</span>
+            <span class="color-fnt">🥼 Ciencias de la Naturaleza: Física.</span>
+            <span class="materia-num"><input type="text" value="MT-101" readonly></span>
+        </label>
+
+        <label class="contenedor-cont sociales">
+            <span class="horario-hr">09:00 AM</span>
+            <span class="color-fnt">🌍 Ciencias Sociales.</span>
+            <span class="materia-num"><input type="text" value="MT-102" readonly></span>
+        </label>
+
+        <label class="contenedor-cont frances">
+            <span class="horario-hr">09:30 AM</span>
+            <span class="color-fnt">🥐 Lenguas Extranjeras: Francés.</span>
+            <span class="materia-num"><input type="text" value="MT-103" readonly></span>
+        </label>
+
+        <label class="contenedor-cont formacion">
+            <span class="horario-hr">11:30 AM</span>
+            <span class="color-fnt">⛪ Formación Integral, Humana y Religiosa.</span>
+            <span class="materia-num"><input type="none" value="MT-104" readonly></span>
+        </label>
+
+        <label class="contenedor-cont matematicas">
+            <span class="horario-hr">12:30 PM</span>
+            <span class="color-fnt">🧮 Matemáticas.</span> 
+            <span class="materia-num"><input type="text" value="MT-105 " readonly></span>
+        </label>
+
+        <label class="contenedor-cont español">
+            <span class="horario-hr">01:30 PM</span>
+            <span class="color-fnt">📖 Lengua Española.</span>
+            <span class="materia-num"><input type="text" value="MT-106 " readonly></span>
+        </label>
+
+        <label class="contenedor-cont deporte">
+            <span class="horario-hr">02:30 PM</span>
+            <span class="color-fnt">🤸 Educación Física.</span>
+            <span class="materia-num"><input type="text" value="MT-107 " readonly></span>
+        </label>
+    </div>
+        </article>
+        <article id="contenedor3">
+            <div class="dash-perms">
+                <div class="cont-perms">
+                <h5>🔐 ÚLTIMOS PERMISOS</h5>
+                <button data-btn="permisos" class="extraButton">+</button>
+            </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Niños</th>
+                            <th>Fecha desde</th>
+                            <th>Fecha hasta</th>
+                            <th>Estatus</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablePerms-body">
+                        <tr>
+                            <td>Visita médica</td>
+                            <td>1</td>
+                            <td>2023-10-18 08:00:00</td>
+                            <td>2023-10-18 17:00:00</td>
+                            <td><span class="status-perms pendiente">PENDIENTE</span></td>
+                            <td><button class="btn-perms editar">Editar solicitud</button></td>
+                        </tr>
+                        <tr>
+                            <td>Cita con el dentista</td>
+                            <td>1</td>
+                            <td>2024-02-10 10:00:00</td>
+                            <td>2024-02-10 12:00:00</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Viaje familiar</td>
+                            <td>3</td>
+                            <td>2024-06-15 06:00:00</td>
+                            <td>2024-06-20 18:00:00</td>
+                            <td><span class="status-perms no-aprobada">NO APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Olimpiada de matemáticas</td>
+                            <td>1</td>
+                            <td>2024-10-10 08:00:00</td>
+                            <td>2024-10-10 15:00:00</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Examen de certificación</td>
+                            <td>1</td>
+                            <td>2024-03-05 09:00:00</td>
+                            <td>2024-03-05 12:00:00</td>
+                            <td><span class="status-perms pendiente">PENDIENTE</span></td>
+                            <td><button class="btn-perms editar">Editar solicitud</button></td>
+                        </tr>
+                        <tr>
+                            <td>Vacaciones de verano</td>
+                            <td>5</td>
+                            <td>2024-07-01 00:00:00</td>
+                            <td>2024-07-10 23:59:59</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Cita con el oftalmólogo</td>
+                            <td>2</td>
+                            <td>2024-04-15 11:00:00</td>
+                            <td>2024-04-15 13:00:00</td>
+                            <td><span class="status-perms no-aprobada">NO APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Reunión con el cliente</td>
+                            <td>1</td>
+                            <td>2024-03-20 14:00:00</td>
+                            <td>2024-03-20 16:00:00</td>
+                            <td><span class="status-perms pendiente">PENDIENTE</span></td>
+                            <td><button class="btn-perms editar">Editar solicitud</button></td>
+                        </tr>
+                        <tr>
+                            <td>Conferencia de tecnología</td>
+                            <td>3</td>
+                            <td>2024-05-25 09:00:00</td>
+                            <td>2024-05-25 17:00:00</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Curso de actualización profesional</td>
+                            <td>1</td>
+                            <td>2024-08-10 08:00:00</td>
+                            <td>2024-08-10 14:00:00</td>
+                            <td><span class="status-perms no-aprobada">NO APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>                
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Calificaciones -->
+        <div class="container-califi">
+            <header>
+                <h5>📆CALIFICACIONES</h5>
+                <button data-btn="calificaciones" class="extraButton">+</button>
+            </header>
+            <table  class="table-hide-last-row">
+                <tr>
+                    <th>Materia</th>
+                    <th>Entregadas/Total</th>
+                    <th>% Entregado</th>
+                </tr>
+                <tr><td>Inglés</td><td>4/9</td><td><div class="progress-bar-container"><div class="progress-bar" style="width: 50%;"></div></div></td></tr>
+                <tr><td>Lengua Española</td><td>3/6</td><td><div class="progress-bar-container"><div class="progress-bar" style="width: 45%;"></div></div></td></tr>
+                <tr><td>Educación Física</td><td>2/6</td><td><div class="progress-bar-container"><div class="progress-bar" style="width: 33%;"></div></div></td></tr>
+                <tr><td>Matemáticas</td><td>1/4</td><td><div class="progress-bar-container"><div class="progress-bar" style="width: 17%;"></div></div></td></tr>
+            </table>
+        </div>
+
+
+         
+        </article>
+        <article id="contenedor4">
+            <div class="attendance-card">
+                <header class="filter-container">
+                    <h5>📒 ASISTENCIA</h5>
+                    <button class="extraButton" data-btn="asistencia">+</button>
+                </header>
+                <section class="asistencia-section">
+                    <select id="filtrar-mes" class="form-select w-auto">
+                        <option value="Enero">Enero 2025</option>
+                        <option value="Febrero">Febrero 2025</option>
+                        <option value="Marzo">Marzo 2025</option>
+                        <option value="Abril">Abril 2025</option>
+                        <option value="Mayo">Mayo 2025</option>
+                        <option value="Junio">Junio 2025</option>
+                        <option value="Julio">Julio 2025</option>
+                        <option value="Agosto">Agosto 2025</option>
+                        <option value="Septiembre">Septiembre 2025</option>
+                        <option value="Octubre">Octubre 2025</option>
+                        <option value="Noviembre">Noviembre 2025</option>
+                        <option value="Diciembre">Diciembre 2025</option>
+                    </select>
+
+                    <select id="seleccionar-estudiante" class="form-select">
+                    <option value="">Seleccionar estudiante</option>
+                    <option value="Niño 1">Niño 1</option>
+                    <option value="Niño 2">Niño 2</option>
+                    <option value="Niño 3">Niño 3</option>
+                    <option value="Niño 4">Niño 4</option>
+                </select>
+        
+                <div class="attendance-summary">
+                    <span class="badge present">Presente</span>
+                    <span class="badge excused">Excusa</span>
+                    <span class="badge absent">Ausente</span>
+                    <span class="badge tardy">Tardanza</span>
+                </div>
+                </section>
+
+        
+                <table id="tabla-asistencia">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Materia</th>
+                            <th colspan="5">Semana 1</th>
+                            <th colspan="5">Semana 2</th>
+                            <th colspan="5">Semana 3</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th>
+                            <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th>
+                            <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </main>
+    <!-- DEJAR ESTO AL FINAL DEL HTML -->
+    <article class="popup-background ">
+        <section id="popup-container">
+
+        </section>
+    </article>
+    <style>
+        /* CSS GENERAL NO TOCA */
+        body {
+            margin: 0;
+            display: flex;
+            background-color: #EDF5FC;
+            font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        main {
+            display: grid;
+            grid-template-rows: 125px 300px 600px 300px 400px;
+            width: 100vw;
+            height: 100%;
+            gap: 5px;
+        }
+
+        #contenedor1, #contenedor2, #contenedor3, #contenedor4 {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 35px;
+            width: 100%;
+        }
+
+
+
+        #contenedor1 {
+            align-items: flex-end;
+        }
+
+        #contenedor2 {
+            align-items: center;
+        }
+
+        #contenedor4 {
+            margin-top: 30px;
+        }
+
+        /* Header CSS */
+        .form-container {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 92%;
+            justify-self: center;
+            height: 89%;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px; 
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1; 
+        }
+
+        .form-container label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #272727;
+            margin-bottom: 5px;
+        }
+
+        .form-container input {
+            width: 90%;
+            padding: 0px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        .form-container select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+
+
+        .form-container input[type="date"] {
+            position: relative;
+            padding-right: 30px;
+        }
+
+        .form-container input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        /* CSS FACTURACION */
+
+        .container-facturacion {
+                    height: 250px;
+                    width: 35%;
+                    background-color: white;
+                    padding: 0px;
+                    border: 1px solid white;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }
+        
+                .container-facturacion header {
+                    height: 20%;
+                    background-color: #fcfcfc;
+                    padding: 5px;
+                    padding-left: 15px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    padding-top: 10px;
+                }
+        
+                .details {
+                    height: 50%;
+                    display: grid;
+                    grid-template-columns: repeat(8,1fr);
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    padding: 3px;
+                }
+        
+                .summary {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    height: 30%;
+                    margin-left: 16px;
+                    margin-right: 16px;
+                    gap: 4px;
+                }
+        
+                .summary-bar {
+                    width: 100%;
+                    padding: 0px;
+                    border-radius: 5px;
+                    height: 20px;
+                    background-color: #eeeeee;
+                    margin-top: 15px;
+                    position: relative;
+                }
+        
+                .summary-bar-percent {
+                    position: absolute;
+                    color: white;
+                    margin-left: 5px;
+                    font-size: 13px;
+                }
+        
+                .details-item {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-end;
+                    font-size: 13px;
+                }
+        
+                .detail-bar {
+                    width: 20px;
+                    border-radius: 2px;
+                }
+        
+                .good-bar {
+                    background-color: #4cb050;
+                }
+        
+                .medium-bar {
+                    background-color: #fea500;
+                }
+        
+                .bad-bar {
+                    background-color: #f44236;
+                }
+                .container-actividades {
+                    height: 250px;
+                    width: 55%;
+                    background-color: white;
+                    padding: 0px;
+                    border: 1px solid white;
+                    border-radius: 4px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                }
+        
+                .container-actividades header {
+                    height: 20%;
+                    background-color: #fcfcfc;
+                    padding: 5px;
+                    padding-left: 15px;
+                    font-size: 19.2px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    display: flex;
+                    gap: 20px;
+                }
+        
+                .summary-actividades {
+                    margin-top: 10px;
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    padding: 3px;
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-rows: repeat(2, 80px);
+                    gap: 5px;
+                }
+        
+                .item-actividades {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    height: 100%;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    width: 100%;
+                    border-radius: 5px;
+                    transition: 0.4s;
+
+                    &:hover {
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.322);
+                    }
+                }
+        
+                .item-actividades header {
+                    background-color: #fcfcfc;
+                    font-size: 14px;
+                    border-bottom: 1px solid #dddddd;
+                    width: 100%;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                }
+        
+                .item-actividades section {
+                    font-size: 14px;
+                    margin-top: 5%;
+                }
+
+
+                /* CSS CALENDARIO */
+                .main-container {
+                    width: 25%;
+                    display: flex;
+                    height: 90%;
+                }
+                
+                .calendar-container {
+                    background: white;
+                    padding: 35px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    width: 100%;
+                    text-align: center;
+                }
+                
+                .calendar-header {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                }
+                
+                .header-left {
+                    display: flex;
+                    gap: 30px;
+                }
+                
+                .header-right {
+                    display: flex;
+                    gap: 5px;
+                }
+                
+                .extraButton {
+                    background: #2196f3;
+                    color: white;
+                    border: none;
+                    padding: 8px;
+                    cursor: pointer;
+                    border-radius: 4px; 
+                    width: 25px;
+                    height: 25px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 16px;
+                }
+                
+                #prevMonth, #nextMonth  {
+                    background: #ffffff;
+                    border: none;
+                    padding: 8px;
+                    cursor: pointer;
+                    border-radius: 50%; 
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-left: 10px;
+                    transition: 0.3s;
+
+                    &:hover {
+                        transform: scale(1.09);
+                    }
+                }
+
+                #prevMonth {
+                    margin-right: -6px;
+                }
+
+                #nextMonth svg {
+                    rotate: 180deg;
+                }
+
+                .calendar-grid {
+                    margin: auto;
+                    display: grid;
+                    grid-template-columns: repeat(7, minmax(40px, 1fr)); 
+                    gap: 3px;
+                    justify-items: auto;
+                    width: 100%;
+                    height: 40%;
+                }
+                
+                .calendar-day {
+                    width: 100%;
+                    height: 55px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: end;
+                    background: #fafafa;
+                    border-radius: 10px;
+                    text-align: center;
+                    font-size: 14px;
+                    cursor: pointer;
+                    gap: 10%;
+                    transition: transform 0.3s, background-color 0.3s;
+
+
+                }
+                
+                .calendar-day.empty {
+                    background: none;
+                    border: none;
+                    visibility: hidden;
+                }
+
+                
+                .event {
+                    background: #ffcc00;
+                    color: #333;
+                    font-size: 10px;
+                    padding: 2px 5px;
+                    border-radius: 3px;
+                    margin-top: 2px;
+                    text-align: center;
+                    max-width: 90%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                
+                .day-name {
+                    font-size: 14px;
+                    font-weight: normal;
+                    color: #333;
+                    text-transform: uppercase;
+                    padding: 10px;
+                }
+
+                /* CSS HORARIO */
+                .container {
+                    background: white;
+                    padding: 18px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    text-align: left;
+                    width: 65%;
+                    height: 90%;
+                    margin: 0px;       
+                    font-size: 21px;      
+                    text-align: left;
+                    color: #000000;
+                    padding: auto;
+                    font-weight: normal;
+                }
+                .contenedor-cont {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 10px;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    transition: transform 0.3s, background-color 0.3s;
+                }
+                .contenedor-cont:hover {
+                    transform: scale(1.02);
+                }
+        
+                .fisica { background: #fafafa; }
+                .sociales { background: #fafafa; }
+                .frances { background: #fafafa; }
+                .formacion { background: #fafafa;}
+                .matematicas { background: #fafafa; }
+                .español { background: #fafafa; }
+                .deporte { background: #fafafa; }
+                .artistica { background: #fafafa; }
+
+                .materia-num {
+                    background: #24a4fc; 
+                    color: white;
+                    padding: 5px 15px;
+                    border-radius: 15px; 
+                    font-size: 13px;
+                    font-weight: normal;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 60px;
+                    text-align: center;
+                    cursor: default;
+                    pointer-events: none;
+                }
+             .materia-num input {
+                    background: transparent;
+                    border: none;
+                    color: white;
+                    font-size: 14px;
+                    font-weight: normal;
+                    text-align: center;
+                    width: 50px;
+                    outline: none;
+                    cursor: default;
+                    pointer-events: none;
+                }
+
+            .color-fnt {
+                    font-size: 14px;
+                    color:#7d828c;
+                    font-weight: normal;
+                    margin-right: auto;
+                }
+
+            .container header {
+                    display: flex;
+                    gap: 30px;
+                    align-items: start;
+                    padding: 8px;
+                    font-weight: 30px;
+
+        }
+
+        /* CSS CALIFICACIONES */
+
+        .container-califi {
+            width: 35%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            position: left;
+            padding: 23px;
+            margin-top: 0px;
+            height: 300px;
+        }
+
+        .container-califi header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .container-califi table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .container-califi th, .container-califi td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .container-califi th {
+            background-color: #fafafa;
+            color: #000000;
+        }
+        .container-califi .progress-bar-container {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            border-radius: 4px;
+        }
+        .container-califi .progress-bar {
+            height: 10px;
+            background-color: #2196f3;
+            transition: width 0.5s;
+            border-radius: 4px;
+        }
+
+        table tr:last-child td {
+            border-bottom: none;
+        }
+
+        h5 {
+            font-size: 18px;
+            color: black;
+            text-align: left;
+        }
+
+        /* CSS PERMISO */
+
+        .dash-perms {
+            width: 55%;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height: 300px;
+        }       
+            
+        .cont-perms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .dash-perms table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        .dash-perms th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .dash-perms th {
+            background-color: #fafafa;
+            color: #000000;
+            font-size: 13px;
+        }
+        
+        .dash-perms td {
+            font-size: 14px;
+        }
+        
+        .dash-perms th:nth-child(6),
+        .dash-perms td:nth-child(6) {
+            width: 1%;
+            white-space: nowrap;
+        }
+        
+        .dash-perms tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .dash-perms tbody tr:nth-child(n+4) {
+            display: none;
+        }
+        
+        .status-perms {
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            min-width: 85px;
+            height: 22px; 
+            border-radius: 3px;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        
+        .status-perms.aprobada {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .status-perms.no-aprobada {
+            background-color: #f44236;
+            color: white;
+        }
+        
+        .status-perms.pendiente {
+            background-color: #ffa800;
+            color: white;
+        }
+        
+        .btn-perms {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 130px;
+            height: 33px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-perms.revisada {
+            background-color: #00bcd4;
+            color: white;
+        }
+        
+        .btn-perms.editar {
+            background-color: #2196f3;
+            color: white;
+        }
+        
+        .btn-perms:hover {
+            opacity: 0.9;
+        }
+
+        .attendance-card {
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            background-color: white;
+            text-align: center;
+
+        }
+
+        .attendance-card h4 {
+            margin-bottom: 15px;
+        }
+
+        .attendance-summary {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            margin: 15px;
+        }
+
+        .present {
+            background-color: #4cb050;
+            color: white;
+            
+        }
+
+        .absent {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .excused {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .tardy {
+            background-color: #2196f3;
+            ;
+            color: white;
+        }
+
+        .attendance-card table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .attendance-card th, .attendance-card td {
+            border: 1px solid #ddd;
+            padding: 6px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .attendance-card th {
+            background-color: #f1f1f1;
+        }
+
+        #tabla-asistencia {
+            display: none;
+        }
+
+        .estado-presente {
+            background-color: #b6e7c9;
+            color: #155724;
+        }
+
+        .estado-ausente {
+            background-color: #f5c6cb;
+            color: #721c24;
+        }
+
+        .estado-excusa {
+            background-color: #ffeeba;
+            color: #856404;
+        }
+
+        .estado-tardanza {
+            background-color: #b3d7ff;
+            color: #004085;
+        }
+
+        .profesor-foto {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .attendance-card .dias-semana {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2px;
+        }
+
+        .attendance-card .dia {
+            border: 1px solid #ddd;
+            padding: 4px;
+        }
+
+        .attendance-card .filter-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .attendance-card h4{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .asistencia-modal {
+            width: 1000px;
+            margin-top: 300px;
+        }
+
+        .asistencia-modal th {
+            font-size: 16px;
+        }
+
+        .asistencia-modal td {
+            font-size: 12px;
+        }
+
+        
+        .extraButton {
+            background: #2196f3;
+            color: white;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            border-radius: 4px; 
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            align-self: center;
+            margin-left: auto;
+        }
+
+        h5 {
+            margin: 0px;
+            align-self: center;
+        }
+
+        th {
+            font-weight: 500;
+        }
+        
+        .asistencia-section {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        #seleccionar-estudiante {
+            height: 20px;
+        }
+
+        .horario-hr {
+            font-size: 16px;
+            background-color: #999494;
+            color: white;
+            padding: 5px;
+            border-radius: 4px;
+        }
+
+        .container-facturacion header, .container-actividades header {
+            padding-right: 20px;
+        }
+
+        #calendar-m-fix {
+            display: flex;
+        }
+        
+    </style>
+
+
+
+
+            </style>
+        
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+const monthYear = document.getElementById("monthYear");
+const calendarView = document.getElementById("calendarView");
+const prevMonthBtn = document.getElementById("prevMonth");
+const nextMonthBtn = document.getElementById("nextMonth");
+
+let currentDate = new Date();
+
+const events = {
+    "2025-02-21": ["Festividad"],
+    "2025-02-24": ["Aniversario"],
+    "2025-02-26": ["Natalicio"]
+};
+
+function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const firstWeekday = firstDay.getDay();
+    const totalDays = lastDay.getDate();
+
+    texto = firstDay.toLocaleString("es-ES", { month: "long", year: "numeric" })
+    .replace(/^\w/, (c) => c.toUpperCase());
+
+    monthYear.textContent = "🗓️ " + texto.toUpperCase();
+    
+    calendarView.innerHTML = ""; 
+
+    const daysOfWeek = ["DOM", "LUN", "MAR", "MIE", "JUE", "VIE", "SAB"];
+
+    daysOfWeek.forEach(day => {
+        const dayElement = document.createElement("div");
+        dayElement.classList.add("day-name");
+        dayElement.textContent = day;
+        calendarView.appendChild(dayElement);
+    });
+
+    for (let i = 0; i < firstWeekday; i++) {
+        const emptyDiv = document.createElement("div");
+        emptyDiv.classList.add("calendar-day", "empty");
+        calendarView.appendChild(emptyDiv);
+    }
+
+    for (let day = 1; day <= totalDays; day++) {
+        const dayElement = document.createElement("div");
+        dayElement.classList.add("calendar-day");
+        dayElement.textContent = day;
+
+        const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+        if (events[dateKey]) {
+            events[dateKey].forEach(event => {
+                const eventEl = document.createElement("div");
+                eventEl.classList.add("event");
+                eventEl.textContent = event;
+                dayElement.appendChild(eventEl);
+            });
+        }
+
+        calendarView.appendChild(dayElement);
+    }
+}
+
+prevMonthBtn.addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+});
+
+nextMonthBtn.addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+});
+
+renderCalendar();
+});
+
+const datosAsistencia = {
+            "Niño 1": generarAsistencia(),
+            "Niño 2": generarAsistencia(),
+            "Niño 3": generarAsistencia(),
+            "Niño 4": generarAsistencia()
+        };
+
+        const materias = [
+            { nombre: "Matemáticas", foto: "InterfazProblemas/educocoasis.html/los-objetivos-como-profesor-1.jpg" },
+            { nombre: "Ciencias", foto: "InterfazProblemas/educocoasis.html/los-objetivos-como-profesor-1.jpg" },
+            
+        ];
+
+        function generarAsistencia() {
+            const totalDias = 15;
+            const estados = ["Presente", "Ausente", "Excusa", "Tardanza"];
+            let asistencia = [];
+
+            for (let i = 0; i < totalDias; i++) {
+                const estado = estados[Math.floor(Math.random() * estados.length)];
+                asistencia.push(estado);
+            }
+
+            return asistencia;
+        }
+
+        function actualizarResumen(estudiante) {
+            if (!estudiante) {
+                document.getElementById('tabla-asistencia').style.display = 'none';
+                return;
+            }
+
+            const asistencia = datosAsistencia[estudiante];
+            actualizarTabla(asistencia);
+            document.getElementById('tabla-asistencia').style.display = 'table';
+        }
+
+        function actualizarTabla(asistencia) {
+            const tbody = document.getElementById('tabla-asistencia').querySelector('tbody');
+            tbody.innerHTML = '';
+
+            materias.forEach((materia) => {
+                const fila = document.createElement('tr');
+
+                const celdaFoto = document.createElement('td');
+                const img = document.createElement('img');
+                img.src = materia.foto;
+                img.alt = "Foto Profesor";
+                img.classList.add('profesor-foto');
+                celdaFoto.appendChild(img);
+                fila.appendChild(celdaFoto);
+
+                const celdaMateria = document.createElement('td');
+                celdaMateria.innerText = materia.nombre;
+                fila.appendChild(celdaMateria);
+
+                for (let i = 0; i < 15; i++) {
+                    const celdaDia = document.createElement('td');
+                    const estado = asistencia[i] || '-';
+                    celdaDia.innerText = estado.charAt(0);
+
+                    if (estado === "Presente") celdaDia.classList.add('estado-presente');
+                    if (estado === "Ausente") celdaDia.classList.add('estado-ausente');
+                    if (estado === "Excusa") celdaDia.classList.add('estado-excusa');
+                    if (estado === "Tardanza") celdaDia.classList.add('estado-tardanza');
+
+                    fila.appendChild(celdaDia);
+                }
+
+                tbody.appendChild(fila);
+            });
+        }
+
+        document.getElementById('seleccionar-estudiante').addEventListener('change', function () {
+            actualizarResumen(this.value);
+        });
+
+        document.getElementById('filtrar-mes').addEventListener('change', function () {
+            console.log('Filtrando por mes:', this.value);
+
+            });
+
+</script>
+
+<style>
+.popup-background {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.479);
+    display: none;
+    z-index: 1;
+    overflow-y:scroll ;
+}
+
+.popup-bg-opened {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#popup-container {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.027);
+}
+</style>
+<script>
+    const DETAILSBUTTONS = document.querySelectorAll('.extraButton');
+const POPUPBACKGROUND = document.querySelector('.popup-background');
+const POPUPCONTAINER = document.getElementById('popup-container');
+
+const getContainerText = (btnType) => {
+    if(btnType === 'facturacion') {
+        containerHtml = `
+
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="height: 50px;">
+                            <h3 class="panel-title">
+                                <span class="">Escolaridad</span> &nbsp;
+                
+                                <div class="pull-right">
+                                                                <select class="form-control" id="anio_factura">
+                                        
+                                        <option value="1" id_factura="">
+                                            2020-2021 ($0.00)</option>
+                
+                                        
+                                        <option value="2" id_factura="">
+                                            2021-2022 ($0.00)</option>
+                
+                                        
+                                        <option value="4" id_factura="">
+                                            2022-2023 ($0.00)</option>
+                
+                                        
+                                        <option value="5" id_factura="9" selected="">
+                                            2023-2024 ($0.00)</option>
+                
+                                                                    </select>
+                                </div>
+                            </h3>
+                        </div>
+                        <!-- panel-body -->
+                        <div class="panel-body" style="padding: 5px; min-height: 70px;" id="tabla_add_estu_3">
+                <div class="row" >
+                
+                <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-12" style="margin-top: 10px;">
+                        <h5 style="margin-left: 10px;" class="pull-left bold text-muted">DETALLES DE LAS CUOTAS</h5>
+                        <div class="text-right">
+                            <div class="btn-group pull-right" style="margin-right: 7px;">
+                                <button type="button" onclick="printPage('modulos/administracion/facturacion/imprimir_estado_de_cuestas.php?id_estu=184&amp;id_factura=9')" class="btn btn-danger btn-xs" style="margin-right: 5px;" data-uw-rm-kbnav="click">
+                                    <i class="fa fa-money"></i> ESTADO DE CUENTAS
+                                </button>
+                
+                                <button type="button" onclick="pagarCuotas('9')" class="btn btn-success btn-xs" style="margin-right: 5px;" data-uw-rm-kbnav="click">
+                                    <i class="fa fa-money"></i> PAGAR CUOTAS
+                                </button>
+                                <button type="button" onclick="notaCreditoCuota('9')" class="btn btn-warning btn-xs" data-uw-rm-kbnav="click">
+                                    <i class="fa fa-money"></i> NOTA DE CRÉDITO CUOTAS
+                                </button>
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
+                
+                <table class="table table-striped table-responsive2" style="width: 90%; justify-self: center;">
+                    <thead>
+                        <tr>
+                            <th class="bold">Cuotas</th>
+                            <th class="bold">Fecha</th>
+                            <th class="bold text-right">Monto</th>
+                            <th class="bold text-right">Mora</th>
+                            <th class="bold text-right">Descuento</th>
+                            <th class="bold text-right">Monto Total</th>
+                            <th class="bold text-success text-right">Pago</th>
+                
+                        </tr>
+                    </thead>
+                    <tbody>
+                </tr><tr>
+                    <td>
+                        <button onclick="verDetalleCuota(109)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">#1</button>
+                    </td>
+                    <td title="07-02-2024">Miercoles 7 de Febrero del 2024</td>
+                    <td class="text-right">$7,000.00</td>
+                    <td class="text-right">$0.00
+                        <br>
+                        <small></small>
+                    </td>
+                    <td class="text-right">$0.00</td>
+                    <td class="text-right">$7,000.00</td>
+                    <td class="text-right">
+                        <button onclick="pagarCuotas(9)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">$7,000.00</button> 
+                    </td>
+                
+                
+                </tr>            
+                    <tr  id="pago-medio">
+                    <td>
+                        <button onclick="verDetalleCuota(101)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">#2</button>
+                    </td>
+                    <td title="16-10-2023">Pago Medio test</td>
+                    <td class="text-right">$7,000.00</td>
+                    <td class="text-right">$0.00
+                        <br>
+                        <small></small>
+                    </td>
+                    <td class="text-right">$0.00</td>
+                    <td class="text-right">$7,000.00</td>
+                    <td class="text-right">
+                        <button onclick="pagarCuotas(9)" 
+                    class="btn btn-xs btn-success" 
+                    style="padding: 5px; letter-spacing: 0.5px; font-weight: bold; 
+                           background: linear-gradient(to right, #ffe96b 50%, white 50%);
+                           color: black; border: none;"
+                    type="button" data-uw-rm-kbnav="click">
+                    $3,500.00
+                </button>
+                    </td>
+                
+                    </tr>
+                    <tr  id="pago-nulo">
+                        <td>
+                            <button onclick="verDetalleCuota(101)" class="btn btn-xs btn-success" style="padding: 5px;letter-spacing: 0.5px;font-weight: bold;" type="button" data-uw-rm-kbnav="click">#3</button>
+                        </td>
+                        <td title="16-10-2023">Pago Nulo test</td>
+                        <td class="text-right">$7,000.00</td>
+                        <td class="text-right">$0.00
+                            <br>
+                            <small></small>
+                        </td>
+                        <td class="text-right">$0.00</td>
+                        <td class="text-right">$7,000.00</td>
+                        <td class="text-right">
+                            <button onclick="pagarCuotas(9)" 
+                        class="btn btn-xs btn-success" 
+                        style="padding: 5px; letter-spacing: 0.5px; font-weight: bold; 
+                               background: rgba(163, 17, 17, 0.7);
+                               color: rgb(255, 255, 255); border: none;"
+                        type="button" data-uw-rm-kbnav="click">
+                        $3,500.00
+                    </button>
+                        </td>
+                
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            
+                            <td class="bold" colspan="2"></td>
+                
+                            <td class="bold text-right">$70,000.00</td>
+                            <td class="bold text-right">$0.00</td>
+                            <td class="bold text-right">$0.00</td>
+                            <td class="bold text-success text-right"><span class="text-success">+$80,000.00</span></td>
+                
+                            <td class="bold text-right" style="padding:0;">
+                                <div style="display: flex;align-items: center;justify-content: flex-end;">
+                                    <div style="position: absolute;padding: 10px;">
+                                        1/3</div>
+                                    <div style="width: 100%;height: 40px;background:rgba(255, 233, 107, 0.68);position: initial;">
+                                    </div>
+                                    <div style="width: 0%;height: 40px;background: #fbc0c0;position: initial;
+                            "></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                <style>
+
+                    tbody tr {
+                        transition: 0.1s;
+                
+                        &:hover {
+                            transform: scale(1.0066);
+                            box-shadow: 2px 2px 2px #46b446;
+                        }
+                    }
+                    
+                </style>
+        `
+    } else if(btnType === 'actividades') {
+        containerHtml = `
+        
+                            <article class="container-actividades2">
+                    <header>ACTIVIDADES PENDIENTES</header>
+                    <section>
+                        <article class="item-actividades2">
+                            <header>
+                                <b>Matemáticas</b>
+                                <div style="width: 13px; height: 13px; background-color: #f44236; border-radius: 50%; margin-left: auto;"></div>
+                            </header>
+                            <section class="item-details hidden" >
+                                <table class="tabla-actividades table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                            <th>
+                                                Descripción
+                                            </th>
+                                            <th>
+                                                Fecha de Entrega
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #f44236; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Ecuaciones Diferenciales</td>
+                                            <td>Resuelve 5 Ecuaciones Diferenciales con lo enseñado en el aula</td>
+                                            <td>Mañana</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #fea500; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Ecuaciones de Conversión</td>
+                                            <td>Resuelve 5 Ecuaciones de Conversión con lo enseñado en el aula</td>
+                                            <td>Viernes</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #4cb050; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Ecuaciones </td>
+                                            <td>Resuelve 5 Ecuaciones de Diferentes Tipos</td>
+                                            <td>12/05/2025</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </article>
+                        <article class="item-actividades2">
+                            <header>
+                                <b>Lengua Española</b>
+                                <div style="width: 13px; height: 13px; background-color: #4cb050; border-radius: 50%; margin-left: auto;"></div>
+                            </header>
+                            <section class="item-details hidden">
+                                <table class="tabla-actividades table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                            </th>
+                                            <th>
+                                                Nombre
+                                            </th>
+                                            <th>
+                                                Descripción
+                                            </th>
+                                            <th>
+                                                Fecha de Entrega
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #4cb050; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Resumen de Libro</td>
+                                            <td>Deben hacer un Resumen de Don Quijote con los elementos explicados en la clase</td>
+                                            <td>05/04/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #4cb050; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Ensayo</td>
+                                            <td>Deben realizar un ensayo sobre la vida Marina con todos sus elementos</td>
+                                            <td>07/04/2025</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </article>
+                        <article class="item-actividades2">
+                            <header>
+                                <b>Ciencias Sociales</b>
+                                <div style="width: 13px; height: 13px; background-color: #f44236; border-radius: 50%; margin-left: auto;"></div>
+                            </header>
+                            <section class="item-details hidden">
+                                <table class="tabla-actividades table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Nombre</th>
+                                            <th>Descripción</th>
+                                            <th>Fecha de Entrega</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #f44236; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Línea del Tiempo</td>
+                                            <td>Realizar una línea del tiempo sobre los principales eventos de la Revolución Francesa.</td>
+                                            <td>Pasado Mañana</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #fea500; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Mapa Conceptual</td>
+                                            <td>Elaborar un mapa conceptual sobre la independencia de América Latina.</td>
+                                            <td>09/03/2025</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </article>
+                        <article class="item-actividades2">
+                            <header>
+                                <b>Ciencias Naturales</b>
+                                <div style="width: 13px; height: 13px; background-color: #ff9800; border-radius: 50%; margin-left: auto;"></div>
+                            </header>
+                            <section class="item-details hidden"    >
+                                <table class="tabla-actividades table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Nombre</th>
+                                            <th>Descripción</th>
+                                            <th>Fecha de Entrega</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #ff9800; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Reporte de Experimento</td>
+                                            <td>Realizar un reporte sobre la reacción química entre vinagre y bicarbonato de sodio.</td>
+                                            <td>Sábado</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #ff9800; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Infografía</td>
+                                            <td>Crear una infografía sobre el ciclo del agua y su importancia en el ecosistema.</td>
+                                            <td>11/03/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #ff9800; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Ensayo</td>
+                                            <td>Escribir un ensayo sobre los efectos del cambio climático en la biodiversidad.</td>
+                                            <td>13/03/2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div style="width: 11px; height: 11px; background-color: #4cb050; border-radius: 50%; margin: auto; margin-top: 5px;"></div></td>
+                                            <td>Proyecto Final</td>
+                                            <td>Elaborar un modelo tridimensional del sistema solar con materiales reciclados.</td>
+                                            <td>18/04/2025</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </section>
+                        </article>
+            
+                    </section>
+                </article>
+            
+                <style>
+                    .container-actividades2 {
+                        width: 80vw;
+                        background-color: white;
+                        padding: 0px;
+                        padding-bottom: 10px;
+                        border: 1px solid #dddddd;
+                        border-radius: 4px;
+                        margin-top: 5px;
+                        overflow: hidden;
+                    }
+            
+                    .container-actividades2 header {
+                        height: 20%;
+                        background-color: #fcfcfc;
+                        padding: 5px;
+                        padding-left: 15px;
+                        font-size: 14px;
+                    }
+            
+                    .container-actividades2 section {
+                        display: flex;
+                        flex-direction: column;
+                        margin-top: 7px;
+                        margin-left: 15px;
+                        margin-right: 15px;
+                        padding: 3px;
+            
+                        gap: 5px;
+                    }
+            
+                    .item-actividades2 {
+                        border: 1px solid #dddddd;
+                        padding: 5px;
+                        border-radius: 5px;
+                    }
+            
+                    .item-actividades2 header {
+                        background-color: white;
+                        display: flex;
+                        align-items: center;
+                        transition: 0.3s;
+            
+                        &:hover {
+                            background-color: #f8f7f7;
+                        }
+                    }
+            
+                    .item-seleccionado header {
+                        background-color: #fcfcfc;
+                    }
+            
+                    .tabla-actividades th {
+                        font-size: 14px;
+                        font-weight: 700;
+                    }
+            
+                    .tabla-actividades td {
+                        font-size: 13px;
+                    }
+
+                    .hidden {
+                        visibility: hidden;
+                    }
+                    
+                    .item-datails {
+                        visibility: visible;
+                    }
+            
+                </style>
+                
+        `;
+    } else if(btnType === 'calendario') {
+        containerHtml = `
+        
+                            <div class="agenda-container">
+                    <div class="agenda-header">
+                        <h2>Agenda de Eventos</h2>
+                        <button id="addEventButton">+</button>
+                    </div>
+            
+                    <div class="agenda-list">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Día</th>
+                                    <th>Duración</th>
+                                    <th>Evento</th>
+                                    <th>Lugar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eventTable">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <style>
+
+                    .agenda-container {
+                        background: #ffffff; 
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        width: 90%;
+                        max-width: 800px;
+                        border: 1px solid #ddd; 
+                        width: 80vw;
+                    }
+                    
+                    .agenda-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 15px;
+                    }
+                    
+                    .agenda-header h2 {
+                        margin: 0;
+                        font-size: 20px;
+                    }
+                    
+                    #addEventButton {
+                        background: #2196f3;
+                        color: white;
+                        border: none;
+                        padding: 10px;
+                        cursor: pointer;
+                        border-radius: 4px; 
+                        font-size: 18px;
+                        width: 40px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                    
+                    .agenda-list {
+                        width: 100%;
+                        overflow-x: auto;
+                    }
+                    
+                    .agenda-container table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        background: white;
+                        border: 1px solid #ddd; 
+                    }
+                    
+                    .agenda-container th, .agenda-container td {
+                        padding: 12px;
+                        text-align: left;
+                        border-bottom: 1px solid #ddd;
+                        white-space: nowrap; 
+                    }
+                    
+                    .agenda-container th {
+                        background: #f8f8f8;
+                        font-weight: bold;
+                        color: black;
+                    }
+                    
+                    .agenda-container tr:nth-child(even) {
+                        background: #f9f9f9; 
+                    }
+                    
+                    .agenda-container tr:hover {
+                        background: #e0e0e0; 
+                    }
+                    
+                    .event-row {
+                        color: black;
+                    }
+                    .agenda-container h2 {
+                        text-align: center;
+                        font-size: 18px;
+                        margin-bottom: 10px;
+                        font-weight: normal;
+                    }
+                    
+                    .agenda-list {
+                        width: 100%;
+                        overflow-x: auto;
+                    }
+                    
+                    </style>
+        `;
+    } else if(btnType === 'horario') {
+        containerHtml = `
+        
+                        <div class="horario2-container">
+                    <div class="horario2-header">
+                        <h2>📅 Horario de Clases</h2>
+                        <div class="filtro-container">
+                            <label for="estudiante">Seleccionar estudiante:</label>
+                            <select id="estudiante" onchange="cambiarHorario()">
+                                <option value="estudiante1">Juan Pérez</option>
+                                <option value="estudiante2">María González</option>
+                                <option value="estudiante3">Carlos Rodríguez</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hora</th>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miércoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="horario-body">
+                            <!-- Aquí se llenará el horario con JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <style>
+                .horario2-container {
+                    background: white;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    width: 80vw;
+                    overflow: hidden;
+                    position: relative;
+                }
+        
+                .horario2-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+        
+                .horario2-container h2 {
+                    color: #000000;
+                    font-weight: normal;
+                    margin-bottom: 10px;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+        
+                .horario2-container table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    margin-top: 10px;
+                }
+        
+                .horario2-container th, .horario2-container td {
+                    padding: 12px;
+                    text-align: center;
+                    border-bottom: 1px solid #ddd;
+                }
+        
+                .horario2-container th {
+                    background-color: #24a4fc;
+                    color: white;
+                    font-weight: bold;
+                }
+        
+                .horario2-container tr:nth-child(even) {
+                    background-color: #eeeeee;
+                }
+        
+                .horario2-container tr:hover {
+                    background-color: #dbeafe;
+                    transition: 0.3s;
+                }
+        
+                .horario2-container .hora {
+                    font-weight: bold;
+                    color: #333;
+                }
+        
+                .horario2-container .asignatura {
+                    font-size: 14px;
+                    font-weight: normal;
+                    background-color: #fff;
+                    border-radius: 5px;
+                    padding: 5px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
+        
+                /* Botón de filtro */
+                .horario2-container .filtro-container {
+                    display: flex;
+                    align-items: center;
+                }
+        
+                .horario2-container select {
+                    padding: 6px;
+                    font-size: 14px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+            </style>
+        
+        `
+    } else if(btnType === 'permisos') {
+        containerHtml = `
+        
+                    
+                <div class="modalPerms-content">
+                    <span class="close-modalPerms">×</span>
+                    <h2>Todos los Permisos</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Niños</th>
+                                <th>Fecha desde</th>
+                                <th>Fecha hasta</th>
+                                <th>Estatus</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalPerms-table-body">
+                        <tr>
+                            <td>Visita médica</td>
+                            <td>1</td>
+                            <td>2023-10-18 08:00:00</td>
+                            <td>2023-10-18 17:00:00</td>
+                            <td><span class="status-perms pendiente">PENDIENTE</span></td>
+                            <td><button class="btn-perms editar">Editar solicitud</button></td>
+                        </tr>
+                        <tr>
+                            <td>Cita con el dentista</td>
+                            <td>1</td>
+                            <td>2024-02-10 10:00:00</td>
+                            <td>2024-02-10 12:00:00</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Viaje familiar</td>
+                            <td>3</td>
+                            <td>2024-06-15 06:00:00</td>
+                            <td>2024-06-20 18:00:00</td>
+                            <td><span class="status-perms no-aprobada">NO APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Olimpiada de matemáticas</td>
+                            <td>1</td>
+                            <td>2024-10-10 08:00:00</td>
+                            <td>2024-10-10 15:00:00</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Examen de certificación</td>
+                            <td>1</td>
+                            <td>2024-03-05 09:00:00</td>
+                            <td>2024-03-05 12:00:00</td>
+                            <td><span class="status-perms pendiente">PENDIENTE</span></td>
+                            <td><button class="btn-perms editar">Editar solicitud</button></td>
+                        </tr>
+                        <tr>
+                            <td>Vacaciones de verano</td>
+                            <td>5</td>
+                            <td>2024-07-01 00:00:00</td>
+                            <td>2024-07-10 23:59:59</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Cita con el oftalmólogo</td>
+                            <td>2</td>
+                            <td>2024-04-15 11:00:00</td>
+                            <td>2024-04-15 13:00:00</td>
+                            <td><span class="status-perms no-aprobada">NO APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Reunión con el cliente</td>
+                            <td>1</td>
+                            <td>2024-03-20 14:00:00</td>
+                            <td>2024-03-20 16:00:00</td>
+                            <td><span class="status-perms pendiente">PENDIENTE</span></td>
+                            <td><button class="btn-perms editar">Editar solicitud</button></td>
+                        </tr>
+                        <tr>
+                            <td>Conferencia de tecnología</td>
+                            <td>3</td>
+                            <td>2024-05-25 09:00:00</td>
+                            <td>2024-05-25 17:00:00</td>
+                            <td><span class="status-perms aprobada">APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>
+                        <tr>
+                            <td>Curso de actualización profesional</td>
+                            <td>1</td>
+                            <td>2024-08-10 08:00:00</td>
+                            <td>2024-08-10 14:00:00</td>
+                            <td><span class="status-perms no-aprobada">NO APROBADA</span></td>
+                            <td><button class="btn-perms revisada">Solicitud revisada</button></td>
+                        </tr>                
+                    </tbody>
+                    </table>
+                </div>
+
+            
+            <style>
+        
+        .modalPerms-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80vw;
+            max-height: 87vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modalPerms-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .modalPerms-content h2 {
+            text-align: left;
+            color: #343a40;
+        }
+        
+        .modalPerms-content th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .modalPerms-content th {
+            background-color: #fafafa;
+            color: #000000;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+        
+        .modalPerms-content td {
+            font-size: 14px;
+        }
+        
+        .modalPerms-content th:nth-child(6),
+        .modalPerms-content td:nth-child(6) {
+            width: 1%;
+            white-space: nowrap;
+        }
+        
+        .modalPerms-content tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .close-modalPerms {
+            float: right;
+            font-size: 22px;
+            cursor: pointer;
+        }
+            </style>
+        
+        `
+    } else if (btnType === 'calificaciones') {
+        containerHtml = `
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+                <section class="calificaciones-container">
+        <h2>Registro de Actividades</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Profesor</th>
+                    <th>%</th>
+                    <th>1</th>
+                    <th>2</th>
+                    <th>3</th>
+                    <th>4</th>
+                    <th>5</th>
+                    <th>6</th>
+                    <th>7</th>
+                    <th>8</th>
+                    <th>9</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>LENGUAS EXTRANJERAS: INGLÉS</td>
+                    <td>Gumercinda Perez 12</td>
+                    <td>3/9</td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>3/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>4/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                    
+                </tr>
+                <tr>
+                    <td>LENGUA ESPAÑOLA</td>
+                    <td>Gumercinda Perez 140</td>
+                    <td>3/6</td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                     <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>EDUCACIÓN FÍSICA</td>
+                    <td>Carlos Garcia 7</td>
+                    <td>5/6</td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>3/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>4/5</span>
+                        </div>
+                    </td>
+                   <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                   <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                   <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>4/5</span>
+                        </div>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>MATEMATICAS</td>
+                    <td>Gumercinda Perez 254</td>
+                    <td>5/6</td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>3/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status not-entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-times-circle"></i>
+                            <span>0/5</span>
+                        </div>
+                    </td>
+                    <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>4/5</span>
+                        </div>
+                    </td>
+                   <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                   <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>5/5</span>
+                        </div>
+                    </td>
+                   <td class="status entregado">
+                        <div class="icon-container">
+                            <i class="fas fa-check-circle"></i>
+                            <span>4/5</span>
+                        </div>
+                    </td>
+                </tr>
+                
+    
+            </tbody>
+        </table>  
+    </section>
+
+    <style>
+                .calificaciones-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .calificaciones-container table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .calificaciones-container th, .calificaciones-container td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #e4e4e4;
+        }
+        .calificaciones-container th {
+            background-color: #fafafa;
+            color: #000000;
+        }
+        .calificaciones-container tr:nth-child(even) {
+            background-color: #fefefe;
+        }
+        .status {
+            cursor: pointer;
+        }
+        .not-entregado {
+            color: #000000;
+        }
+        .entregado {
+            color: #000000;
+        }
+        .calificaciones-container td {
+            font-size: 14px;
+        }
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+        .icon-container i {
+            font-size: 20px;
+            padding: 5px;
+        }
+        .not-entregado i {
+            color: #f44236;
+        }
+        .entregado i {
+            color: #4cb04f;
+        }
+        .icon-container span {
+            font-size: 11px;
+        }
+
+        .calificaciones-container h2 {
+            color: #000000;
+            font-weight: normal;
+        }
+    </style>
+
+        `
+    } else if (btnType === 'asistencia') {
+        containerHtml = `
+<div class="asistencia-modal attendance-card">
+    <div>
+        <div>
+            <div>
+                <h5>Asistencia</h5>
+            </div>
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Tipo de asistencia</th>
+                            <th>Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Sábado</td><td class="estado-presente">Presente</td><td>01/03/2025</td></tr>
+                        <tr><td>Domingo</td><td class="estado-ausente">Ausente</td><td>02/03/2025</td></tr>
+                        <tr><td>Lunes</td><td class="estado-tardanza">Tardanza</td><td>03/03/2025</td></tr>
+                        <tr><td>Martes</td><td class="estado-presente">Presente</td><td>04/03/2025</td></tr>
+                        <tr><td>Miércoles</td><td class="estado-ausente">Ausente</td><td>05/03/2025</td></tr>
+                        <tr><td>Jueves</td><td class="estado-presente">Presente</td><td>06/03/2025</td></tr>
+                        <tr><td>Viernes</td><td class="estado-tardanza">Tardanza</td><td>07/03/2025</td></tr>
+                        <tr><td>Sábado</td><td class="estado-presente">Presente</td><td>08/03/2025</td></tr>
+                        <tr><td>Domingo</td><td class="estado-ausente">Ausente</td><td>09/03/2025</td></tr>
+                        <tr><td>Lunes</td><td class="estado-presente">Presente</td><td>10/03/2025</td></tr>
+                        <tr><td>Martes</td><td class="estado-tardanza">Tardanza</td><td>11/03/2025</td></tr>
+                        <tr><td>Miércoles</td><td class="estado-presente">Presente</td><td>12/03/2025</td></tr>
+                        <tr><td>Jueves</td><td class="estado-ausente">Ausente</td><td>13/03/2025</td></tr>
+                        <tr><td>Viernes</td><td class="estado-presente">Presente</td><td>14/03/2025</td></tr>
+                        <tr><td>Sábado</td><td class="estado-tardanza">Tardanza</td><td>15/03/2025</td></tr>
+                        <tr><td>Domingo</td><td class="estado-ausente">Ausente</td><td>16/03/2025</td></tr>
+                        <tr><td>Lunes</td><td class="estado-presente">Presente</td><td>17/03/2025</td></tr>
+                        <tr><td>Martes</td><td class="estado-tardanza">Tardanza</td><td>18/03/2025</td></tr>
+                        <tr><td>Miércoles</td><td class="estado-presente">Presente</td><td>19/03/2025</td></tr>
+                        <tr><td>Jueves</td><td class="estado-ausente">Ausente</td><td>20/03/2025</td></tr>
+                        <tr><td>Viernes</td><td class="estado-presente">Presente</td><td>21/03/2025</td></tr>
+                        <tr><td>Sábado</td><td class="estado-tardanza">Tardanza</td><td>22/03/2025</td></tr>
+                        <tr><td>Domingo</td><td class="estado-ausente">Ausente</td><td>23/03/2025</td></tr>
+                        <tr><td>Lunes</td><td class="estado-presente">Presente</td><td>24/03/2025</td></tr>
+                        <tr><td>Martes</td><td class="estado-tardanza">Tardanza</td><td>25/03/2025</td></tr>
+                        <tr><td>Miércoles</td><td class="estado-presente">Presente</td><td>26/03/2025</td></tr>
+                        <tr><td>Jueves</td><td class="estado-ausente">Ausente</td><td>27/03/2025</td></tr>
+                        <tr><td>Viernes</td><td class="estado-presente">Presente</td><td>28/03/2025</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        
+        `
+    }
+    else containerHtml = 'Ningun modulo ha sido seleccionado';
+
+    return containerHtml;
+}
+
+
+DETAILSBUTTONS.forEach((detailButton) => {
+
+    detailButton.addEventListener('click', ()=> {
+        POPUPBACKGROUND.classList.add('popup-bg-opened');
+        const btnType = detailButton.getAttribute('data-btn');
+        
+        POPUPCONTAINER.innerHTML = getContainerText(btnType);
+
+        if(btnType === 'actividades'){
+            const items = document.querySelectorAll('.item-actividades2');
+            items.forEach(item => {
+                item.addEventListener('click', () => {
+                    const itemDetails = item.querySelector('.item-details');
+                    const isHidden = itemDetails.classList.contains('hidden');
+                    if(isHidden) {
+                        itemDetails.classList.remove('hidden');
+                    } else {
+                        itemDetails.classList.add('hidden')
+                    }
+                })
+            });
+        } else if(btnType === 'calendario') {
+                        const eventTable = document.getElementById("eventTable");
+            const addEventButton = document.getElementById("addEventButton");
+
+            if (!eventTable || !addEventButton) return; // Evitar errores si los elementos no existen
+
+            let events = [
+                { date: "17-04-2025", day: "Jueves", duration: "Todo el día", name: "Jueves Santo", place: "Iglesia Central" },
+                { date: "18-04-2025", day: "Viernes", duration: "Todo el día", name: "Viernes Santo", place: "Catedral" },
+                { date: "01-05-2025", day: "Jueves", duration: "Todo el día", name: "Día del Trabajo", place: "Ministerio de Trabajo" },
+                { date: "05-05-2025", day: "Lunes", duration: "Todo el día", name: "Día del Trabajo", place: "Oficinas del Gobierno" },
+                { date: "25-05-2025", day: "Domingo", duration: "Todo el día", name: "Día de la Madre", place: "Casa Familiar" }
+            ];
+
+            function renderEvents() {
+                eventTable.innerHTML = "";
+                events.forEach(event => {
+                    const row = document.createElement("tr");
+                    row.classList.add("event-row");
+
+                    row.innerHTML = `
+                        <td>${event.date}</td>
+                        <td>${event.day}</td>
+                        <td>${event.duration}</td>
+                        <td>${event.name}</td>
+                        <td>${event.place}</td>
+                    `;
+
+                    eventTable.appendChild(row);
+                });
+            }
+
+            addEventButton.addEventListener("click", () => {
+                const date = prompt("Ingrese la fecha (DD-MM-YYYY):");
+                if (!date) return;
+
+                const day = prompt("Ingrese el día (Ej: Lunes):");
+                if (!day) return;
+
+                const duration = prompt("Ingrese la duración (Ej: Todo el día o 3:00 PM - 5:00 PM):");
+                if (!duration) return;
+
+                const name = prompt("Ingrese el nombre del evento:");
+                if (!name) return;
+
+                const place = prompt("Ingrese el lugar del evento:");
+                if (!place) return;
+
+                events.push({ date, day, duration, name, place });
+                renderEvents();
+            });
+
+            renderEvents();
+        } else if(btnType === 'horario') {
+            const horarios = {
+                estudiante1: [
+                    ["8:00 - 9:00 AM", "Matemáticas", "Ciencias", "Lengua Española", "Historia", "Educación Física"],
+                    ["9:00 - 10:00 AM", "Inglés", "Matemáticas", "Arte", "Lengua Española", "Ciencias"],
+                    ["10:00 - 11:00 AM", "Historia", "Inglés", "Matemáticas", "Ciencias", "Lengua Española"],
+                    ["11:00 - 12:00 PM", "Educación Física", "Historia", "Inglés", "Matemáticas", "Arte"]
+                ],
+                estudiante2: [
+                    ["8:00 - 9:00 AM", "Física", "Matemáticas", "Historia", "Arte", "Ciencias"],
+                    ["9:00 - 10:00 AM", "Química", "Inglés", "Educación Física", "Historia", "Matemáticas"],
+                    ["10:00 - 11:00 AM", "Biología", "Lengua Española", "Arte", "Matemáticas", "Historia"],
+                    ["11:00 - 12:00 PM", "Ciencias", "Educación Física", "Inglés", "Física", "Arte"]
+                ],
+                estudiante3: [
+                    ["8:00 - 9:00 AM", "Historia", "Ciencias", "Inglés", "Matemáticas", "Arte"],
+                    ["9:00 - 10:00 AM", "Matemáticas", "Historia", "Educación Física", "Lengua Española", "Química"],
+                    ["10:00 - 11:00 AM", "Lengua Española", "Arte", "Física", "Ciencias", "Historia"],
+                    ["11:00 - 12:00 PM", "Educación Física", "Matemáticas", "Inglés", "Arte", "Ciencias"]
+                ]
+            };
+        
+            
+                const estudiante = document.getElementById("estudiante").value;
+                const horarioBody = document.getElementById("horario-body");
+        
+                horarioBody.innerHTML = "";
+        
+                horarios[estudiante].forEach(fila => {
+                    const tr = document.createElement("tr");
+                    fila.forEach(celda => {
+                        const td = document.createElement("td");
+                        td.textContent = celda;
+                        if (fila.indexOf(celda) === 0) td.classList.add("hora");
+                        else td.classList.add("asignatura");
+                        tr.appendChild(td);
+                    });
+                    horarioBody.appendChild(tr);
+                });
+
+                
+            
+        } else if(btnType === 'permisos') {
+            document.querySelector(".close-modalPerms").addEventListener("click", function() {
+                POPUPBACKGROUND.classList.remove('popup-bg-opened');
+            });
+        }
+    });
+});
+
+
+POPUPBACKGROUND.addEventListener('click', () => {
+    POPUPBACKGROUND.classList.remove('popup-bg-opened');
+})
+
+POPUPCONTAINER.addEventListener('click', (event) => {
+    event.stopPropagation();
+});
+</script>
+
+
+
+</body>
+
+    
+</html>

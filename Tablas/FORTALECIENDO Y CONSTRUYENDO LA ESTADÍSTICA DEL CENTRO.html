@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORTALECIENDO Y CONSTRUYENDO LA ESTADÍSTICA DEL CENTRO</title>
+</head>
+<body>
+    <h1>FORTALECIENDO Y CONSTRUYENDO LA ESTADÍSTICA DEL CENTRO</h1>
+    <table>
+        <thead>
+            <th></th>
+            <th>Edad</th>
+            <th>Niños</th>
+            <th>Niñas</th>
+            <th>Meses</th>
+            <th class="grid-th" colspan="3">
+                <div class="grid-container">
+                    <span>Niños/niñas inscritos</span>
+                    <span>Niños</span>
+                    <span>Niñas</span>
+                    <span>Total</span>
+                </div>
+            </th>
+            <th class="grid-th" colspan="3">
+                <div class="grid-container">
+                    <span>Retirados</span>
+                    <span>Niños</span>
+                    <span>Niñas</span>
+                    <span>Total</span>
+                </div>
+            </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowspan="7">Matrícula Inicial</td>
+                <td rowspan="3">4 años y 8
+                    meses - 4
+                    años
+                    y 11 meses</td>
+                <td></td>
+                <td></td>
+                <td>Agosto</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Septiembre</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Octubre</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="2">5 años</td>
+                <td></td>
+                <td></td>
+                <td>Noviembre</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Diciembre</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="2">5 años y
+                    más</td>
+                <td></td>
+                <td></td>
+                <td>Enero</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Febrero</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="4">Matrícula Inicial</td>
+                <td rowspan="2">5 años y 6
+                    meses más</td>
+                <td></td>
+                <td></td>
+                <td>Marzo</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Abril</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="2">5 años y 11
+                    meses-6
+                    años</td>
+                <td></td>
+                <td></td>
+                <td>Mayo</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>Junio</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td colspan="7">TOTAL GENERAL</td>
+            </tr>
+        </tbody>
+    </table>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 95%;
+            font-size: 20px;
+        }
+        h1{
+            text-align: center;
+            font-size: 18px;
+        }
+        th{
+            background-color: #b1b1b1;
+            padding: 10px;
+            margin: 0;
+            border: 1px solid black
+        }
+        th:first-child {
+            background-color: white;
+        }
+        td {
+            height: 5%;
+
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            padding: 10px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .grid-container span:first-child {
+            grid-column: span 3;
+            border-bottom: 1px solid black;
+        }
+        .grid-container span:nth-child(3) {
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+        }
+
+        .grid-th {
+            padding: 0;
+        }
+
+        td{
+            background-color: white;
+            padding: 20px;
+            margin: 0;
+            border: 1px solid black
+        }
+        
+        th:first-child {
+            width: 10%;
+        }
+
+        th:nth-child(2) {
+            width: 10%;
+        }
+
+        th:nth-child(3) {
+            width: 7%;
+        }
+
+        th:nth-child(5) {
+            width: 7%;
+        }
+    </style>
+</body>
+</html>

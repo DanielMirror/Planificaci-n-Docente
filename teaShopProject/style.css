@@ -1,0 +1,142 @@
+body {
+    background-color: black;
+    font-family: Helvetica, sans-serif;
+    opacity: 0.9;
+    color: seashell;
+    box-sizing: border-box;
+    margin: 0px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 69px;
+    width: 100%;
+    border-bottom: 1px solid seashell;
+    font-size: 22px;
+}
+
+#cozy-logo {
+    height: 50px;
+    margin-left: 10px;
+}
+
+.navbar-list {
+    display: flex;
+    margin-left: auto;
+    gap: 12px;
+    margin-right: 10px;
+}
+
+.navbar-list li {
+    list-style: none;
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.first-article {
+    background-image: url(assets/mission-background.jpg);
+    height: 700px;
+    width: 1200px;
+    display: flex;
+    align-items: center;
+}
+
+#our-mission {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width: 1200px;
+}
+
+#tea-month {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1000px;
+}
+
+#tea-month header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tea-month section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#tea-month article {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tea-month img {
+    height: 200px;
+    width: 300px;
+    margin: 10px;
+}
+
+#locations {
+    height: 500px;
+    width: 1200px;
+    background-image: url(assets/locations-background.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+#locations section {
+    display: flex;
+    gap: 40px;
+}
+
+.location-article {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: black;
+    opacity: 1;
+    padding-bottom: 20px;
+}
+
+
+.location-article section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    gap: 30px;
+}
+
+.location-article header {
+    display: flex;
+    justify-content: center;
+}
+
+#contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+footer h5 {
+    margin-left: 20px;
+}
